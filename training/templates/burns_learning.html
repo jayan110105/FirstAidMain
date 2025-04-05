@@ -4,57 +4,185 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="container-fluid p-4">
+    <a href="/modules" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-    <!-- Enhanced Content Box -->
-    <div class="content-box">
-        <h2 class="text-center">Burns</h2>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa fa-thermometer-three-quarters" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Burns First Aid</h1>
+    </div>      
 
-        <p>
-            Burns are common injuries caused by exposure to extreme temperatures.  
-            Thermal burns occur due to heat exposure, such as cooking accidents or hot water.  
-            Ice burns are caused by freezing temperatures, often affecting outdoor workers or adventurers.
-        </p>
-
-        <h3>When to Go to the Hospital?</h3>
-        <p>
-            Burns are classified based on their depth and tissue damage:
-        </p>
-        <ul>
-            <li><strong>First-Degree Burns (Superficial):</strong> Mild discomfort, red and slightly inflamed skin. Heals within 7-10 days. Seek medical help if the burn is large or in a sensitive area like the hands, feet, joints, or groin.</li>
-            <li><strong>Second-Degree Burns (Partial Thickness):</strong> Red, white, or splotchy skin with blisters. Moderate to severe pain. A hospital visit is recommended if pain is severe or if the burn is in a sensitive area.</li>
-            <li><strong>Third-Degree Burns (Full Thickness):</strong> White, brown, or blackened skin with a leathery texture. Often numb due to nerve damage. Immediate medical attention is critical to prevent loss of movement or life.</li>
-        </ul>
-
-        <h3>How to Treat a Burn at Home?</h3>
-        <ul>
-            <li><strong>Cool the Burn:</strong> Run cool (not cold) water over the area for 10 minutes to reduce pain and swelling. Avoid using ice.</li>
-            <li><strong>Protect the Burn:</strong> Cover with a clean, non-stick bandage or cloth. Do not use adhesive bandages directly on the burn.</li>
-            <li><strong>Relieve Pain:</strong> Over-the-counter pain relievers like ibuprofen or acetaminophen can help reduce pain and inflammation.</li>
-        </ul>
-
-        <h3>Recognizing Infection</h3>
-        <p>
-            If the burn does not improve and the injured person experiences increasing pain, redness, pus, or fever, the burn may be infected. Seek medical help immediately.
-        </p>
-
-        <h3>Ice Burns or Frostbite</h3>
-        <p>
-            Ice burns (frostbite) are less common than thermal burns. Symptoms include:
-        </p>
-        <ul>
-            <li>Pain, numbness, hard or waxy skin.</li>
-            <li>Frostbite can occur even if the skin looks normal initially.</li>
-        </ul>
-        <p>
-            <strong>Treatment:</strong> Gently warm the area using a cloth soaked in warm water. Do not rub the skin.  
-            Seek medical help if the injured person is not warming up or has other exposure-related issues.
-        </p>
-        <a href="{% url 'burns_quiz' %}" class="btn btn-secondary mt-3">Take Quiz</a>
-        <a href="{% url 'modules' %}" class="btn btn-secondary mt-3">Back Modules</a>
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                Burns are common injuries that can happen to anyone, anywhere. Knowing how to properly identify and
+                treat burns can prevent complications and may even save a life. Let's learn the essential skills to
+                handle burn emergencies with confidence!
+                </p>
+            </div>
+            </div>
+        </div>
     </div>
 
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Types of Burns
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-temperature-high text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Thermal Burns</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                  Caused by heat sources like fire, hot objects, steam, or scalding liquids. Common in cooking
+                  accidents or from hot water.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-primary bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-temperature-low text-primary"></i>
+                  <h6 class="mb-0 fw-semibold">Cold Burns (Frostbite)</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                  Caused by exposure to freezing temperatures. Often affects outdoor workers, adventurers, or those
+                  in extreme cold conditions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            Burn Severity
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <h6 class="fw-semibold mb-0">First-Degree Burns (Superficial)</h6>
+            </div>
+            <div class="text-muted mb-2">
+                <ul class="ps-3 small">
+                  <li class="mb-1">Mild discomfort, red and slightly inflamed skin</li>
+                  <li class="mb-1">Heals within 7-10 days</li>
+                  <li class="mb-1">Seek medical help if the burn is large or in a sensitive area</li>
+                </ul>
+            </div>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <h6 class="fw-semibold mb-0">Second-Degree Burns (Partial Thickness)</h6>
+            </div>
+            <div class="text-muted mb-2">
+                <ul class="ps-3 small">
+                  <li class="mb-1">Red, white, or splotchy skin with blisters</li>
+                  <li class="mb-1">Moderate to severe pain</li>
+                  <li class="mb-1">
+                    A hospital visit is recommended if pain is severe or if the burn is in a sensitive area
+                  </li>
+                </ul>
+              </div>
+            </div>
+        
+            <!-- Step 3 -->
+            <div>
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <h6 class="fw-semibold mb-0">Third-Degree Burns (Full Thickness)</h6>
+            </div>
+            <div class="text-muted mb-2">
+                <ul class="ps-3 small">
+                  <li class="mb-1">White, brown, or blackened skin with a leathery texture</li>
+                  <li class="mb-1">Often numb due to nerve damage</li>
+                  <li class="mb-1 fw-semibold text-danger">Immediate medical attention is critical!</li>
+                </ul>
+            </div>              
+            </div>
+        
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            Treatment Steps
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">Cool the Burn</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Run cool (not cold) water over the area for 10-15 minutes to reduce pain and swelling.
+            </p>
+            <div class="badge-intermediate bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                <i class="fa fa-exclamation-triangle me-2 mt-1"></i>
+                <span>Never use ice, as it can cause further damage to the skin.</span>
+            </div>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">Protect the Burn</h6>
+            </div>
+            <p class="text-muted small">
+                Cover with a clean, non-stick bandage or cloth. Do not use adhesive bandages directly on the burn.
+            </p>
+            </div>
+        
+            <!-- Step 3 -->
+            <div>
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">Relieve Pain</h6>
+            </div>
+            <p class="text-muted small">
+                Over-the-counter pain relievers like ibuprofen or acetaminophen can help reduce pain and inflammation.
+            </p>
+            </div>
+        
+        </div>
+    </div>
+    <a href="{% url 'burns_quiz' %}" class="btn btn-danger mt-3">Take Quiz</a>
 </div>
 
 {% endblock %}
