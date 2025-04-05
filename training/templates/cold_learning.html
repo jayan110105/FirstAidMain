@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Cold Learning{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">❄️ Cold Exposure First Aid</h2>
+    <p>
+        Exposure to extreme cold can lead to serious health issues such as hypothermia and frostbite. It’s important to recognize the symptoms early to prevent severe complications or even death. Below is essential information on how to handle cold exposure emergencies.
+    </p>
+
+    <h3>Hypothermia</h3>
+    <p>Hypothermia occurs when the body temperature drops below 95°F (35°C), causing the body to lose heat faster than it can produce it.</p>
+    
+    <h4>Symptoms of Hypothermia:</h4>
+    <ul>
+        <li>Shivering (although shivering may stop in severe cases)</li>
+        <li>Slurred speech</li>
+        <li>Confusion or disorientation</li>
+        <li>Numbness, fatigue, or weakness</li>
+        <li>Pale or blue skin</li>
+        <li>Loss of coordination or clumsiness</li>
+        <li>Slow or irregular heartbeat and breathing</li>
+        <li>Loss of consciousness (severe cases)</li>
+    </ul>
+    
+    <h4>Treatment for Hypothermia:</h4>
+    <ol>
+        <li>Move the person to a warmer area immediately, such as a heated building or vehicle.</li>
+        <li>Remove wet clothing and replace it with dry, warm layers.</li>
+        <li>Warm the person gradually by wrapping them in blankets, using warm, dry towels, or applying warm water bottles to their armpits, chest, or groin area. Avoid direct heat like a hot water bath.</li>
+        <li>Provide warm drinks (non-alcoholic and non-caffeinated), but avoid giving them alcohol, as it can lower body temperature.</li>
+        <li>Monitor their condition and seek medical help if the symptoms persist or worsen.</li>
+    </ol>
+    
+    <p>If the person is unconscious or unresponsive, call emergency services immediately. Do not attempt to warm them too quickly, as this can cause complications such as cardiac arrhythmias.</p>
+
+    <h3>Frostbite</h3>
+    <p>Frostbite occurs when body tissues freeze due to prolonged exposure to cold, particularly in extremities like fingers, toes, ears, and nose.</p>
+    
+    <h4>Symptoms of Frostbite:</h4>
+    <ul>
+        <li>Skin that appears white, gray, yellowish, or waxy</li>
+        <li>Numbness or a "pins and needles" sensation</li>
+        <li>Hard or frozen skin that is difficult to move</li>
+        <li>Blisters (in severe cases)</li>
+        <li>The area may feel cold to the touch</li>
+    </ul>
+
+    <h4>Treatment for Frostbite:</h4>
+    <ol>
+        <li>Get the person to a warmer environment immediately.</li>
+        <li>Remove wet or tight clothing and place the affected area in warm water (100°F-104°F / 37°C-40°C). Do not use direct heat like a heating pad or fire, as it may cause further damage.</li>
+        <li>Rewarm the affected area slowly and gently. Do not rub or massage frostbitten skin, as this can cause further injury.</li>
+        <li>Keep the person warm, and protect the affected areas by wrapping them in sterile dressings or gauze.</li>
+        <li>Seek medical attention immediately for severe frostbite. Rewarming should only be done if the person is in a safe, warm environment.</li>
+    </ol>
+
+    <h3>Finding Shelter and Preventing Cold Exposure:</h3>
+    <ol>
+        <li>Find Shelter: If possible, take shelter in a building, vehicle, or any structure that can block the wind and provide warmth.</li>
+        <li>Insulate Your Body: Insulate your body with dry clothing and materials such as wool or synthetic fabrics that retain heat. Avoid wearing cotton, as it can trap moisture and cause further heat loss.</li>
+        <li>Avoid Alcohol: While it may make you feel warm, alcohol actually lowers your core body temperature and increases the risk of cold exposure.</li>
+        <li>Keep Moving: If shelter is unavailable, continue moving to generate body heat. However, be careful not to overexert yourself, as it can lead to exhaustion.</li>
+        <li>Hydrate: Drink warm, non-caffeinated, non-alcoholic fluids to stay hydrated, but avoid anything that may lead to dehydration or worsen cold exposure.</li>
+    </ol>
+
+    <h3>What to Do If You Are Stranded in Cold Weather:</h3>
+    <ol>
+        <li>Stay Dry: Wet clothing increases heat loss. Try to stay as dry as possible and remove wet clothing immediately.</li>
+        <li>Conserve Energy: Keep movements to a minimum to prevent exhaustion.</li>
+        <li>Signal for Help: Use a whistle, bright clothing, or fire to attract attention. Create large symbols like "SOS" in the snow or use a mirror to reflect sunlight.</li>
+        <li>Utilize Available Resources: If you have access to a water source, filter or purify it. Use any available materials like branches or tarps to construct shelter.</li>
+    </ol>
+
+    <p>Recognizing the signs of cold exposure early and knowing how to respond can save lives. If you suspect someone is experiencing hypothermia or frostbite, act quickly and seek professional medical care as soon as possible.</p>
+    <a href="{% url 'cold_quiz' %}" class="btn btn-primary">Take the Quiz</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+{% endblock %}

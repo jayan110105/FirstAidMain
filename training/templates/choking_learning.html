@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="content-box">
+        <h2 class="text-center">Choking</h2>
+
+        <p>
+            Choking occurs when an object, usually food or a small item, blocks the airway, preventing normal breathing. If not treated immediately, choking can lead to suffocation.
+        </p>
+
+        <h3>Recognizing Choking</h3>
+        <ul>
+            <li>Be unable to speak, cough, or breathe</li>
+            <li>Clutch their throat (universal choking sign)</li>
+            <li>Have blue-tinted lips or face (due to lack of oxygen)</li>
+            <li>Make high-pitched wheezing sounds or be completely silent</li>
+        </ul>
+        <p>If the person is coughing forcefully, encourage them to keep coughing. If they cannot cough, speak, or breathe, act immediately using the Heimlich maneuver.</p>
+
+        <h3>The Heimlich Maneuver</h3>
+        <p>The Heimlich maneuver is a lifesaving technique used to dislodge an obstruction from the airway. It varies based on the person's age.</p>
+        <p><a href="https://www.youtube.com/watch?v=2dn13zneEjo" target="_blank" class="btn btn-custom">Watch: Heimlich Maneuver</a></p>
+
+        <h3>For Adults</h3>
+        <ul>
+            <li>Stand behind the person and wrap your arms around their waist.</li>
+            <li>Make a fist with one hand and place it just above their belly button.</li>
+            <li>Grab your fist with your other hand and perform quick, inward and upward thrusts.</li>
+            <li>Repeat until the object is expelled or the person becomes unresponsive.</li>
+        </ul>
+
+        <h3>For Children (Ages 1-8)</h3>
+        <ul>
+            <li>Same technique as for adults but with reduced force.</li>
+            <li>Kneel behind the child if necessary.</li>
+            <li>Perform gentler abdominal thrusts using less force than on an adult.</li>
+            <li>Stop when the object is dislodged or if the child becomes unconscious.</li>
+        </ul>
+
+        <h3>For Infants (Under 1 Year Old)</h3>
+        <ul>
+            <li>Lay the baby face-down along your forearm, supporting their head and neck.</li>
+            <li>Give 5 firm back blows between the shoulder blades.</li>
+            <li>If the object is not dislodged, turn the infant onto their back.</li>
+            <li>Give 5 chest thrusts using two fingers, pushing down about 1.5 inches.</li>
+            <li>Repeat until the object is expelled or the infant becomes unresponsive.</li>
+        </ul>
+
+        <h3>For Yourself (Self-Heimlich)</h3>
+        <ul>
+            <li>Make a fist and place it above your belly button.</li>
+            <li>Grab your fist with your other hand and press inward and upward sharply.</li>
+            <li>Lean over a sturdy object (chair, counter, railing) and push your abdomen forcefully against it.</li>
+            <li>Repeat until the object is expelled.</li>
+        </ul>
+
+        <h3>When to Seek Medical Help</h3>
+        <ul>
+            <li>If the person becomes unconscious.</li>
+            <li>If choking persists despite Heimlich attempts.</li>
+            <li>After successful removal of the object, especially in infants or children, as internal injury may have occurred.</li>
+        </ul>
+        <a href="{% url 'choking_quiz' %}" class="btn btn-primary">Take the Quiz</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    </div>
+</div>
+    
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Cardiac Emergencies{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+  <h2>Cardiac Emergencies</h2>
+  <div class="row">
+
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/cpr.png' %}"
+          class="card-img-top"
+          alt="Cardiac Emergencies"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Cardiac Emergencies</h5>
+          <p class="card-text">Handle CPR and heart related emergencies.</p>
+          <a href="{% url 'cardiac_emergencies_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'cardiac_emergencies_quiz' %}" class="btn btn-secondary">Revising</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

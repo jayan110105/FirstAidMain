@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Venomous Bites Quiz{% endblock %}
+
+{% block content %}
+<h2 class='text-center'>🐍 Venomous Bites Quiz</h2>
+<form id="venomousBitesQuiz">
+    <p><strong>1. What should you do first if bitten by a snake?</strong></p>
+    <input type="radio" name="q1" value="a"> Stay calm and call emergency services<br>
+    <input type="radio" name="q1" value="b"> Apply ice to the bite area<br>
+    <input type="radio" name="q1" value="c"> Try to suck out the venom<br>
+
+    <p><strong>2. How should you treat a spider bite?</strong></p>
+    <input type="radio" name="q2" value="a"> Clean the bite, apply a cool compress, and seek help if symptoms worsen<br>
+    <input type="radio" name="q2" value="b"> Apply ice directly to the wound and avoid moving the affected area<br>
+    <input type="radio" name="q2" value="c"> Apply pressure to stop bleeding and apply heat<br>
+
+    <p><strong>3. What is the first step if stung by an insect?</strong></p>
+    <input type="radio" name="q3" value="a"> Clean the sting site and apply a cool compress<br>
+    <input type="radio" name="q3" value="b"> Apply a tourniquet above the sting site<br>
+    <input type="radio" name="q3" value="c"> Remove the stinger (if visible), clean the site<br>
+
+    <p><strong>4. How should you treat a scorpion sting?</strong></p>
+    <input type="radio" name="q4" value="b"> Apply pressure to stop venom spread<br>
+    <input type="radio" name="q4" value="a"> Clean the sting, apply ice, and seek medical help for severe reactions<br>
+    <input type="radio" name="q4" value="c"> Wash the area with hot water<br>
+
+    <p><strong>5. What should you do in a remote area if you get bitten or stung?</strong></p>
+    <input type="radio" name="q5" value="a"> Immobilize the limb, clean wounds, and signal for help<br>
+    <input type="radio" name="q5" value="b"> Walk to the nearest hospital without waiting<br>
+    <input type="radio" name="q5" value="c"> Apply a tourniquet and wait for the venom to subside<br>
+
+    <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('venomousBitesQuiz', ['a', 'a', 'c', 'a', 'a'])">Check Answers</button>
+    <p id="venomousBitesQuizFeedback" class="mt-2"></p>
+</form>
+<a href="{% url 'venom_learning' %}" class="btn btn-primary">Back to Learning</a>
+<a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+{% endblock %}

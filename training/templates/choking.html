@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Choking{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+  <h2>Choking</h2>
+  <div class="row">
+
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/choking.png' %}"
+          class="card-img-top"
+          alt="Choking"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Choking</h5>
+          <p class="card-text">Learn How to Assist someone who is choking</p>
+          <a href="{% url 'choking_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'choking_quiz' %}" class="btn btn-secondary">Revising</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

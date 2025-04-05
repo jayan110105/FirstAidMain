@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Fractures and Sprains{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+  <h2>Fractures and Sprains</h2>
+  <div class="row">
+
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/fractures_and_sprains.png' %}"
+          class="card-img-top"
+          alt="Fractures and Sprains"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Fractures and Sprains</h5>
+          <p class="card-text">Identify and stabilise fractures and sprains</p>
+          <a href="{% url 'fractures_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'fractures_quiz' %}" class="btn btn-danger">Revising</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

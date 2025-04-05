@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">🚑 Choking First Aid Quiz</h2>
+    <form id="chokingQuiz">
+        <p><strong>1. What is a universal sign of choking?</strong></p>
+        <input type="radio" name="q1" value="a"> Coughing loudly<br>
+        <input type="radio" name="q1" value="b"> Clutching the throat<br>
+        <input type="radio" name="q1" value="c"> Holding the stomach<br>
+
+        <p><strong>2. What should you do if a choking person is still coughing?</strong></p>
+        <input type="radio" name="q2" value="a"> Encourage them to keep coughing<br>
+        <input type="radio" name="q2" value="b"> Perform the Heimlich maneuver immediately<br>
+        <input type="radio" name="q2" value="c"> Give them water to drink<br>
+
+        <p><strong>3. How do you perform the Heimlich maneuver on an infant?</strong></p>
+        <input type="radio" name="q3" value="a"> Perform abdominal thrusts<br>
+        <input type="radio" name="q3" value="b"> Give back blows and chest thrusts<br>
+        <input type="radio" name="q3" value="c"> Tilt the infant backward and pat their head<br>
+
+        <p><strong>4. What should you do if a person becomes unconscious while choking?</strong></p>
+        <input type="radio" name="q4" value="a"> Start CPR immediately<br>
+        <input type="radio" name="q4" value="b"> Continue giving abdominal thrusts<br>
+        <input type="radio" name="q4" value="c"> Shake the person to wake them up<br>
+
+        <p><strong>5. What is the first step for a self-Heimlich maneuver?</strong></p>
+        <input type="radio" name="q5" value="a"> Lean backward and take deep breaths<br>
+        <input type="radio" name="q5" value="b"> Press your abdomen against a sturdy object<br>
+        <input type="radio" name="q5" value="c"> Try drinking water to clear the airway<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('chokingQuiz', ['b', 'a', 'b', 'a', 'b'])">Check Answers</button>
+        <p id="chokingQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'choking_learning' %}" class="btn btn-primary">Back to Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+{% endblock %}

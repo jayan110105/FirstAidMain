@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Exposure{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+  <h2>Exposure</h2>
+  <div class="row">
+
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/heat.jpg' %}"
+          class="card-img-top"
+          alt="Heat"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Heat</h5>
+          <p class="card-text">Identify and treat patients suffering from prolonged exposure to high temperatures</p>
+          <a href="{% url 'heat_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'heat_quiz' %}" class="btn btn-secondary">Revising</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/cold.png' %}"
+          class="card-img-top"
+          alt="Cold"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Cold</h5>
+          <p class="card-text">Identify and treat patients suffering from prolonged exposure to low temperatures</p>
+          <a href="{% url 'cold_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'cold_quiz' %}" class="btn btn-secondary">Revising</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

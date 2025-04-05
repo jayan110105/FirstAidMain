@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Scenarios{% endblock %}
+
+{% block content %}
+    <div class="container-fluid p-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="fw-bold">Emergency Scenarios</h2>
+            <div>
+                <span>Points: <span class="fw-bold">0</span></span>
+                <span class="ms-3">Level: <span class="fw-bold">Beginner</span></span>
+            </div>
+        </div>
+        <p class="text-muted">Test your skills in realistic emergency situations. Make quick decisions and learn from the outcomes.</p>
+
+        <!-- Scenario Cards -->
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card scenario-card">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Cardiac Arrest Emergency">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">Cardiac Arrest Emergency </h5>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                        <p class="card-text text-muted">Respond to a sudden cardiac arrest situation in a public place.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted"><i class="fa-regular fa-clock"></i> 10 min &nbsp; <i class="fas fa-trophy"></i> 200 points</p>
+                            <a href="#" class="btn btn-danger">Start Scenario</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card scenario-card">
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Severe Bleeding Control">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">Severe Bleeding Control</h5>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                        <p class="card-text text-muted">Handle a severe bleeding emergency in a workplace setting.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted"><i class="fa-regular fa-clock"></i> 8 min &nbsp; <i class="fas fa-trophy"></i> 150 points</p>
+                            <a href="#" class="btn btn-danger">Start Scenario</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+{% endblock %}

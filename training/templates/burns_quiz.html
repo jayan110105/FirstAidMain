@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">🔥 Burns Quiz</h2>
+    <form id="burnsQuiz">
+        <p><strong>1. What is the first step when treating a minor burn?</strong></p>
+        <input type="radio" name="q1" value="b"> Run cool water over the burn for 10 minutes<br>
+        <input type="radio" name="q1" value="a"> Apply ice directly to the burn<br>
+        <input type="radio" name="q1" value="c"> Cover it immediately with a bandage<br>
+
+        <p><strong>2. Which type of burn is characterized by blisters and pain?</strong></p>
+        <input type="radio" name="q2" value="b"> Second-degree burn<br>
+        <input type="radio" name="q2" value="a"> First-degree burn<br>
+        <input type="radio" name="q2" value="c"> Third-degree burn<br>
+
+        <p><strong>3. What to do if someone has frostbite</strong></p>
+        <input type="radio" name="q3" value="a"> Place the affected area under hot water<br>
+        <input type="radio" name="q3" value="b"> Warm the area using a cloth dipped in warm water<br>
+        <input type="radio" name="q3" value="c"> Rub the area to encourage blood flow<br>
+
+        <p><strong>4. What is a sign of infection?</strong></p>
+        <input type="radio" name="q4" value="a"> Numbness in the area of burn <br>
+        <input type="radio" name="q4" value="b"> Extreme pain lasting for unusually long time<br>
+        <input type="radio" name="q4" value="c"> Injured person develops cold a cough a few days after the burn<br>
+
+        <p><strong>5. When to go to a hospital for a first degree burn</strong></p>
+        <input type="radio" name="q5" value="a"> If the burn is large<br>
+        <input type="radio" name="q5" value="b"> If the burn is painful<br>
+        <input type="radio" name="q5" value="c"> If the injured person wants to ride in an ambulance<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('burnsQuiz', ['b', 'b','b','b','a'])">Check Answers</button>
+        <p id="burnsQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'burns_learning' %}" class="btn btn-secondary mt-3">Back to Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary mt-3">Back Modules</a>
+</div>
+
+{% endblock %}

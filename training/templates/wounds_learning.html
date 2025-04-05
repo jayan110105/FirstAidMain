@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <!-- Enhanced Content Box -->
+    <div class="content-box">
+        <h2 class="text-center">Wounds</h2>
+
+        <p>
+            Wounds occur when the skin or body tissues break due to cuts, scrapes, or punctures.  
+            While minor wounds can be treated at home, some cases require medical attention to prevent complications.
+        </p>
+
+        <h3>When to Seek Medical Attention</h3>
+        <p>Seek professional care if any of the following apply:</p>
+        <ul>
+            <li><strong>Uncontrolled Bleeding:</strong> Bleeding does not stop after 10-15 minutes of direct pressure.</li>
+            <li><strong>Deep or Large Wounds:</strong> If a wound is deeper than 1/4 inch or exposes fat or muscle, stitches may be needed.</li>
+            <li><strong>Location Concerns:</strong> Wounds on the face, hands, feet, genitals, or over major joints should be evaluated due to functional and cosmetic risks.</li>
+            <li><strong>Foreign Objects:</strong> If debris remains embedded after cleaning, medical help is needed.</li>
+            <li><strong>Animal or Human Bites:</strong> High risk of infection; often requires antibiotics.</li>
+            <li><strong>Tetanus Risk:</strong> Wounds from dirty or rusty objects need attention, especially if vaccinations are outdated.</li>
+        </ul>
+
+        <h3>First Aid Treatment at Home</h3>
+        <ul>
+            <li><strong>Wash Your Hands:</strong> Prevent infection by cleaning your hands before touching the wound.</li>
+            <li><strong>Stop the Bleeding:</strong> Apply gentle pressure with a clean cloth or bandage.</li>
+            <li><strong>Clean the Wound:</strong> Rinse under running water to remove dirt. Avoid soap directly in the wound.</li>
+            <li><strong>Apply Antibiotic Ointment:</strong> Helps prevent infection and keeps the wound moist.</li>
+            <li><strong>Protect the Wound:</strong> Cover with a sterile bandage, changing it daily or when dirty.</li>
+            <li><strong>Monitor for Infection:</strong> Watch for redness, swelling, or pus development.</li>
+        </ul>
+
+        <h3>Recognizing Infection After a Few Days</h3>
+        <p>Even with proper care, infections may develop. Watch for:</p>
+        <ul>
+            <li><strong>Increased Redness & Swelling:</strong> Spreading redness or swelling around the wound.</li>
+            <li><strong>Pus or Discharge:</strong> Yellow or green fluid oozing from the wound.</li>
+            <li><strong>Fever:</strong> A temperature above 100.4°F (38°C) may indicate an infection.</li>
+            <li><strong>Persistent Pain:</strong> Pain that worsens or does not improve.</li>
+        </ul>
+        <p>
+            If any of these symptoms occur, seek medical attention to prevent serious complications.
+        </p>
+        <a href="{% url 'wounds_quiz' %}" class="btn btn-secondary mt-3">Take Quiz</a>
+        <a href="{% url 'modules' %}" class="btn btn-secondary mt-3">Back Modules</a>
+    </div>
+
+</div>
+    
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="content-box">
+    <h2 class="text-center">Cardiac Emergencies</h2>
+
+    <p>
+        Cardiac emergencies occur when the heart stops functioning properly, cutting off blood flow to vital organs. 
+        Without immediate action, this can lead to death within minutes. Recognizing the signs and responding quickly 
+        can double or triple survival chances.
+    </p>
+
+    <h3>Recognizing a Cardiac Emergency</h3>
+    <p>Someone experiencing a cardiac event may show the following symptoms:</p>
+    <ul>
+        <li>Sudden collapse and unresponsiveness</li>
+        <li>No breathing or gasping for air</li>
+        <li>No pulse or very weak pulse</li>
+        <li>Clutching the chest (in cases of a heart attack)</li>
+        <li>Dizziness, confusion, or extreme fatigue</li>
+    </ul>
+    <p>If you suspect a cardiac emergency, act immediately—every second counts.</p>
+
+    <h3>Immediate Actions to Take</h3>
+    <ul>
+        <li><strong>Check Responsiveness:</strong> Shake the person and shout their name. If no response, proceed immediately.</li>
+        <li><strong>Call Emergency Services:</strong> Dial 911 (or your local emergency number) and report the situation. Stay on the line and follow instructions.</li>
+        <li><strong>Start CPR:</strong> Begin chest compressions immediately.</li>
+        <li><strong>Use an AED:</strong> If available, follow the instructions to deliver a shock.</li>
+    </ul>
+
+    <h3>CPR on Adults</h3>
+    <ul>
+        <li>Place the person on a firm, flat surface.</li>
+        <li>Give hard, fast chest compressions (100-120 per minute). Push down at least 2 inches in the center of the chest.</li>
+        <li>Allow the chest to fully rise between compressions.</li>
+        <li>Continue until emergency responders arrive.</li>
+    </ul>
+    <p><strong>Watch this CPR demonstration:</strong> <a href="https://www.youtube.com/watch?v=msRft-g-k_s" target="_blank">CPR Video</a></p>
+
+    <h3>CPR on Children</h3>
+    <p>
+        The main differences between child and adult CPR are in compression depth, hand placement, and rescue breaths 
+        due to the size and fragility of a child’s body.
+    </p>
+    <ul>
+        <li><strong>Compression Depth:</strong> Compress about 2 inches, but no more than that to avoid injury.</li>
+        <li><strong>Hand Placement:</strong> Use one or two hands, depending on the child’s size—one hand for smaller children and two for larger ones.</li>
+    </ul>
+
+    <h3>How to Use an AED</h3>
+    <ul>
+        <li>Turn it on and follow the voice prompts.</li>
+        <li>Attach the electrode pads to the person’s bare chest as shown in the instructions.</li>
+        <li>If advised, deliver a shock and immediately resume CPR.</li>
+    </ul>
+
+    <h3>Working with Other Bystanders</h3>
+    <p>If others are present, assign specific tasks:</p>
+    <ul>
+        <li>One person should call emergency services.</li>
+        <li>Another should locate and bring an AED.</li>
+        <li>A third can assist with CPR rotation to prevent fatigue.</li>
+    </ul>
+    <a href="{% url 'cardiac_emergencies_quiz' %}" class="btn btn-primary">Quiz</a>
+<a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+
+</div>
+
+{% endblock %}

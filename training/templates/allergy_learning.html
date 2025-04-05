@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Allergic Reactions{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="content-box">
+        <h2 class="text-center">Allergic Reactions First Aid</h2>
+
+        <p>An allergic reaction occurs when the body’s immune system reacts to a substance it deems harmful, even though it may not be harmful to most people. The substance causing the reaction is called an allergen, which can range from food to insect stings, medications, or environmental triggers like pollen.</p>
+
+        <h3>Signs and Symptoms of an Allergic Reaction</h3>
+        <h4>Mild Symptoms:</h4>
+        <ul>
+            <li>Itchy skin, rash, or hives</li>
+            <li>Swelling of lips, face, or eyes</li>
+            <li>Sneezing, coughing, or a runny nose</li>
+            <li>Shortness of breath or wheezing</li>
+        </ul>
+
+        <h4>Severe Symptoms (Anaphylaxis):</h4>
+        <ul>
+            <li>Difficulty breathing or wheezing</li>
+            <li>Swelling of the throat or tongue</li>
+            <li>Drop in blood pressure (leading to dizziness or fainting)</li>
+            <li>Rapid or weak pulse</li>
+            <li>Loss of consciousness</li>
+        </ul>
+
+        <h3>First Aid for Allergic Reactions</h3>
+        <h4>1. Mild Reactions:</h4>
+        <ul>
+            <li>Remove the allergen if possible (e.g., take off tight clothing or avoid the triggering food).</li>
+            <li>Take antihistamines (if available and not contraindicated).</li>
+            <li>Apply cool compresses to reduce swelling or hives.</li>
+        </ul>
+
+        <h4>2. Severe Reactions (Anaphylaxis):</h4>
+        <ul>
+            <li>Call emergency services immediately.</li>
+            <li>If the person has an epinephrine auto-injector (EpiPen), administer it right away. Follow the device’s instructions.</li>
+            <li>Keep the person lying down and raise their legs to prevent shock, unless it causes breathing difficulty.</li>
+            <li>Stay with the person and monitor their breathing and pulse until help arrives.</li>
+        </ul>
+
+        <h4>3. Insect Stings:</h4>
+        <ul>
+            <li>Remove the stinger if visible (scrape it off with a credit card or a flat object).</li>
+            <li>Clean the sting area with water and apply a cold compress.</li>
+            <li>Take antihistamines or apply an antihistamine cream to reduce itching and swelling.</li>
+        </ul>
+
+        <h3>When to Seek Medical Help</h3>
+        <ul>
+            <li>If the reaction is severe or symptoms progress quickly (e.g., difficulty breathing, throat swelling, or unconsciousness).</li>
+            <li>If the person does not have an epinephrine auto-injector or medical assistance is unavailable.</li>
+            <li>After using an epinephrine auto-injector, as further medical attention is usually necessary.</li>
+        </ul>
+
+        <a href="{% url 'allergy_quiz' %}" class="btn btn-primary">Take the Quiz</a>
+        <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    </div>
+</div>
+
+{% endblock %}

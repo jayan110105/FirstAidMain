@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">🩹 Wounds Quiz</h2>
+    <form id="woundsQuiz">
+        <p><strong>1. What is the first step in treating a minor wound?</strong></p>
+        <input type="radio" name="q1" value="a"> Apply a bandage immediately<br>
+        <input type="radio" name="q1" value="b"> Wash your hands first<br>
+        <input type="radio" name="q1" value="c"> Apply antibiotic ointment<br>
+
+        <p><strong>2. Which wound type should always receive medical attention?</strong></p>
+        <input type="radio" name="q2" value="a"> Small paper cut<br>
+        <input type="radio" name="q2" value="b"> Deep wound exposing fat or muscle<br>
+        <input type="radio" name="q2" value="c"> Small scrape on the knee<br>
+
+        <p><strong>3. How do we clean a wound?</strong></p>
+        <input type="radio" name="q3" value="a"> Rinse it under water<br>
+        <input type="radio" name="q3" value="b"> Wash it with soap<br>
+        <input type="radio" name="q3" value="c"> Clean it with a dry cloth<br>
+
+        <p><strong>4. What is a sign of infection?</strong></p>
+        <input type="radio" name="q4" value="a"> Unusual tiredness in injured person<br>
+        <input type="radio" name="q4" value="b"> Lack of mobility in the injured area<br>
+        <input type="radio" name="q4" value="c"> Fever<br>
+
+        <p><strong>5. What is the minimum depth of a wound requiring medical attention</strong></p>
+        <input type="radio" name="q5" value="a"> 1/2 inch<br>
+        <input type="radio" name="q5" value="b"> 1/4 cm<br>
+        <input type="radio" name="q5" value="c"> 1/4 inch<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('woundsQuiz', ['b', 'b','a','c','c'])">Check Answers</button>
+        <p id="woundsQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'wounds_learning' %}" class="btn btn-secondary mt-3">Back to Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary mt-3">Back Modules</a>
+</div>
+
+{% endblock %}

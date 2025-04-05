@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}First Aid Training{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            position: fixed;
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        .sidebar a:hover {
+            background-color: #fef2f2;
+            color: #dc2626;
+        }
+        .sidebar a.active{
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+        .main-content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        .badge-advanced {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .badge-intermediate {
+            background-color: #fef9c3;
+            color: #92400e;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .scenario-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar p-3">
+        <h4 class="text-danger fw-bold"><i class="fa-solid fa-briefcase-medical me-2"></i>First Aid Training</h4>
+        <hr>
+        <a href="{% url 'modules' %}" class="nav-link"><i class="fas fa-book"></i> Modules</a>
+        <a href="{% url 'scenarios' %}" class="nav-link"><i class="fas fa-heartbeat"></i> Scenarios</a>
+        <a href="{% url 'achievements' %}" class="nav-link"><i class="fas fa-trophy"></i> Achievements</a>
+        <a href="{% url 'leaderboard' %}" class="nav-link"><i class="fas fa-chart-line"></i> Leaderboard</a>
+        <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        {% block content %} {% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".sidebar a").each(function() {
+                if ($(this).attr("href") === window.location.pathname) {
+                    $(this).addClass("active");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

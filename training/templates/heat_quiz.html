@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Heat Quiz{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">☀️ Heat-Related First Aid Quiz</h2>
+    <form id="heatQuiz">
+        <p><strong>1. What is the first step to take when someone has heat stroke?</strong></p>
+        <input type="radio" name="q1" value="a"> Give them water<br>
+        <input type="radio" name="q1" value="b"> Move them to a cool environment and call emergency services<br>
+        <input type="radio" name="q1" value="c"> Cover them with blankets<br>
+
+        <p><strong>2. Which symptom indicates heat exhaustion?</strong></p>
+        <input type="radio" name="q2" value="a"> Cold, clammy skin<br>
+        <input type="radio" name="q2" value="b"> High fever<br>
+        <input type="radio" name="q2" value="c"> Seizures<br>
+
+        <p><strong>3. What should you NOT do during a heat emergency?</strong></p>
+        <input type="radio" name="q3" value="a"> Immerse the person in cold water<br>
+        <input type="radio" name="q3" value="b"> Provide caffeinated drinks<br>
+        <input type="radio" name="q3" value="c"> Use fans and cool towels<br>
+
+        <p><strong>4. Why is it important to remove tight clothing during a heat emergency?</strong></p>
+        <input type="radio" name="q4" value="a"> It helps to increase body heat<br>
+        <input type="radio" name="q4" value="b"> It allows the body to cool more efficiently<br>
+        <input type="radio" name="q4" value="c"> It prevents dehydration<br>
+
+        <p><strong>5. Which of the following is the best prevention strategy for heat illness?</strong></p>
+        <input type="radio" name="q5" value="a"> Avoid water<br>
+        <input type="radio" name="q5" value="b"> Wear dark, heavy clothing<br>
+        <input type="radio" name="q5" value="c"> Stay hydrated and wear lightweight clothing<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('heatQuiz', ['b', 'a', 'b', 'b', 'c'])">Check Answers</button>
+        <p id="heatQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'heat_learning' %}" class="btn btn-primary">Back to Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+<script src="{% static 'js/quiz_script.js' %}"></script>
+{% endblock %}

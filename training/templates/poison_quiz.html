@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Poisoning Quiz{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">🚑 Poisoning First Aid Quiz</h2>
+    <form id="poisoningQuiz">
+        <p><strong>1. What should you do if someone has ingested poison?</strong></p>
+        <input type="radio" name="q1" value="a"> Induce vomiting immediately<br>
+        <input type="radio" name="q1" value="b"> Call emergency services and provide water or milk if advised<br>
+        <input type="radio" name="q1" value="c"> Give them sugar or honey<br>
+
+        <p><strong>2. How should you assist a person with inhalation poisoning?</strong></p>
+        <input type="radio" name="q2" value="a"> Get them to fresh air and call emergency services<br>
+        <input type="radio" name="q2" value="b"> Let them rest and give them water<br>
+        <input type="radio" name="q2" value="c"> Try to make them vomit<br>
+
+        <p><strong>3. What is the first step in dealing with contact poisoning (e.g., chemical exposure)?</strong></p>
+        <input type="radio" name="q3" value="a"> Wash the affected area with soap and water<br>
+        <input type="radio" name="q3" value="b"> Apply an ointment or cream<br>
+        <input type="radio" name="q3" value="c"> Apply ice or heat to the affected area<br>
+
+        <p><strong>4. If the person is unconscious due to poisoning, what should you do?</strong></p>
+        <input type="radio" name="q4" value="a"> Call emergency services and monitor their breathing<br>
+        <input type="radio" name="q4" value="b"> Leave them and wait for help<br>
+        <input type="radio" name="q4" value="c"> Try to make them drink water<br>
+
+        <p><strong>5. How do you handle a poisoning case where the substance is unknown?</strong></p>
+        <input type="radio" name="q5" value="a"> Call emergency services immediately and provide any available information<br>
+        <input type="radio" name="q5" value="b"> Try to treat them with home remedies<br>
+        <input type="radio" name="q5" value="c"> Wait to see if symptoms worsen<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('poisoningQuiz', ['b', 'a', 'a', 'a', 'a'])">Check Answers</button>
+        <p id="poisoningQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'poison_learning' %}" class="btn btn-primary">Back to Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+{% endblock %}

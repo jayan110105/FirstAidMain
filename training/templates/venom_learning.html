@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Venomous Bites First Aid{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="content-box">
+        <h2 class="text-center">Venomous Bites First Aid</h2>
+
+        <p>Venomous bites or stings can be caused by animals like snakes, spiders, insects, marine life, and scorpions. Immediate action is vital to prevent severe reactions or death.</p>
+
+        <h3>Signs and Symptoms of Venomous Bites:</h3>
+        <ul>
+            <li>Pain, swelling, and redness at the site</li>
+            <li>Difficulty breathing or dizziness</li>
+            <li>Rapid heart rate or weakness</li>
+            <li>Nausea, vomiting, or paralysis</li>
+            <li>Severe itching, rash, or blurred vision</li>
+        </ul>
+
+        <h3>First Aid for Venomous Bites:</h3>
+        <h4>1. Snake Bites:</h4>
+        <ul>
+            <li>Stay calm, keep the limb still, and call emergency services.</li>
+            <li>Do not try to suck out venom or apply ice.</li>
+            <li>Remove tight clothing near the bite area.</li>
+        </ul>
+
+        <h4>2. Spider Bites:</h4>
+        <ul>
+            <li>Clean the bite, apply a cool compress, and seek help if symptoms worsen.</li>
+        </ul>
+
+        <h4>3. Insect Stings:</h4>
+        <ul>
+            <li>Remove the stinger (if visible), clean the site, and apply a cool compress.</li>
+            <li>Seek help for allergic reactions.</li>
+        </ul>
+
+        <h4>4. Scorpion Stings:</h4>
+        <ul>
+            <li>Clean the sting, apply ice, and seek medical help for severe reactions.</li>
+        </ul>
+
+        <h4>5. Marine Stings:</h4>
+        <ul>
+            <li>Rinse the sting with vinegar or seawater, remove tentacles, and seek help for severe reactions.</li>
+        </ul>
+
+        <h3>What to Do in a Remote Area:</h3>
+        <ul>
+            <li><strong>Stay Calm:</strong> Avoid panic to reduce the spread of venom.</li>
+            <li><strong>Move to Safety:</strong> Get away from the animal and to a safer area.</li>
+            <li><strong>Apply First Aid:</strong> Immobilize the limb, clean wounds with available resources, and apply cool compresses.</li>
+            <li><strong>Signal for Help:</strong> Use bright clothing, mirrors, or fire to signal for help.</li>
+            <li><strong>Look for Natural Remedies:</strong> If necessary, use safe plants or water for relief.</li>
+        </ul>
+
+        <h3>When to Seek Medical Help:</h3>
+        <ul>
+            <li>Severe symptoms like difficulty breathing or seizures</li>
+            <li>If the person becomes unconscious</li>
+            <li>If help is not readily available in remote areas</li>
+        </ul>
+        
+        <a href="{% url 'venom_quiz' %}" class="btn btn-primary">Take the Quiz</a>
+        <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    </div>
+</div>
+{% endblock %}

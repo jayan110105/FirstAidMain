@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+  <h2>Burns and Wounds</h2>
+  <div class="row">
+
+    <!-- Burns -->
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/burns.jpg' %}"
+          class="card-img-top"
+          alt="Burns"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Burns</h5>
+          <p class="card-text">Learn about different types of burns and how to treat them.</p>
+          <a href="{% url 'burns_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'burns_quiz' %}" class="btn btn-secondary">Revising</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wounds -->
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <img
+          src="{% static 'images/wound.jpg' %}"
+          class="card-img-top"
+          alt="Wounds"
+          height="300"
+          width="200"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Wounds</h5>
+          <p class="card-text">Learn about different types of wounds and how to treat them.</p>
+          <a href="{% url 'wounds_learning' %}" class="btn btn-danger">Learning</a>
+          <a href="{% url 'wounds_quiz' %}" class="btn btn-secondary">Revising</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

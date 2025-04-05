@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Allergy Quiz{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">🚑 Allergic Reactions First Aid Quiz</h2>
+    <form id="allergicReactionsQuiz">
+        <p><strong>1. What is the first step in treating a mild allergic reaction?</strong></p>
+        <input type="radio" name="q1" value="a"> Take antihistamines and remove the allergen<br>
+        <input type="radio" name="q1" value="b"> Administer epinephrine immediately<br>
+        <input type="radio" name="q1" value="c"> Call emergency services<br>
+
+        <p><strong>2. Which of the following is a severe symptom of an allergic reaction?</strong></p>
+        <input type="radio" name="q2" value="a"> Sneezing<br>
+        <input type="radio" name="q2" value="b"> Swelling of the throat or tongue<br>
+        <input type="radio" name="q2" value="c"> Itchy skin and hives<br>
+
+        <p><strong>3. How should you treat an insect sting?</strong></p>
+        <input type="radio" name="q3" value="a"> Scrape off the stinger, clean the area, and apply a cold compress<br>
+        <input type="radio" name="q3" value="b"> Apply a tourniquet to the limb<br>
+        <input type="radio" name="q3" value="c"> Apply ice directly to the sting site for 30 minutes<br>
+
+        <p><strong>4. What should you do if someone is having a severe allergic reaction (anaphylaxis)?</strong></p>
+        <input type="radio" name="q4" value="a"> Administer epinephrine, lay the person down, and raise their legs<br>
+        <input type="radio" name="q4" value="b"> Give them antihistamines and wait for symptoms to subside<br>
+        <input type="radio" name="q4" value="c"> Encourage them to drink water and wait for help<br>
+
+        <p><strong>5. When should you seek medical help after administering an epinephrine auto-injector?</strong></p>
+        <input type="radio" name="q5" value="a"> If symptoms improve and the person feels better<br>
+        <input type="radio" name="q5" value="b"> After using an epinephrine auto-injector, as further medical attention is necessary<br>
+        <input type="radio" name="q5" value="c"> Only if the person loses consciousness<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('allergicReactionsQuiz', ['a', 'b', 'a', 'a', 'b'])">Check Answers</button>
+        <p id="allergicReactionsQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'allergy_learning' %}" class="btn btn-primary">Back to Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+{% endblock %}

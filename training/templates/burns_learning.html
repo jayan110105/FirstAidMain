@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <!-- Enhanced Content Box -->
+    <div class="content-box">
+        <h2 class="text-center">Burns</h2>
+
+        <p>
+            Burns are common injuries caused by exposure to extreme temperatures.  
+            Thermal burns occur due to heat exposure, such as cooking accidents or hot water.  
+            Ice burns are caused by freezing temperatures, often affecting outdoor workers or adventurers.
+        </p>
+
+        <h3>When to Go to the Hospital?</h3>
+        <p>
+            Burns are classified based on their depth and tissue damage:
+        </p>
+        <ul>
+            <li><strong>First-Degree Burns (Superficial):</strong> Mild discomfort, red and slightly inflamed skin. Heals within 7-10 days. Seek medical help if the burn is large or in a sensitive area like the hands, feet, joints, or groin.</li>
+            <li><strong>Second-Degree Burns (Partial Thickness):</strong> Red, white, or splotchy skin with blisters. Moderate to severe pain. A hospital visit is recommended if pain is severe or if the burn is in a sensitive area.</li>
+            <li><strong>Third-Degree Burns (Full Thickness):</strong> White, brown, or blackened skin with a leathery texture. Often numb due to nerve damage. Immediate medical attention is critical to prevent loss of movement or life.</li>
+        </ul>
+
+        <h3>How to Treat a Burn at Home?</h3>
+        <ul>
+            <li><strong>Cool the Burn:</strong> Run cool (not cold) water over the area for 10 minutes to reduce pain and swelling. Avoid using ice.</li>
+            <li><strong>Protect the Burn:</strong> Cover with a clean, non-stick bandage or cloth. Do not use adhesive bandages directly on the burn.</li>
+            <li><strong>Relieve Pain:</strong> Over-the-counter pain relievers like ibuprofen or acetaminophen can help reduce pain and inflammation.</li>
+        </ul>
+
+        <h3>Recognizing Infection</h3>
+        <p>
+            If the burn does not improve and the injured person experiences increasing pain, redness, pus, or fever, the burn may be infected. Seek medical help immediately.
+        </p>
+
+        <h3>Ice Burns or Frostbite</h3>
+        <p>
+            Ice burns (frostbite) are less common than thermal burns. Symptoms include:
+        </p>
+        <ul>
+            <li>Pain, numbness, hard or waxy skin.</li>
+            <li>Frostbite can occur even if the skin looks normal initially.</li>
+        </ul>
+        <p>
+            <strong>Treatment:</strong> Gently warm the area using a cloth soaked in warm water. Do not rub the skin.  
+            Seek medical help if the injured person is not warming up or has other exposure-related issues.
+        </p>
+        <a href="{% url 'burns_quiz' %}" class="btn btn-secondary mt-3">Take Quiz</a>
+        <a href="{% url 'modules' %}" class="btn btn-secondary mt-3">Back Modules</a>
+    </div>
+
+
+</div>
+
+{% endblock %}

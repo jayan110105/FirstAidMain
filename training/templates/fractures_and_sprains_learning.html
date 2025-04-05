@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <!-- Enhanced Content Box -->
+    <div class="content-box">
+        <h2 class="text-center">Fractures and Sprains</h2>
+
+        <p>
+            A <strong>fracture</strong> is a break in the bone, ranging from a small crack to a complete break. It occurs due to excessive force, falls, or direct impacts. 
+            A <strong>sprain</strong>, on the other hand, is the stretching or tearing of ligaments—the tough bands connecting bones at a joint. 
+            Sprains happen when a joint is twisted or overstretched, commonly affecting the ankles, wrists, and knees.
+        </p>
+
+        <h3>Identifying Fractures vs Sprains</h3>
+        <p>
+            Both injuries cause pain, swelling, and bruising, making them difficult to distinguish at first.
+        </p>
+        <ul>
+            <li><strong>Fracture Pain:</strong> Sharp and worsens with movement or pressure. Often causes deformity (limb looks out of place) and, in severe cases, bone may protrude.</li>
+            <li><strong>Sprain Pain:</strong> More of an aching discomfort that worsens with joint use. Swelling may be significant, but the joint retains some function.</li>
+            <li><strong>Fractures:</strong> Often come with a grating sensation or inability to move the limb.</li>
+            <li><strong>Sprains:</strong> May still allow partial movement despite pain.</li>
+        </ul>
+        <p>If in doubt, seek medical attention.</p>
+
+        <h3>Transport to the Hospital</h3>
+        <p>
+            If a fracture is suspected, <strong>stabilize the limb and seek immediate medical help.</strong> 
+            If a sprain results in severe pain or the inability to bear weight, medical attention is necessary.
+        </p>
+
+        <h3>How to Splint a Fracture</h3>
+        <p>
+            Splinting immobilizes the injured limb, reducing pain and preventing further damage.
+        </p>
+        <ul>
+            <li>Keep the injured person still. Do <strong>not</strong> attempt to realign the bone.</li>
+            <li>Find a firm object (padded board, rolled towel) as a splint.</li>
+            <li>Place it alongside the injured limb, ensuring it supports the joints above and below the fracture.</li>
+            <li>Secure with bandages or cloth strips, making sure they are snug but not overly tight.</li>
+            <li>Regularly check for swelling, discoloration, or numbness, which may indicate restricted blood flow.</li>
+        </ul>
+        <p><a href="https://www.youtube.com/watch?v=sxui3wU7WBM" target="_blank" class="btn btn-custom">Watch: How to Splint a Fracture</a></p>
+
+        <h3>How to Wrap a Sprain</h3>
+        <p>
+            Wrapping provides support, reduces swelling, and prevents further injury.
+        </p>
+        <ul>
+            <li>Position the limb comfortably and slightly elevated.</li>
+            <li>Start wrapping below the injured joint and continue upward in a figure-eight pattern.</li>
+            <li>Maintain firm but gentle pressure—tight enough for support, but not so tight as to cut off circulation.</li>
+            <li>Adjust the wrap if swelling increases or if numbness occurs.</li>
+        </ul>
+        <p><a href="https://www.youtube.com/watch?v=0jps5SZlTdo" target="_blank" class="btn btn-custom">Watch: How to Wrap a Sprain</a></p>
+
+        <h3>Further Treatment for a Sprain</h3>
+        <p>Most sprains can be managed at home using the <strong>R.I.C.E.</strong> method:</p>
+        <ul>
+            <li><strong>Rest:</strong> Avoid putting weight on the joint for at least 48 hours.</li>
+            <li><strong>Ice:</strong> Apply an ice pack wrapped in a cloth for 15-20 minutes every 2-3 hours.</li>
+            <li><strong>Compression:</strong> Use a bandage to reduce swelling but ensure circulation is not restricted.</li>
+            <li><strong>Elevation:</strong> Keep the injured limb above heart level whenever possible.</li>
+        </ul>
+        <p>
+            Over-the-counter pain relievers like ibuprofen can help with discomfort. 
+            If symptoms persist for more than a few days, or if the joint remains unstable, seek medical evaluation.
+        </p>
+    </div>
+    <a href="{% url 'fractures_quiz' %}" class="btn btn-primary">Take Quiz</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+
+</div>
+
+{% endblock %}

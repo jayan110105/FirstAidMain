@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">❤️ Cardiac Emergencies Quiz</h2>
+    <form id="cardiacQuiz">
+        
+        <p><strong>1. What is a common symptom of a cardiac emergency?</strong></p>
+        <input type="radio" name="q1" value="b"> Sharp abdominal pain<br>
+        <input type="radio" name="q1" value="a"> Sudden collapse and unresponsiveness<br>
+        <input type="radio" name="q1" value="c"> Runny nose<br>
+
+        <p><strong>2. What should you do first if you suspect someone is having a cardiac emergency?</strong></p>
+        <input type="radio" name="q2" value="a"> Check responsiveness and call emergency services<br>
+        <input type="radio" name="q2" value="b"> Wait to see if they recover on their own<br>
+        <input type="radio" name="q2" value="c"> Give them water and have them sit down<br>
+
+        <p><strong>3. How deep should chest compressions be when performing CPR on an adult?</strong></p>
+        <input type="radio" name="q3" value="b"> About 1 inch<br>
+        <input type="radio" name="q3" value="c"> 3 to 4 inches<br>
+        <input type="radio" name="q3" value="a"> At least 2 inches<br>
+
+        <p><strong>4. How does CPR on a child differ from CPR on an adult?</strong></p>
+        <input type="radio" name="q4" value="a"> You may use one or two hands depending on the child's size<br>
+        <input type="radio" name="q4" value="b"> You should always use two hands regardless of size<br>
+        <input type="radio" name="q4" value="c"> You push harder on a child than on an adult<br>
+
+        <p><strong>5. What is the correct action to take when using an AED?</strong></p>
+        <input type="radio" name="q5" value="b"> Only use it if you are a trained medical professional<br>
+        <input type="radio" name="q5" value="a"> Turn it on, follow the voice prompts, and attach the pads<br>
+        <input type="radio" name="q5" value="c"> Rub the pads together before applying them<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('cardiacQuiz', ['a', 'a', 'a', 'a', 'a'])">Check Answers</button>
+        <p id="cardiacQuizFeedback" class="mt-2"></p>
+    </form>
+
+    <a href="{% url 'cardiac_emergencies_learning' %}" class="btn btn-primary">Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+
+{% endblock %}

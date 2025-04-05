@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns and Wounds{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center">🦴 Fractures & Sprains Quiz</h2>
+    <form id="fracturesQuiz">
+        <p><strong>1. What is a key sign of a fracture?</strong></p>
+        <input type="radio" name="q1" value="a"> Mild bruising<br>
+        <input type="radio" name="q1" value="b"> Deformity or inability to move limb<br>
+        <input type="radio" name="q1" value="c"> Itching<br>
+
+        <p><strong>2. What should you do if someone has a suspected sprain?</strong></p>
+        <input type="radio" name="q2" value="a"> Apply ice and rest the injured area<br>
+        <input type="radio" name="q2" value="b"> Keep walking on it to reduce stiffness<br>
+        <input type="radio" name="q2" value="c"> Soak the injured joint in hot water<br>
+
+        <p><strong>3. What is the first step of splinting a fracture</strong></p>
+        <input type="radio" name="q3" value="a"> Attempt to re align the bonea<br>
+        <input type="radio" name="q3" value="b"> Find padding and wrap it around the limb to keep the patient comfortable<br>
+        <input type="radio" name="q3" value="c"> Keep the injured area still and find a firm object to use as a split<br>
+
+        <p><strong>4.In which direction to we wrap a sprained limb?</strong></p>
+        <input type="radio" name="q4" value="a">Distal End to Proximal End<br>
+        <input type="radio" name="q4" value="b"> Proximal End to Distal End<br>
+        <input type="radio" name="q4" value="c"> Either, it does not make a difference<br>
+
+        <p><strong>5. How long do you apply ice on a sprain?</strong></p>
+        <input type="radio" name="q5" value="a"> Until the injured person feels numb<br>
+        <input type="radio" name="q5" value="b"> 45 minutes every 4 hours<br>
+        <input type="radio" name="q5" value="c"> 15-20 minutes every 2 to 3 hours<br>
+
+        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('fracturesQuiz', ['b', 'a','c','a','c'])">Check Answers</button>
+        <p id="fracturesQuizFeedback" class="mt-2"></p>
+    </form>
+    <a href="{% url 'fractures_learning' %}" class="btn btn-primary">Learning</a>
+    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+</div>
+{% endblock %}
