@@ -4,53 +4,265 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="container-fluid p-4">
 
     <!-- Enhanced Content Box -->
-    <div class="content-box">
-        <h2 class="text-center">Wounds</h2>
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-        <p>
-            Wounds occur when the skin or body tissues break due to cuts, scrapes, or punctures.  
-            While minor wounds can be treated at home, some cases require medical attention to prevent complications.
-        </p>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-bandage" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Wound Care</h1>
+    </div>     
 
-        <h3>When to Seek Medical Attention</h3>
-        <p>Seek professional care if any of the following apply:</p>
-        <ul>
-            <li><strong>Uncontrolled Bleeding:</strong> Bleeding does not stop after 10-15 minutes of direct pressure.</li>
-            <li><strong>Deep or Large Wounds:</strong> If a wound is deeper than 1/4 inch or exposes fat or muscle, stitches may be needed.</li>
-            <li><strong>Location Concerns:</strong> Wounds on the face, hands, feet, genitals, or over major joints should be evaluated due to functional and cosmetic risks.</li>
-            <li><strong>Foreign Objects:</strong> If debris remains embedded after cleaning, medical help is needed.</li>
-            <li><strong>Animal or Human Bites:</strong> High risk of infection; often requires antibiotics.</li>
-            <li><strong>Tetanus Risk:</strong> Wounds from dirty or rusty objects need attention, especially if vaccinations are outdated.</li>
-        </ul>
-
-        <h3>First Aid Treatment at Home</h3>
-        <ul>
-            <li><strong>Wash Your Hands:</strong> Prevent infection by cleaning your hands before touching the wound.</li>
-            <li><strong>Stop the Bleeding:</strong> Apply gentle pressure with a clean cloth or bandage.</li>
-            <li><strong>Clean the Wound:</strong> Rinse under running water to remove dirt. Avoid soap directly in the wound.</li>
-            <li><strong>Apply Antibiotic Ointment:</strong> Helps prevent infection and keeps the wound moist.</li>
-            <li><strong>Protect the Wound:</strong> Cover with a sterile bandage, changing it daily or when dirty.</li>
-            <li><strong>Monitor for Infection:</strong> Watch for redness, swelling, or pus development.</li>
-        </ul>
-
-        <h3>Recognizing Infection After a Few Days</h3>
-        <p>Even with proper care, infections may develop. Watch for:</p>
-        <ul>
-            <li><strong>Increased Redness & Swelling:</strong> Spreading redness or swelling around the wound.</li>
-            <li><strong>Pus or Discharge:</strong> Yellow or green fluid oozing from the wound.</li>
-            <li><strong>Fever:</strong> A temperature above 100.4°F (38°C) may indicate an infection.</li>
-            <li><strong>Persistent Pain:</strong> Pain that worsens or does not improve.</li>
-        </ul>
-        <p>
-            If any of these symptoms occur, seek medical attention to prevent serious complications.
-        </p>
-        <a href="{% url 'wounds_quiz' %}" class="btn btn-secondary mt-3">Take Quiz</a>
-        <a href="{% url 'modules' %}" class="btn btn-secondary mt-3">Back Modules</a>
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    Wounds are common injuries that can happen in everyday situations. Proper wound care prevents infection and promotes healing. Learning these skills will help you confidently handle injuries and potentially prevent serious complications.
+                </p>
+            </div>
+            </div>
+        </div>
     </div>
 
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            When to Seek Medical Attention
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <h6 class="fw-semibold mb-0">Uncontrolled Bleeding</h6>
+            </div>
+            <div class="text-muted mb-2">
+                Bleeding that doesn't stop after 10-15 minutes of direct pressure requires immediate medical attention.
+            </div>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <h6 class="fw-semibold mb-0">Deep or Large Wounds</h6>
+            </div>
+            <div class="text-muted mb-2">
+                if a wound is deeper than 1/4 inch or exposes fat or muscle, stitches may be needed.
+              </div>
+            </div>
+        
+            <!-- Step 3 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <h6 class="fw-semibold mb-0">Location Concerns</h6>
+            </div>
+            <div class="text-muted mb-2">
+                Wounds on the face, hands, feet, genitals, or over major joints should be evaluated due to functional and cosmetic risks.
+            </div>   
+            <div class="badge-intermediate bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                <i class="fa fa-exclamation-triangle me-2 mt-1"></i>
+                <span>Facial wounds may leave visible scars and should be treated by a professional.</span>
+            </div>           
+            </div>
+
+            <div class="mb-4">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <h6 class="fw-semibold mb-0">Foreign Objects</h6>
+                </div>
+                <div class="text-muted mb-2">
+                    If debris remains embedded after cleaning, medical help is needed. Never attempt to remove deeply embedded objects yourself.
+                </div>              
+            </div>
+
+            <div class="mb-4">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <h6 class="fw-semibold mb-0">Animal or Human Bites</h6>
+                </div>
+                <div class="text-muted mb-2">
+                    High risk of infection; often requires antibiotics. All human bites that break the skin should be seen by a doctor.
+                </div>     
+                <div class="badge-danger bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                    <i class="fa fa-exclamation-triangle me-2 mt-1"></i>
+                    <span>Animal bites can transmit rabies and other serious infections.</span>
+                </div>            
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <h6 class="fw-semibold mb-0">Tetanus Risk</h6>
+                </div>
+                <div class="text-muted mb-2">
+                    Wounds from dirty or rusty objects need attention, especially if vaccinations are outdated. Tetanus boosters are typically needed every 10 years.
+                </div>              
+            </div>
+        
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            First Aid Treatment at Home
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">Wash Your Hands</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Prevent infection by cleaning your hands thoroughly before touching the wound.
+            </p>
+            <div class="badge-intermediate bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                <i class="fa fa-exclamation-triangle me-2 mt-1"></i>
+                <span>Use soap and water or hand sanitizer with at least 60% alcohol.</span>
+            </div>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">Stop the Bleeding</h6>
+            </div>
+            <p class="text-muted small">
+                Apply gentle pressure with a clean cloth or bandage. Elevate the wound above heart level if possible.
+            </p>
+            </div>
+        
+            <!-- Step 3 -->
+            <div>
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">Clean the Wound</h6>
+            </div>
+            <p class="text-muted small">
+                Rinse under running water to remove dirt. Avoid soap directly in the wound as it can irritate tissue.
+            </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">4</span>
+                    <h6 class="fw-semibold mb-0">Apply Antibiotic Ointment</h6>
+                </div>
+                <p class="text-muted small">
+                    Helps prevent infection and keeps the wound moist, which promotes healing.
+                </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">5</span>
+                    <h6 class="fw-semibold mb-0">Protect the Wound</h6>
+                </div>
+                <p class="text-muted small">
+                    Cover with a sterile bandage, changing it daily or when dirty. This keeps the wound clean and protected.
+                </p>
+            </div>
+        
+        </div>
+    </div>
+
+        <div class="card mb-4 border-start shadow-sm">
+            <div class="card-header">
+                <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+                <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                    3
+                </div>
+                Recognizing Infection
+                </h5>
+            </div>
+            <div class="card-body">
+              <p class="text-muted mb-4" style="font-size: 0.875rem;">
+                Even with proper care, infections may develop. Watch for these warning signs:
+              </p>
+          
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger-subtle" style="width: 32px; height: 32px;">
+                        <i class="fa-solid fa-microscope text-danger"></i>
+                      </div>
+                      <h6 class="mb-0 fw-semibold">Increased Redness & Swelling</h6>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.875rem;">
+                      Spreading redness or swelling around the wound, especially with warmth.
+                    </p>
+                  </div>
+                </div>
+          
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <div class="d-flex align-items-center justify-content-center rounded-circle bg-success-subtle" style="width: 32px; height: 32px;">
+                        <i class="fa-solid fa-droplet text-success"></i>
+                      </div>
+                      <h6 class="mb-0 fw-semibold">Pus or Discharge</h6>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.875rem;">
+                      Yellow or green fluid oozing from the wound indicates infection.
+                    </p>
+                  </div>
+                </div>
+          
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <div class="d-flex align-items-center justify-content-center rounded-circle bg-warning-subtle" style="width: 32px; height: 32px;">
+                        <i class="fa-solid fa-temperature-full text-warning"></i>
+                      </div>
+                      <h6 class="mb-0 fw-semibold">Fever</h6>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.875rem;">
+                      A temperature above 100.4°F (38°C) may indicate an infection.
+                    </p>
+                  </div>
+                </div>
+          
+                <div class="col-md-6">
+                  <div class="border rounded p-3 h-100">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <div class="d-flex align-items-center justify-content-center rounded-circle bg-info-subtle" style="width: 32px; height: 32px;">
+                        <i class="fa-solid fa-triangle-exclamation text-info"></i>
+                      </div>
+                      <h6 class="mb-0 fw-semibold">Persistent Pain</h6>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.875rem;">
+                      Pain that worsens or does not improve over time.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" mt-4 badge-danger bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                <i class="fa fa-exclamation-triangle me-2 mt-1"></i>
+                <span>If any of these symptoms occur, seek medical attention to prevent serious complications.</span>
+              </div>
+            </div>
+          </div>          
+          <a href="{% url 'wounds_quiz' %}" class="btn btn-danger mt-3">Take Quiz</a>
+    </div>
 </div>
     
 {% endblock %}
