@@ -1,65 +1,307 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Allergic Reactions{% endblock %}
+{% block title %}Heat Learning{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="content-box">
-        <h2 class="text-center">Allergic Reactions First Aid</h2>
+<div class="container-fluid p-4">
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-        <p>An allergic reaction occurs when the body’s immune system reacts to a substance it deems harmful, even though it may not be harmful to most people. The substance causing the reaction is called an allergen, which can range from food to insect stings, medications, or environmental triggers like pollen.</p>
-
-        <h3>Signs and Symptoms of an Allergic Reaction</h3>
-        <h4>Mild Symptoms:</h4>
-        <ul>
-            <li>Itchy skin, rash, or hives</li>
-            <li>Swelling of lips, face, or eyes</li>
-            <li>Sneezing, coughing, or a runny nose</li>
-            <li>Shortness of breath or wheezing</li>
-        </ul>
-
-        <h4>Severe Symptoms (Anaphylaxis):</h4>
-        <ul>
-            <li>Difficulty breathing or wheezing</li>
-            <li>Swelling of the throat or tongue</li>
-            <li>Drop in blood pressure (leading to dizziness or fainting)</li>
-            <li>Rapid or weak pulse</li>
-            <li>Loss of consciousness</li>
-        </ul>
-
-        <h3>First Aid for Allergic Reactions</h3>
-        <h4>1. Mild Reactions:</h4>
-        <ul>
-            <li>Remove the allergen if possible (e.g., take off tight clothing or avoid the triggering food).</li>
-            <li>Take antihistamines (if available and not contraindicated).</li>
-            <li>Apply cool compresses to reduce swelling or hives.</li>
-        </ul>
-
-        <h4>2. Severe Reactions (Anaphylaxis):</h4>
-        <ul>
-            <li>Call emergency services immediately.</li>
-            <li>If the person has an epinephrine auto-injector (EpiPen), administer it right away. Follow the device’s instructions.</li>
-            <li>Keep the person lying down and raise their legs to prevent shock, unless it causes breathing difficulty.</li>
-            <li>Stay with the person and monitor their breathing and pulse until help arrives.</li>
-        </ul>
-
-        <h4>3. Insect Stings:</h4>
-        <ul>
-            <li>Remove the stinger if visible (scrape it off with a credit card or a flat object).</li>
-            <li>Clean the sting area with water and apply a cold compress.</li>
-            <li>Take antihistamines or apply an antihistamine cream to reduce itching and swelling.</li>
-        </ul>
-
-        <h3>When to Seek Medical Help</h3>
-        <ul>
-            <li>If the reaction is severe or symptoms progress quickly (e.g., difficulty breathing, throat swelling, or unconsciousness).</li>
-            <li>If the person does not have an epinephrine auto-injector or medical assistance is unavailable.</li>
-            <li>After using an epinephrine auto-injector, as further medical attention is usually necessary.</li>
-        </ul>
-
-        <a href="{% url 'allergy_quiz' %}" class="btn btn-primary">Take the Quiz</a>
-        <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-hand-dots" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Allergic Reactions First Aid</h1>
     </div>
-</div>
 
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    An allergic reaction occurs when the body's immune system reacts to a substance it deems harmful, even though it may not be harmful to most people. These reactions can range from mild discomfort to life-threatening emergencies. Knowing how to recognize and respond to allergic reactions, especially severe ones like anaphylaxis, can save lives. This module will teach you the essential skills for handling allergic emergencies.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Signs and Symptoms of Allergic Reactions
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-4" style="font-size: 0.9rem;">
+            Allergic reactions can range from mild to severe. It's important to recognize the symptoms and their severity:
+          </p>
+      
+          <div class="row g-4 mb-4">
+            <!-- Mild Symptoms -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-success bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <h6 class="text-success fw-semibold mb-3">Mild Symptoms</h6>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Itchy skin, rash, or hives</li>
+                  <li>• Swelling of lips, face, or eyes</li>
+                  <li>• Sneezing, coughing, or a runny nose</li>
+                  <li>• Shortness of breath or wheezing</li>
+                  <li>• Stomach pain or nausea</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Severe Symptoms -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-danger bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <h6 class="text-danger fw-semibold mb-3">Severe Symptoms (Anaphylaxis)</h6>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Difficulty breathing or wheezing</li>
+                  <li>• Swelling of the throat or tongue</li>
+                  <li>• Drop in blood pressure (dizziness or fainting)</li>
+                  <li>• Rapid or weak pulse</li>
+                  <li>• Loss of consciousness</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Alert -->
+          <div class="p-3 bg-danger bg-opacity-10 border border-danger rounded">
+            <h6 class="fw-medium d-flex align-items-center mb-2">
+              <i class="fas fa-exclamation-triangle text-danger me-2"></i>
+              Important Warning
+            </h6>
+            <p class="text-muted mb-0" style="font-size: 0.875rem;">
+              Anaphylaxis is a life-threatening emergency. Administer epinephrine (if available) and call emergency services immediately.
+            </p>
+          </div>
+        </div>
+      </div>      
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            First Aid for Allergic Reactions
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted" style="font-size: 0.9rem;">
+            The appropriate first aid depends on the severity of the reaction:
+          </p>
+      
+          <!-- Mild Reactions -->
+          <div class="rounded p-3">
+            <h6 class="fw-semibold mb-2">1. Mild Reactions</h6>
+            <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+              <li>• Remove the allergen if possible (e.g., take off tight clothing or avoid the triggering food)</li>
+              <li>• Take antihistamines (if available and not contraindicated)</li>
+              <li>• Apply cool compresses to reduce swelling or hives</li>
+              <li>• Monitor for worsening symptoms</li>
+            </ul>
+            <div class="mt-2 text-sm text-success bg-success bg-opacity-10 p-2 rounded d-inline-flex align-items-center">
+              <i class="fas fa-exclamation-triangle text-success me-2"></i>
+              <span>
+                Even mild reactions should be monitored closely, as they can sometimes progress to more severe reactions.
+              </span>
+            </div>
+          </div>
+      
+          <!-- Severe Reactions -->
+          <div class="rounded p-3">
+            <h6 class="fw-semibold mb-2">2. Severe Reactions (Anaphylaxis)</h6>
+            <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+              <li>• Call emergency services immediately</li>
+              <li>• Administer epinephrine (EpiPen) immediately if available</li>
+              <li>• Keep the person lying down and raise their legs (unless it causes breathing difficulty)</li>
+              <li>• Monitor breathing and pulse until help arrives</li>
+            </ul>
+            <div class="mt-2 text-sm text-danger bg-danger bg-opacity-10 p-2 rounded d-inline-flex align-items-center">
+              <i class="fas fa-exclamation-triangle text-danger me-2"></i>
+              <span>
+                If symptoms don't improve within 5-15 minutes after the first dose of epinephrine, a second dose may be needed if available.
+              </span>
+            </div>
+          </div>
+      
+          <!-- Insect Stings -->
+          <div class="rounded p-3 mb-3">
+            <h6 class="fw-semibold mb-2">3. Insect Stings</h6>
+            <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+              <li>• Remove the stinger if visible (scrape it off with a credit card or flat object)</li>
+              <li>• Clean the area with water and apply a cold compress</li>
+              <li>• Take antihistamines or use antihistamine cream</li>
+              <li>• Monitor for severe allergic reactions if there's a known allergy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            Common Allergens and Prevention
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-4" style="font-size: 0.9rem;">
+            Understanding common allergens can help with prevention and preparedness:
+          </p>
+      
+          <div class="row g-4 mb-4">
+            <!-- Food Allergens -->
+            <div class="col-md-4">
+              <div class="border rounded p-3 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-warning bg-opacity-25 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-utensils text-warning"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Food Allergens</h6>
+                </div>
+                <ul class="list-unstyled ps-3 small text-muted">
+                  <li>• Peanuts and tree nuts</li>
+                  <li>• Shellfish and fish</li>
+                  <li>• Milk and eggs</li>
+                  <li>• Wheat and soy</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Insect Allergens -->
+            <div class="col-md-4">
+              <div class="border rounded p-3 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-success bg-opacity-25 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-bug text-success"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Insect Allergens</h6>
+                </div>
+                <ul class="list-unstyled ps-3 small text-muted">
+                  <li>• Bee and wasp stings</li>
+                  <li>• Fire ant bites</li>
+                  <li>• Mosquito bites</li>
+                  <li>• Cockroach droppings</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Other Allergens -->
+            <div class="col-md-4">
+              <div class="border rounded p-3 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-primary bg-opacity-25 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-capsules text-primary"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Other Common Allergens</h6>
+                </div>
+                <ul class="list-unstyled ps-3 small text-muted">
+                  <li>• Medications (penicillin, aspirin)</li>
+                  <li>• Latex</li>
+                  <li>• Pollen, dust mites, mold</li>
+                  <li>• Pet dander</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Prevention Tips -->
+          <div class="p-3 bg-primary bg-opacity-10 border border-primary-subtle rounded">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <i class="fas fa-shield-alt text-primary me-2"></i>
+              Prevention Tips
+            </h6>
+            <ul class="list-unstyled ps-3 small text-muted">
+              <li>• Always carry prescribed medications (like an EpiPen)</li>
+              <li>• Wear a medical alert bracelet or necklace</li>
+              <li>• Read food labels carefully</li>
+              <li>• Inform restaurants about allergies</li>
+              <li>• Avoid environments with known allergens</li>
+              <li>• Educate others about your allergies and emergency response</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                4
+            </div>
+            When to Seek Medical Help
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-4" style="font-size: 0.9rem;">Always seek medical help in the following situations:</p>
+      
+          <div class="row g-4 mb-4">
+            <!-- Emergency Situations -->
+            <div class="col-md-6">
+              <div class="border rounded p-3 bg-danger bg-opacity-10 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fas fa-triangle-exclamation text-danger" style="font-size: 1.1rem;"></i>
+                  <h6 class="fw-semibold mb-0">Emergency Situations</h6>
+                </div>
+                <ul class="list-unstyled ps-3 small text-muted">
+                  <li>• Any signs of anaphylaxis (difficulty breathing, swelling of throat, dizziness)</li>
+                  <li>• Symptoms that progress rapidly</li>
+                  <li>• After using an epinephrine auto-injector</li>
+                  <li>• If the person has a history of severe allergic reactions</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Non-Emergency Situations -->
+            <div class="col-md-6">
+              <div class="border rounded p-3 bg-warning bg-opacity-10 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fas fa-info-circle text-warning" style="font-size: 1.1rem;"></i>
+                  <h6 class="fw-semibold mb-0">Non-Emergency Situations</h6>
+                </div>
+                <ul class="list-unstyled ps-3 small text-muted">
+                  <li>• Mild reactions that don't improve with over-the-counter medications</li>
+                  <li>• Recurring allergic reactions without a known cause</li>
+                  <li>• To get tested for suspected allergies</li>
+                  <li>• To get a prescription for an epinephrine auto-injector if you have allergies</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Follow-Up Care -->
+          <div class="p-3 bg-purple-subtle bg-opacity-10 border border-purple-subtle rounded">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <i class="fas fa-heartbeat text-purple me-2"></i>
+              Follow-Up Care
+            </h6>
+            <p class="text-muted" style="font-size: 0.9rem;">
+              After a severe allergic reaction, follow-up with an allergist is important to:
+            </p>
+            <ul class="list-unstyled ps-3 small text-muted mt-2">
+              <li>• Identify the specific allergen</li>
+              <li>• Develop an emergency action plan</li>
+              <li>• Get prescriptions for emergency medications</li>
+              <li>• Discuss long-term management strategies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      
+    <a href="{% url 'allergy_quiz' %}" class="btn btn-danger">Take Quiz</a>
+</div>
 {% endblock %}
