@@ -271,24 +271,134 @@
             </p>
           </div>
         </div>
-      </div>      
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                5
+            </div>
+            How to Use an AED
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">Turn it On</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Press the power button and follow the voice prompts. Modern AEDs will guide you through each step.
+            </p>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">Attach the Electrode Pads</h6>
+            </div>
+            <p class="text-muted small">
+                Place the pads on the person's bare chest as shown in the instructions. One pad goes on the upper right side, and the other on the lower left side of the chest.
+            </p>
+            </div>
+        
+            <!-- Step 3 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">Let the AED Analyze</h6>
+            </div>
+            <p class="text-muted small">
+                The AED will analyze the heart rhythm. Make sure no one is touching the person during analysis.
+            </p>
+            <div class="badge-danger bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                <i class="fa-solid fa-triangle-exclamation me-2 mt-1"></i>
+                <span>If the AED advises a shock, make sure everyone is clear of the person before pressing the shock button.</span>
+            </div>
+            </div>
 
-    <h3>How to Use an AED</h3>
-    <ul>
-        <li>Turn it on and follow the voice prompts.</li>
-        <li>Attach the electrode pads to the person’s bare chest as shown in the instructions.</li>
-        <li>If advised, deliver a shock and immediately resume CPR.</li>
-    </ul>
+            <div class="p-3 bg-primary bg-opacity-10 rounded">
+                <h6 class="mb-2 d-flex align-items-center">
+                  <i class="fa-solid fa-heart me-2 text-primary"></i> After Using an AED
+                </h6>
+                <p class="text-muted small mb-0">
+                  For infants (under 1 year), use two fingers for compressions and cover both the mouth and nose
+                  during rescue breaths. The compression rate remains the same: 100-120 compressions per minute.
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <h3>Working with Other Bystanders</h3>
-    <p>If others are present, assign specific tasks:</p>
-    <ul>
-        <li>One person should call emergency services.</li>
-        <li>Another should locate and bring an AED.</li>
-        <li>A third can assist with CPR rotation to prevent fatigue.</li>
-    </ul>
-    <a href="{% url 'cardiac_emergencies_quiz' %}" class="btn btn-primary">Quiz</a>
-<a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                6
+            </div>
+            Working with Other Bystanders
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            If others are present, assign specific tasks to make the emergency response more effective:
+          </p>
+      
+          <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+            <div class="col">
+              <div class="border rounded p-3 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-phone text-primary"></i>
+                  <h6 class="mb-0 fw-semibold">Call for Help</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  One person should call emergency services and stay on the line for instructions.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col">
+              <div class="border rounded p-3 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-bolt text-warning"></i>
+                  <h6 class="mb-0 fw-semibold">Locate an AED</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  Another person should locate and bring an AED if one is available nearby.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col">
+              <div class="border rounded p-3 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-users text-success"></i>
+                  <h6 class="mb-0 fw-semibold">CPR Rotation</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  A third person can assist with CPR rotation to prevent fatigue and maintain effective compressions.
+                </p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="p-3 bg-success bg-opacity-10 rounded">
+            <h6 class="d-flex align-items-center mb-2 fw-medium">
+              <i class="fa-solid fa-users text-success me-2"></i>
+              Coordinating the Response
+            </h6>
+            <p class="text-muted small mb-0">
+              Clear communication is essential. Designate one person to lead the response and coordinate efforts. This helps
+              prevent confusion and ensures all necessary actions are taken promptly.
+            </p>
+          </div>
+        </div>
+    </div>
+
+    <a href="{% url 'cardiac_emergencies_quiz' %}" class="btn btn-danger">Take Quiz</a>
 </div>
 
 </div>
