@@ -4,69 +4,476 @@
 
 {% block content %}
 
-<div class="container mt-4">
-    <div class="content-box">
-        <h2 class="text-center">Choking</h2>
+<div class="container-fluid p-4">
 
-        <p>
-            Choking occurs when an object, usually food or a small item, blocks the airway, preventing normal breathing. If not treated immediately, choking can lead to suffocation.
-        </p>
-
-        <h3>Recognizing Choking</h3>
-        <ul>
-            <li>Be unable to speak, cough, or breathe</li>
-            <li>Clutch their throat (universal choking sign)</li>
-            <li>Have blue-tinted lips or face (due to lack of oxygen)</li>
-            <li>Make high-pitched wheezing sounds or be completely silent</li>
-        </ul>
-        <p>If the person is coughing forcefully, encourage them to keep coughing. If they cannot cough, speak, or breathe, act immediately using the Heimlich maneuver.</p>
-
-        <h3>The Heimlich Maneuver</h3>
-        <p>The Heimlich maneuver is a lifesaving technique used to dislodge an obstruction from the airway. It varies based on the person's age.</p>
-        <p><a href="https://www.youtube.com/watch?v=2dn13zneEjo" target="_blank" class="btn btn-custom">Watch: Heimlich Maneuver</a></p>
-
-        <h3>For Adults</h3>
-        <ul>
-            <li>Stand behind the person and wrap your arms around their waist.</li>
-            <li>Make a fist with one hand and place it just above their belly button.</li>
-            <li>Grab your fist with your other hand and perform quick, inward and upward thrusts.</li>
-            <li>Repeat until the object is expelled or the person becomes unresponsive.</li>
-        </ul>
-
-        <h3>For Children (Ages 1-8)</h3>
-        <ul>
-            <li>Same technique as for adults but with reduced force.</li>
-            <li>Kneel behind the child if necessary.</li>
-            <li>Perform gentler abdominal thrusts using less force than on an adult.</li>
-            <li>Stop when the object is dislodged or if the child becomes unconscious.</li>
-        </ul>
-
-        <h3>For Infants (Under 1 Year Old)</h3>
-        <ul>
-            <li>Lay the baby face-down along your forearm, supporting their head and neck.</li>
-            <li>Give 5 firm back blows between the shoulder blades.</li>
-            <li>If the object is not dislodged, turn the infant onto their back.</li>
-            <li>Give 5 chest thrusts using two fingers, pushing down about 1.5 inches.</li>
-            <li>Repeat until the object is expelled or the infant becomes unresponsive.</li>
-        </ul>
-
-        <h3>For Yourself (Self-Heimlich)</h3>
-        <ul>
-            <li>Make a fist and place it above your belly button.</li>
-            <li>Grab your fist with your other hand and press inward and upward sharply.</li>
-            <li>Lean over a sturdy object (chair, counter, railing) and push your abdomen forcefully against it.</li>
-            <li>Repeat until the object is expelled.</li>
-        </ul>
-
-        <h3>When to Seek Medical Help</h3>
-        <ul>
-            <li>If the person becomes unconscious.</li>
-            <li>If choking persists despite Heimlich attempts.</li>
-            <li>After successful removal of the object, especially in infants or children, as internal injury may have occurred.</li>
-        </ul>
-        <a href="{% url 'choking_quiz' %}" class="btn btn-primary">Take the Quiz</a>
-    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>
+    
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fas fa-lungs" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Choking First Aid</h1>
     </div>
+
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    Choking occurs when an object blocks the airway, preventing normal breathing. If not treated immediately, choking can lead to suffocation and death within minutes. Knowing how to recognize and respond to choking can save a life. These skills are essential for everyone, especially parents, caregivers, and those who work with children.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Recognizing Choking
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Unable to Speak, Cough, or Breathe</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    The person cannot talk, make noise, or breathe effectively. This is the most serious sign.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Universal Choking Sign</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    The person clutches their throat with one or both hands. This is a universal distress signal for choking.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-danger bg-opacity-10">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa fa-exclamation-triangle text-danger"></i>
+                    <h6 class="mb-0 fw-semibold">Blue-Tinted Lips or Face</h6>
+                  </div>
+                  <p class="small text-muted mb-0">
+                    Cyanosis (blue coloration) occurs due to lack of oxygen and indicates a severe emergency.
+                  </p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+            <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fa fa-exclamation-triangle text-danger"></i>
+                <h6 class="mb-0 fw-semibold">Unusual Sounds</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    High-pitched wheezing sounds while inhaling or complete silence can indicate choking.
+                </p>
+            </div>
+            </div>
+
+          </div>
+          <div class="mt-4 p-3 bg-warning bg-opacity-10 rounded">
+            <h6 class="mb-2 d-flex align-items-center">
+              <i class="fas fa-exclamation-triangle me-2 text-warning"></i> Important Distinction
+            </h6>
+            <p class="text-muted small mb-0">
+                If the person is coughing forcefully, encourage them to keep coughing. This indicates their airway is not completely blocked, and they may be able to clear the obstruction themselves. Only intervene if they cannot cough, speak, or breathe.
+            </p>
+          </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            The Heimlich Maneuver
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            The Heimlich maneuver is a lifesaving technique used to dislodge an obstruction from the airway. It varies based on the person's age.
+          </p>
+      
+          <div class="d-flex mt-4">
+            <a
+              href="https://www.youtube.com/watch?v=2dn13zneEjo"
+              target="_blank"
+              class="btn btn-outline-secondary d-flex align-items-center gap-2"
+            >
+              Watch Heimlich Demonstration
+              <i class="fas fa-question-circle"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            For Adults
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">Stand Behind the Person</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Stand behind the person and wrap your arms around their waist.
+            </p>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">Make a Fist</h6>
+            </div>
+            <p class="text-muted small">
+                Make a fist with one hand and place it just above their belly button (navel).
+            </p>
+            </div>
+        
+            <!-- Step 3 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">Grab Your Fist</h6>
+            </div>
+            <p class="text-muted small">
+                Grab your fist with your other hand and perform quick, inward and upward thrusts.
+            </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">4</span>
+                    <h6 class="fw-semibold mb-0">Repeat Until Successful</h6>
+                </div>
+                <p class="text-muted small">
+                    Repeat until the object is expelled or the person becomes unresponsive.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                4
+            </div>
+            For Children (Ages 1-8)
+            </h5>
+        </div>
+      
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            The technique for children is similar to adults but with some important modifications:
+          </p>
+      
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="border rounded p-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                    1
+                  </div>
+                  <h6 class="mb-0">Same Technique, Less Force</h6>
+                </div>
+                <p class="text-muted small">
+                    Use the same technique as for adults but with reduced force to avoid injury.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="border rounded p-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                    2
+                  </div>
+                  <h6 class="mb-0">Kneel If Necessary</h6>
+                </div>
+                <p class="text-muted small">
+                    Kneel behind the child if necessary to be at the appropriate height.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="border rounded p-3">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                      3
+                    </div>
+                    <h6 class="mb-0">Gentler Abdominal Thrusts</h6>
+                  </div>
+                  <p class="text-muted small">
+                    Perform gentler abdominal thrusts using less force than on an adult.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="border rounded p-3">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                      4
+                    </div>
+                    <h6 class="mb-0">Stop When Successful</h6>
+                  </div>
+                  <p class="text-muted small">
+                    Stop when the object is dislodged or if the child becomes unconscious.
+                  </p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                5
+            </div>
+            For Infants (Under 1 Year Old)
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+
+            <p class="text-muted small mb-4">
+                The technique for infants is significantly different due to their small size and fragility:
+            </p>
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">Position the Infant</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Lay the baby face-down along your forearm, supporting their head and neck. Keep their head lower than their body.
+            </p>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">Back Blows</h6>
+            </div>
+            <p class="text-muted small">
+                Give 5 firm back blows between the shoulder blades using the heel of your hand.
+            </p>
+            </div>
+        
+            <!-- Step 3 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">Turn the Infant Over</h6>
+            </div>
+            <p class="text-muted small">
+                If the object is not dislodged, turn the infant onto their back while supporting their head.
+            </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">4</span>
+                    <h6 class="fw-semibold mb-0">Chest Thrusts</h6>
+                </div>
+                <p class="text-muted small">
+                    Give 5 chest thrusts using two fingers, pushing down about 1.5 inches on the center of the chest.
+                </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">5</span>
+                    <h6 class="fw-semibold mb-0">Repeat the Cycle</h6>
+                </div>
+                <p class="text-muted small">
+                    Repeat the cycle of 5 back blows and 5 chest thrusts until the object is expelled or the infant becomes unresponsive.
+                </p>
+            </div>
+
+            <div class="p-3 bg-danger bg-opacity-10 rounded">
+                <h6 class="mb-2 d-flex align-items-center">
+                  <i class="fas fa-exclamation-triangle me-2 text-danger"></i> Important Warning
+                </h6>
+                <p class="text-muted small mb-0">
+                    Never perform abdominal thrusts (Heimlich maneuver) on infants as this can cause internal injuries. Stick to the back blow and chest thrust technique.
+                </p>
+              </div>
+
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                6
+            </div>
+            For Yourself (Self-Heimlich)
+            </h5>
+        </div>
+      
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            If you're alone and choking, you can perform the Heimlich maneuver on yourself:
+          </p>
+      
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="border rounded p-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                    1
+                  </div>
+                  <h6 class="mb-0">Make a Fist</h6>
+                </div>
+                <p class="text-muted small">
+                    Make a fist and place it above your belly button, below your ribcage.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="border rounded p-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                    2
+                  </div>
+                  <h6 class="mb-0">Grab Your Fist</h6>
+                </div>
+                <p class="text-muted small">
+                    Grab your fist with your other hand and press inward and upward sharply.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="border rounded p-3">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                      3
+                    </div>
+                    <h6 class="mb-0">Use a Sturdy Object</h6>
+                  </div>
+                  <p class="text-muted small">
+                    Alternatively, lean over a sturdy object like a chair back, counter, or railing, and push your abdomen forcefully against it.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="border rounded p-3">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                      4
+                    </div>
+                    <h6 class="mb-0">Repeat Until Successful</h6>
+                  </div>
+                  <p class="text-muted small">
+                    Repeat until the object is expelled.
+                  </p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4 border-start shadow-sm">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                7
+            </div>
+            When to Seek Medical Help
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 border rounded ">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Unconsciousness</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    If the person becomes unconscious at any point during the choking episode.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="p-3 border rounded ">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Persistent Choking</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    If choking persists despite multiple attempts at the Heimlich maneuver.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded ">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa fa-exclamation-triangle text-danger"></i>
+                    <h6 class="mb-0 fw-semibold">After Successful Removal</h6>
+                  </div>
+                  <p class="small text-muted mb-0">
+                    After successful removal of the object, especially in infants or children, as internal injury may have occurred.
+                  </p>
+                </div>
+            </div>
+          </div>
+          <div class="mt-4 p-3 bg-primary bg-opacity-10 rounded">
+            <h6 class="mb-2 d-flex align-items-center">
+              <i class="fa-solid fa-heart me-2 text-primary"></i> Follow-Up Care
+            </h6>
+            <p class="text-muted small mb-0">
+                Even if the choking episode seems resolved, watch for signs of respiratory distress, persistent cough, difficulty swallowing, or chest/throat pain, which could indicate complications requiring medical attention.
+            </p>
+          </div>
+        </div>
+    </div>
+    <a href="{% url 'choking_quiz' %}" class="btn btn-danger">Take Quiz</a>
 </div>
     
 {% endblock %}
