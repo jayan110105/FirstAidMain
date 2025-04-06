@@ -1,71 +1,260 @@
 {% extends "base.html" %}
 {% load static %}
-
-{% block title %}Poisoning{% endblock %}
+{% block title %}Heat Learning{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="content-box">
-        <h2 class="text-center">Poisoning First Aid</h2>
+<div class="container-fluid p-4">
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-        <p>Poisoning occurs when a person ingests, inhales, or comes into contact with toxic substances...</p>
-
-        <h3>Signs and Symptoms of Poisoning</h3>
-        <ul>
-            <li>Difficulty breathing or shortness of breath</li>
-            <li>Chest pain or tightness</li>
-            <li>Nausea, vomiting, or diarrhea</li>
-            <li>Excessive salivation or drooling</li>
-            <li>Drowsiness, confusion, or dizziness</li>
-            <li>Seizures</li>
-            <li>Burns or redness around the mouth or skin (if the poison is corrosive)</li>
-            <li>Abnormal pupil size (dilated or constricted)</li>
-        </ul>
-
-        <h3>First Aid for Poisoning</h3>
-
-        <h4>1. Ingestion Poisoning</h4>
-        <ul>
-            <li>Call for help via the emergency helpline number</li>
-            <li>DO NOT induce vomiting unless instructed by a medical professional</li>
-            <li>If the person is conscious, offer them water or milk (only if instructed by a medical professional)</li>
-            <li>Identify the poison if possible (bring the container, plant, or substance involved)</li>
-        </ul>
-
-        <h4>2. Inhalation Poisoning</h4>
-        <ul>
-            <li>Get the person to fresh air immediately while keeping yourself safe from exposure</li>
-            <li>If the person is unconscious but breathing, place them in the recovery position to ensure their airway remains clear</li>
-            <li>Call emergency services immediately</li>
-        </ul>
-
-        <h4>3. Contact Poisoning</h4>
-        <ul>
-            <li>Wash the affected skin immediately with soap and water</li>
-            <li>If the poison is from a plant (e.g., poison ivy), wash the affected area and avoid scratching</li>
-            <li>For chemical burns, flush the area with large amounts of water for at least 20 minutes</li>
-            <li>Seek medical attention if severe reactions occur</li>
-        </ul>
-
-        <h4>4. Injection Poisoning</h4>
-        <ul>
-            <li>Call emergency services immediately</li>
-            <li>If the substance is known (e.g., heroin), administer Naloxone (Narcan) if available</li>
-            <li>For stings or bites, remove the stinger or needle carefully without squeezing</li>
-            <li>Monitor vital signs (breathing, pulse) and be prepared to administer CPR if necessary</li>
-        </ul>
-
-        <h3>When to Seek Medical Help</h3>
-        <ul>
-            <li>If the person is unconscious, drowsy, or confused</li>
-            <li>If the person cannot breathe or is showing difficulty breathing</li>
-            <li>If the person shows signs of severe poisoning (e.g., seizures, paralysis, severe burns)</li>
-            <li>If the poisoning involves a child or elderly person</li>
-            <li>If you cannot identify the poison</li>
-        </ul>
-
-        <a href="{% url 'poison_quiz' %}" class="btn btn-primary">Take the Quiz</a>
-        <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-skull" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Poisoning First Aid</h1>
     </div>
+
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    Poisoning occurs when a person ingests, inhales, or comes into contact with toxic substances. Quick and appropriate action can prevent serious complications or even save a life. Knowing how to recognize poisoning and provide proper first aid is essential, especially in households with children or in workplaces with hazardous materials.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Signs and Symptoms of Poisoning
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-purple-subtle bg-opacity-10 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-wind text-purple"></i>
+                  <h6 class="mb-0 fw-semibold">Respiratory Symptoms</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                    <li>• Difficulty breathing or shortness of breath</li>
+                    <li>• Chest pain or tightness</li>
+                </ul>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-purple-subtle bg-opacity-10 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-droplet text-purple"></i>
+                  <h6 class="mb-0 fw-semibold">Digestive Symptoms</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                    <li>• Nausea, vomiting, or diarrhea</li>
+                    <li>• Excessive salivation or drooling</li>
+                  </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-purple-subtle bg-opacity-10 h-100">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa fa-exclamation-triangle text-purple"></i>
+                    <h6 class="mb-0 fw-semibold">Neurological Symptoms</h6>
+                  </div>
+                  <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                    <li>• Drowsiness, confusion, or dizziness</li>
+                    <li>• Seizures</li>
+                    <li>• Abnormal pupil size (dilated or constricted)</li>
+                  </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6 ">
+            <div class="p-3 border rounded bg-purple-subtle bg-opacity-10 h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fa fa-exclamation-triangle text-purple"></i>
+                <h6 class="mb-0 fw-semibold">Skin Symptoms</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                    <li>• Burns or redness around the mouth or skin (if the poison is corrosive)</li>
+                    <li>• Rashes or irritation</li>
+                  </ul>
+            </div>
+            </div>
+          </div>
+          <div class="p-3 bg-warning bg-opacity-10 rounded">
+            <h6 class="mb-2 d-flex align-items-center">
+              <i class="fas fa-exclamation-triangle me-2 text-warning"></i> Important Note
+            </h6>
+            <p class="text-muted small mb-0">
+                Symptoms can vary widely depending on the type of poison, amount, and how it entered the body. Some poisons may not cause immediate symptoms. When in doubt, always seek medical help.
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            First Aid for Different Types of Poisoning
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            The appropriate first aid depends on how the poison entered the body:
+          </p>
+      
+          <!-- Ingestion Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">1. Ingestion Poisoning</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Call for help via the emergency helpline number</li>
+              <li class="fw-medium text-danger">DO NOT induce vomiting unless instructed by a medical professional</li>
+              <li>If the person is conscious, offer them water or milk (only if instructed by a medical professional)</li>
+              <li>Identify the poison if possible (bring the container, plant, or substance involved)</li>
+            </ul>
+            <div class="bg-danger bg-opacity-10 border border-danger-subtle rounded p-2 small text-danger d-inline-flex align-items-start">
+              <i class="fas fa-triangle-exclamation me-2 mt-1"></i>
+              Never try to neutralize a poison with lemon juice, vinegar, or other substances unless directed by poison control.
+            </div>
+          </div>
+      
+          <!-- Inhalation Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">2. Inhalation Poisoning</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Get the person to fresh air immediately while keeping yourself safe from exposure</li>
+              <li>If unconscious but breathing, place them in recovery position</li>
+              <li>Call emergency services immediately</li>
+            </ul>
+            <div class="bg-primary bg-opacity-10 border border-primary-subtle rounded p-2 small text-primary d-inline-flex align-items-start">
+              <i class="fas fa-triangle-exclamation me-2 mt-1"></i>
+              Common inhalation poisons include carbon monoxide, chlorine gas, and chemical fumes. Always ensure your own safety first.
+            </div>
+          </div>
+      
+          <!-- Contact Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">3. Contact Poisoning</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-0">
+              <li>Wash the affected skin immediately with soap and water</li>
+              <li>If caused by a plant (e.g., poison ivy), wash the area and avoid scratching</li>
+              <li>For chemical burns, flush the area with lots of water for at least 20 minutes</li>
+              <li>Remove contaminated clothing using gloves</li>
+              <li>Seek medical attention if severe reactions occur</li>
+            </ul>
+          </div>
+      
+          <!-- Injection Poisoning -->
+          <div>
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">4. Injection Poisoning</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Call emergency services immediately</li>
+              <li>If the substance is known (e.g., heroin), administer Naloxone (Narcan) if available</li>
+              <li>For stings or bites, remove the stinger or needle carefully without squeezing</li>
+              <li>Monitor breathing and pulse, be ready to perform CPR</li>
+            </ul>
+            <div class="bg-warning bg-opacity-10 border border-warning-subtle rounded p-2 small d-inline-flex align-items-start">
+              <i class="fas fa-triangle-exclamation me-2 mt-1 text-warning "></i>
+              Injection poisoning includes drug overdoses, snake bites, and insect stings. Time is critical in these cases.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4 border-start shadow-sm">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            When to Seek Medical Help
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="p-3 border rounded h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Unconsciousness</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    If the person is unconscious, drowsy, or confused, call emergency services immediately.
+                  </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="p-3 border rounded h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-wind text-warning"></i>
+                  <h6 class="mb-0 fw-semibold">Breathing Difficulty</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    If the person is showing difficulty breathing or is experiencing chest pain, seek immediate medical attention.
+                  </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="p-3 border rounded h-100">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa-solid fa-skull text-primary"></i>
+                    <h6 class="mb-0 fw-semibold">Severe Symptoms</h6>
+                  </div>
+                  <p class="small text-muted mb-0">
+                    If the person shows signs of severe poisoning (e.g., seizures, paralysis, severe burns), call emergency services immediately.
+                  </p>
+                </div>
+            </div>
+
+            <div class="col-md-6 ">
+            <div class="p-3 border rounded h-100">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fa-solid fa-heart text-success"></i>
+                <h6 class="mb-0 fw-semibold">Vulnerable Individuals</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                    If the poisoning involves a child or elderly person, seek medical help even for minor symptoms.
+                  </p>
+            </div>
+            </div>
+          </div>
+          <div class="p-3 bg-danger bg-opacity-10 rounded">
+            <h6 class="mb-2 d-flex align-items-center">
+              <i class="fas fa-exclamation-triangle me-2 text-danger"></i> Critical Warning
+            </h6>
+            <p class="text-muted small mb-0">
+                If you cannot identify the poison or are unsure about what to do, always err on the side of caution and seek professional medical care or call poison control. Time is critical in poisoning cases.
+            </p>
+        </div>
+        </div>
+    </div>
+
+    <a href="{% url 'poison_quiz' %}" class="btn btn-danger">Take Quiz</a>
 </div>
 {% endblock %}
