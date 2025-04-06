@@ -4,52 +4,274 @@
 
 {% block content %}
 
-<div class="content-box">
-    <h2 class="text-center">Cardiac Emergencies</h2>
+<div class="container-fluid p-4">
 
-    <p>
-        Cardiac emergencies occur when the heart stops functioning properly, cutting off blood flow to vital organs. 
-        Without immediate action, this can lead to death within minutes. Recognizing the signs and responding quickly 
-        can double or triple survival chances.
-    </p>
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-    <h3>Recognizing a Cardiac Emergency</h3>
-    <p>Someone experiencing a cardiac event may show the following symptoms:</p>
-    <ul>
-        <li>Sudden collapse and unresponsiveness</li>
-        <li>No breathing or gasping for air</li>
-        <li>No pulse or very weak pulse</li>
-        <li>Clutching the chest (in cases of a heart attack)</li>
-        <li>Dizziness, confusion, or extreme fatigue</li>
-    </ul>
-    <p>If you suspect a cardiac emergency, act immediately—every second counts.</p>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-heart" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Cardiac Emergencies</h1>
+    </div>
+    
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    Cardiac emergencies occur when the heart stops functioning properly, cutting off blood flow to vital organs. Without immediate action, this can lead to death within minutes. Recognizing the signs and responding quickly can double or triple survival chances. These skills could help you save a life.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
 
-    <h3>Immediate Actions to Take</h3>
-    <ul>
-        <li><strong>Check Responsiveness:</strong> Shake the person and shout their name. If no response, proceed immediately.</li>
-        <li><strong>Call Emergency Services:</strong> Dial 911 (or your local emergency number) and report the situation. Stay on the line and follow instructions.</li>
-        <li><strong>Start CPR:</strong> Begin chest compressions immediately.</li>
-        <li><strong>Use an AED:</strong> If available, follow the instructions to deliver a shock.</li>
-    </ul>
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Recognizing a Cardiac Emergency
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">Sudden Collapse</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                  Caused by heat sources like fire, hot objects, steam, or scalding liquids. Common in cooking
+                  accidents or from hot water.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa fa-exclamation-triangle text-danger"></i>
+                  <h6 class="mb-0 fw-semibold">No Breathing or Gasping</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                  Caused by exposure to freezing temperatures. Often affects outdoor workers, adventurers, or those
+                  in extreme cold conditions.
+                </p>
+              </div>
+            </div>
 
-    <h3>CPR on Adults</h3>
-    <ul>
-        <li>Place the person on a firm, flat surface.</li>
-        <li>Give hard, fast chest compressions (100-120 per minute). Push down at least 2 inches in the center of the chest.</li>
-        <li>Allow the chest to fully rise between compressions.</li>
-        <li>Continue until emergency responders arrive.</li>
-    </ul>
-    <p><strong>Watch this CPR demonstration:</strong> <a href="https://www.youtube.com/watch?v=msRft-g-k_s" target="_blank">CPR Video</a></p>
+            <div class="col-md-6">
+                <div class="p-3 border rounded bg-danger bg-opacity-10">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fa fa-exclamation-triangle text-danger"></i>
+                    <h6 class="mb-0 fw-semibold">No Pulse</h6>
+                  </div>
+                  <p class="small text-muted mb-0">
+                    Caused by exposure to freezing temperatures. Often affects outdoor workers, adventurers, or those
+                    in extreme cold conditions.
+                  </p>
+                </div>
+            </div>
 
-    <h3>CPR on Children</h3>
-    <p>
-        The main differences between child and adult CPR are in compression depth, hand placement, and rescue breaths 
-        due to the size and fragility of a child’s body.
-    </p>
-    <ul>
-        <li><strong>Compression Depth:</strong> Compress about 2 inches, but no more than that to avoid injury.</li>
-        <li><strong>Hand Placement:</strong> Use one or two hands, depending on the child’s size—one hand for smaller children and two for larger ones.</li>
-    </ul>
+            <div class="col-md-6">
+            <div class="p-3 border rounded bg-danger bg-opacity-10">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="fa fa-exclamation-triangle text-danger"></i>
+                <h6 class="mb-0 fw-semibold">Clutching the Chest</h6>
+                </div>
+                <p class="small text-muted mb-0">
+                Caused by exposure to freezing temperatures. Often affects outdoor workers, adventurers, or those
+                in extreme cold conditions.
+                </p>
+            </div>
+            </div>
+
+          </div>
+          <div class=" mt-4 badge-danger bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+            <i class="fa-solid fa-clock me-2 mt-1"></i>
+            <span>If you suspect a cardiac emergency, act immediately—every second counts.</span>
+          </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            Immediate Actions to Take
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">Check Responsiveness</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Shake the person and shout their name. If no response, proceed immediately.
+            </p>
+            </div>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">Call Emergency Services</h6>
+            </div>
+            <p class="text-muted small">
+                Dial 911 (or your local emergency number) and report the situation. Stay on the line and follow instructions.
+            </p>
+            <div class="badge-info bg-opacity-25 p-2 rounded d-inline-flex align-items-start small">
+                <i class="fa-solid fa-phone me-2 mt-1"></i>
+                <span>If others are present, have someone call while you begin CPR.</span>
+            </div>
+            </div>
+        
+            <!-- Step 3 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">Start CPR</h6>
+            </div>
+            <p class="text-muted small">
+                Begin chest compressions immediately. Push hard and fast in the center of the chest.
+            </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 24px; height: 24px; font-size: 0.875rem;">4</span>
+                    <h6 class="fw-semibold mb-0">Use an AED</h6>
+                </div>
+                <p class="text-muted small">
+                    If available, follow the instructions to deliver a shock. AEDs are designed to be used by anyone, with clear voice prompts.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            CPR on Adults
+            </h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="border rounded p-3">
+                  <h6 class="mb-2">Proper Technique</h6>
+                  <ul class="ps-3 text-muted small">
+                    <li>Place the person on a firm, flat surface.</li>
+                    <li>Position yourself directly over the person's chest.</li>
+                    <li>Place the heel of one hand on the center of the chest, between the nipples.</li>
+                    <li>Place your other hand on top of the first hand.</li>
+                    <li>Keep your arms straight and position your shoulders directly above your hands.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="border rounded p-3">
+                  <h6 class="mb-2">Compression Guidelines</h6>
+                  <ul class="ps-3 text-muted small">
+                    <li>Push hard and fast at a rate of 100-120 compressions per minute.</li>
+                    <li>Compress the chest at least 2 inches (5 cm) deep.</li>
+                    <li>Allow the chest to fully recoil between compressions.</li>
+                    <li>Minimize interruptions in compressions.</li>
+                    <li>Continue until emergency responders arrive.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="d-flex mt-4">
+            <a
+              href="https://www.youtube.com/watch?v=msRft-g-k_s"
+              target="_blank"
+              class="btn btn-outline-secondary d-flex align-items-center gap-2"
+            >
+              Watch CPR Demonstration
+              <i class="fas fa-question-circle"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                4
+            </div>
+            CPR on Children
+            </h5>
+        </div>
+      
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            The main differences between child and adult CPR are in compression depth, hand placement, and rescue
+            breaths due to the size and fragility of a child's body.
+          </p>
+      
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="border rounded p-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                    1
+                  </div>
+                  <h6 class="mb-0">Compression Depth</h6>
+                </div>
+                <p class="text-muted small">
+                  Compress about 2 inches, but no more than that to avoid injury. For infants, compress about 1.5 inches.
+                </p>
+              </div>
+            </div>
+      
+            <div class="col-md-6">
+              <div class="border rounded p-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="d-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle" style="width: 24px; height: 24px; font-size: 14px;">
+                    2
+                  </div>
+                  <h6 class="mb-0">Hand Placement</h6>
+                </div>
+                <p class="text-muted small">
+                  Use one or two hands, depending on the child's size—one hand for smaller children and two for larger ones.
+                </p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="p-3 bg-warning bg-opacity-10 rounded">
+            <h6 class="mb-2 d-flex align-items-center">
+              <i class="fas fa-exclamation-triangle me-2 text-warning"></i> Important Note
+            </h6>
+            <p class="text-muted small mb-0">
+              For infants (under 1 year), use two fingers for compressions and cover both the mouth and nose
+              during rescue breaths. The compression rate remains the same: 100-120 compressions per minute.
+            </p>
+          </div>
+        </div>
+      </div>      
 
     <h3>How to Use an AED</h3>
     <ul>
