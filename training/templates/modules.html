@@ -13,21 +13,38 @@
           <img
             src="{% static 'images/burns2.png' %}"
             class="card-img-top img-fluid"
-            alt="Burns and Wounds"
+            alt="Burns"
             width="300"
             height="200"
           />
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title">Burns and Wounds</h5>
+              <h5 class="card-title">Burns</h5>
               <span class="badge badge-advanced">beginner</span>
             </div>
             <p class="card-text text-muted">
-              Learn how to treat burns and wounds effectively.
+              Learn about different types of burns and how to treat them.
             </p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
               <p class="text-muted mb-0">150 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'burns_and_wounds' %}" class="btn btn-danger">Start Module</a>
+              <a href="{% url 'burns_learning' %}" class="btn btn-danger">Start Module</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card module-card">
+          <img src="{% static 'images/wound.png' %}" class="card-img-top img-fluid" alt="Fractures and Sprains" width="300" height="200" />
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title">Wounds</h5>
+              <span class="badge badge-advanced">beginner</span>
+            </div>
+            <p class="card-text text-muted">Learn about different types of wounds and how to treat them.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
+              <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              <a href="{% url 'wounds_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -45,7 +62,7 @@
             <p class="card-text text-muted">Identify and stabilize fractures and sprains.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
               <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'fractures_and_sprains' %}" class="btn btn-danger">Start Module</a>
+              <a href="{% url 'fractures_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -63,7 +80,7 @@
             <p class="card-text text-muted">Handle CPR and heart-related emergencies.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
               <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'cardiac_emergencies' %}" class="btn btn-danger">Start Module</a>
+              <a href="{% url 'cardiac_emergencies_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -81,7 +98,7 @@
             <p class="card-text text-muted">Learn how to assist someone who is choking.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
               <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'choking' %}" class="btn btn-danger">Start Module</a>
+              <a href="{% url 'choking_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -93,13 +110,30 @@
           <img src="{% static 'images/hot.png' %}" class="card-img-top img-fluid" alt="Exposure" width="300" height="200" />
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title">Exposure</h5>
+              <h5 class="card-title">Heat Exposure</h5>
               <span class="badge badge-intermediate">intermediate</span>
             </div>
-            <p class="card-text text-muted">Recognize and treat heat/cold-related emergencies.</p>
+            <p class="card-text text-muted">Identify and treat patients suffering from prolonged exposure to high temperatures</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
               <p class="text-muted mb-0">150 points &nbsp;</p>
-              <a href="{% url 'exposure' %}" class="btn btn-danger">Start Module</a>
+              <a href="{% url 'heat_learning' %}" class="btn btn-danger">Start Module</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card module-card">
+          <img src="{% static 'images/cold2.png' %}" class="card-img-top img-fluid" alt="Exposure" width="300" height="200" />
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title">Cold Exposure</h5>
+              <span class="badge badge-intermediate">intermediate</span>
+            </div>
+            <p class="card-text text-muted">Identify and treat patients suffering from prolonged exposure to low temperatures</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
+              <p class="text-muted mb-0">150 points &nbsp;</p>
+              <a href="{% url 'cold_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -108,16 +142,50 @@
       <!-- 6. Poison/Venom/Allergies -->
       <div class="col-md-4">
         <div class="card module-card">
+          <img src="{% static 'images/poison.png' %}" class="card-img-top img-fluid" alt="Poison/Venom/Allergies" width="300" height="200" />
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title">Poison</h5>
+              <span class="badge badge-intermediate">intermediate</span>
+            </div>
+            <p class="card-text text-muted">Learn how to diagnose and treat poisoned patients.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
+              <p class="text-muted mb-0">200 points &nbsp;</p>
+              <a href="{% url 'poison_learning' %}" class="btn btn-danger">Start Module</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card module-card">
           <img src="{% static 'images/venom.png' %}" class="card-img-top img-fluid" alt="Poison/Venom/Allergies" width="300" height="200" />
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title">Poison/Venom/Allergies</h5>
+              <h5 class="card-title">Venom</h5>
               <span class="badge badge-intermediate">intermediate</span>
             </div>
-            <p class="card-text text-muted">Handle poisonings, venomous bites, and allergic reactions.</p>
+            <p class="card-text text-muted">Learn about venomous bites and its first aid.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
               <p class="text-muted mb-0">200 points &nbsp;</p>
-              <a href="{% url 'poison_venom_allergy' %}" class="btn btn-danger">Start Module</a>
+              <a href="{% url 'venom_learning' %}" class="btn btn-danger">Start Module</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card module-card">
+          <img src="{% static 'images/allergy.png' %}" class="card-img-top img-fluid" alt="Poison/Venom/Allergies" width="300" height="200" />
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="card-title">Allergy</h5>
+              <span class="badge badge-intermediate">intermediate</span>
+            </div>
+            <p class="card-text text-muted">Learn about allergic reactions and its first aid.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
+              <p class="text-muted mb-0">200 points &nbsp;</p>
+              <a href="{% url 'allergy_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
