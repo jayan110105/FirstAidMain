@@ -3,80 +3,218 @@
 {% block title %}Heat Learning{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-center">☀️ Heat-Related First Aid</h2>
-    <p>
-        Exposure to extreme heat can lead to serious health conditions, including heat exhaustion and heatstroke. Knowing the symptoms can help prevent life-threatening situations.
-    </p>
+<div class="container-fluid p-4">
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-    <h3>Heat Exhaustion</h3>
-    <p>Symptoms of heat exhaustion are:</p>
-    <ul>
-        <li>Heavy sweating</li>
-        <li>Weakness or dizziness</li>
-        <li>Cool, clammy skin</li>
-        <li>Nausea or vomiting</li>
-        <li>Fast but weak pulse</li>
-        <li>Muscle cramps and headache</li>
-    </ul>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-sun" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Heat-Related First Aid</h1>
+    </div>
 
-    <h3>Treatment</h3>
-    <ul>
-        <li>Move the person to a cool, shaded area or indoors.</li>
-        <li>Loosen tight clothing and apply cool, damp cloths to the body.</li>
-        <li>Encourage slow sipping of water or electrolyte-rich fluids.</li>
-        <li>Rest until symptoms improve.</li>
-    </ul>
-    <p>If symptoms persist for over an hour or worsen, seek medical help.</p>
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    Exposure to extreme heat can lead to serious health conditions, including heat exhaustion and heatstroke. These conditions can escalate quickly and become life-threatening if not properly addressed. Knowing how to recognize the symptoms and provide appropriate first aid can prevent serious complications and potentially save lives, especially during hot weather or in situations where people are exerting themselves in high temperatures.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
 
-    <h3>Heatstroke (Medical Emergency)</h3>
-    <p>Symptoms of heatstroke are:</p>
-    <ul>
-        <li>High body temperature (above 104°F / 40°C)</li>
-        <li>Hot, dry skin (no sweating)</li>
-        <li>Confusion, dizziness, or seizures</li>
-        <li>Rapid, strong pulse</li>
-        <li>Loss of consciousness</li>
-    </ul>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Heat Exhaustion
+            </h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4" style="font-size: 0.875rem;">
+                Heat exhaustion is a condition that occurs when the body overheats. It's a milder form of heat-related illness that can develop after exposure to high temperatures and inadequate fluid replacement.
+            </p>
+          <div class="row g-4 mb-4">
+            <!-- Fracture Card -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-warning bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-droplet text-warning" style="font-size: 1.25rem;"></i>
+                  <h6 class="fw-semibold mb-0">Symptoms</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Heavy sweating</li>
+                  <li>• Weakness or dizziness</li>
+                  <li>• Cool, clammy skin</li>
+                  <li>• Nausea or vomiting</li>
+                  <li>• Fast but weak pulse</li>
+                  <li>• Muscle cramps and headache</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Sprain Card -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-primary bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-person-running text-primary" style="font-size: 1.25rem;"></i>
+                  <h6 class="fw-semibold mb-0">Treatment</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Move to a cool, shaded area or indoors</li>
+                  <li>• Loosen tight clothing and apply cool, damp cloths</li>
+                  <li>• Encourage slow sipping of water or electrolyte-rich fluids</li>
+                  <li>• Rest until symptoms improve</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Alert Box -->
+          <div class="p-3 bg-warning bg-opacity-10 border border-warning-subtle rounded">
+            <h6 class="fw-medium d-flex align-items-center mb-2">
+              <i class="fa-solid fa-triangle-exclamation text-warning me-2"></i>
+              Important Warning
+            </h6>
+            <p class="text-muted mb-0" style="font-size: 0.875rem;">
+                If symptoms persist for over an hour or worsen, seek medical help. Heat exhaustion can progress to heatstroke, which is a life-threatening emergency.
+            </p>
+          </div>
+    
+        </div>
+      </div>
 
-    <h3>Treatment</h3>
-    <ul>
-        <li>Call emergency services immediately! Heatstroke can be fatal.</li>
-        <li>Move the person to shade and remove excess clothing.</li>
-        <li>Cool the body rapidly using water, ice packs, or fanning.</li>
-        <li>If conscious, offer small sips of cool water.</li>
-        <li>Avoid caffeine or alcohol, which can worsen dehydration.</li>
-    </ul>
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            Heatstroke (Medical Emergency)
+            </h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4" style="font-size: 0.875rem;">
+                Heatstroke is a severe and potentially life-threatening condition that occurs when the body's temperature regulation system fails and body temperature rises to dangerous levels (above 104°F or 40°C).
+            </p>
+          <div class="row g-4 mb-4">
+            <!-- Fracture Card -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-danger bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-temperature-empty text-danger" style="font-size: 1.25rem;"></i>
+                  <h6 class="fw-semibold mb-0">Symptoms</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• High body temperature (above 104°F / 40°C)</li>
+                  <li>• Hot, dry skin (no sweating)</li>
+                  <li>• Confusion or slurred speech</li>
+                  <li>• Rapid, strong pulse</li>
+                  <li>• Loss of consciousness</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Sprain Card -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-danger bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-triangle-exclamation text-danger" style="font-size: 1.25rem;"></i>
+                  <h6 class="fw-semibold mb-0">Treatment</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Call emergency services immediately! Heatstroke can be fatal.</li>
+                  <li>• Move the person to shade and remove excess clothing</li>
+                  <li>• Cool the body rapidly using water, ice packs, or fanning</li>
+                  <li>• If conscious, offer small sips of cool water</li>
+                  <li>• Avoid caffeine or alcohol, which can worsen dehydration</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Alert Box -->
+          <div class="p-3 bg-danger bg-opacity-10 border border-warning-subtle rounded">
+            <h6 class="fw-medium d-flex align-items-center mb-2">
+              <i class="fa-solid fa-triangle-exclamation text-danger me-2"></i>
+              Critical Emergency
+            </h6>
+            <p class="text-muted mb-0" style="font-size: 0.875rem;">
+                Heatstroke is a medical emergency that requires immediate professional attention. Every minute counts. While waiting for emergency services, focus on cooling the person down as quickly as possible.
+            </p>
+          </div>
+    
+        </div>
+      </div>
 
-    <h3>Finding Help & Improvising in a Remote Location</h3>
-
-    <h4>1. Locate Shade & Shelter</h4>
-    <ul>
-        <li>Seek natural shade (trees, caves, or large rocks).</li>
-        <li>Improvise a sun shelter with clothing, branches, or emergency blankets.</li>
-    </ul>
-
-    <h4>2. Hydration & Water Sources</h4>
-    <ul>
-        <li>Conserve sweat, not water—rest in the shade.</li>
-        <li>Look for dew, rivers, or underground water (dig in dry riverbeds).</li>
-        <li>If needed, filter and purify water using boiling, filtration, or solar disinfection.</li>
-    </ul>
-
-    <h4>3. Cooling Strategies</h4>
-    <ul>
-        <li>Use evaporation: Wet clothes with any available water and let the breeze cool the body.</li>
-        <li>Bury water bottles partially in sand to keep them cooler.</li>
-        <li>Rest during the hottest hours (midday) and move in the early morning or evening.</li>
-    </ul>
-
-    <h4>4. Signaling for Help</h4>
-    <ul>
-        <li>Use a mirror, bright clothing, or a fire to signal rescuers.</li>
-        <li>Create large symbols (SOS) on the ground using rocks or branches.</li>
-        <li>If near a road, leave signs (arrows, footprints) pointing to your location.</li>
-    </ul>
-    <a href="{% url 'heat_quiz' %}" class="btn btn-primary">Take the Quiz</a>
-    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            Finding Help & Improvising in a Remote Location
+            </h5>
+        </div>
+        <div class="card-body p-4">
+          <p class="text-muted small mb-4">
+            If you're in a remote location and someone is suffering from heat-related illness, you may need to
+            improvise while seeking help. Here are some strategies:
+          </p>
+      
+          <div class="mb-4">
+            <h6 class="fw-semibold mb-2 d-flex align-items-center">
+              <i class="fas fa-umbrella-beach me-2 text-warning"></i> 1. Locate Shade & Shelter
+            </h6>
+            <ul class="small text-muted ps-4 mb-3">
+              <li>Seek natural shade (trees, caves, or large rocks)</li>
+              <li>Improvise a sun shelter with clothing, branches, or emergency blankets</li>
+            </ul>
+          </div>
+      
+          <div class="mb-4">
+            <h6 class="fw-semibold mb-2 d-flex align-items-center">
+              <i class="fas fa-tint me-2 text-primary"></i> 2. Hydration & Water Sources
+            </h6>
+            <ul class="small text-muted ps-4 mb-3">
+              <li>Conserve water, not energy—rest in the shade</li>
+              <li>Look for dew, rivers, or underground water (dig in dry riverbeds)</li>
+              <li>If needed, filter and purify water using boiling, filtration, or solar disinfection</li>
+            </ul>
+          </div>
+      
+          <div class="mb-4">
+            <h6 class="fw-semibold mb-2 d-flex align-items-center">
+              <i class="fas fa-water me-2 text-info"></i> 3. Cooling Strategies
+            </h6>
+            <ul class="small text-muted ps-4 mb-3">
+              <li>Use evaporation: Wet clothes with any available water and let the breeze cool the body</li>
+              <li>Bury water bottles partially in sand to keep them cooler</li>
+              <li>Rest during the hottest hours (midday) and move in the early morning or evening</li>
+            </ul>
+          </div>
+      
+          <div>
+            <h6 class="fw-semibold mb-2 d-flex align-items-center">
+              <i class="fas fa-map-marker-alt me-2 text-danger"></i> 4. Signaling for Help
+            </h6>
+            <ul class="small text-muted ps-4 mb-0">
+              <li>Use a mirror, bright clothing, or a fire to signal rescuers</li>
+              <li>Create large symbols (SOS) on the ground using rocks or branches</li>
+              <li>If near a road, leave signs (arrows, footprints) pointing to your location</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <a href="{% url 'heat_quiz' %}" class="btn btn-danger">Take Quiz</a>
 </div>
 {% endblock %}
