@@ -1,70 +1,351 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Venomous Bites First Aid{% endblock %}
+{% block title %}Heat Learning{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="content-box">
-        <h2 class="text-center">Venomous Bites First Aid</h2>
+<div class="container-fluid p-4">
+    <a href="{% url 'modules' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Modules
+    </a>      
 
-        <p>Venomous bites or stings can be caused by animals like snakes, spiders, insects, marine life, and scorpions. Immediate action is vital to prevent severe reactions or death.</p>
-
-        <h3>Signs and Symptoms of Venomous Bites:</h3>
-        <ul>
-            <li>Pain, swelling, and redness at the site</li>
-            <li>Difficulty breathing or dizziness</li>
-            <li>Rapid heart rate or weakness</li>
-            <li>Nausea, vomiting, or paralysis</li>
-            <li>Severe itching, rash, or blurred vision</li>
-        </ul>
-
-        <h3>First Aid for Venomous Bites:</h3>
-        <h4>1. Snake Bites:</h4>
-        <ul>
-            <li>Stay calm, keep the limb still, and call emergency services.</li>
-            <li>Do not try to suck out venom or apply ice.</li>
-            <li>Remove tight clothing near the bite area.</li>
-        </ul>
-
-        <h4>2. Spider Bites:</h4>
-        <ul>
-            <li>Clean the bite, apply a cool compress, and seek help if symptoms worsen.</li>
-        </ul>
-
-        <h4>3. Insect Stings:</h4>
-        <ul>
-            <li>Remove the stinger (if visible), clean the site, and apply a cool compress.</li>
-            <li>Seek help for allergic reactions.</li>
-        </ul>
-
-        <h4>4. Scorpion Stings:</h4>
-        <ul>
-            <li>Clean the sting, apply ice, and seek medical help for severe reactions.</li>
-        </ul>
-
-        <h4>5. Marine Stings:</h4>
-        <ul>
-            <li>Rinse the sting with vinegar or seawater, remove tentacles, and seek help for severe reactions.</li>
-        </ul>
-
-        <h3>What to Do in a Remote Area:</h3>
-        <ul>
-            <li><strong>Stay Calm:</strong> Avoid panic to reduce the spread of venom.</li>
-            <li><strong>Move to Safety:</strong> Get away from the animal and to a safer area.</li>
-            <li><strong>Apply First Aid:</strong> Immobilize the limb, clean wounds with available resources, and apply cool compresses.</li>
-            <li><strong>Signal for Help:</strong> Use bright clothing, mirrors, or fire to signal for help.</li>
-            <li><strong>Look for Natural Remedies:</strong> If necessary, use safe plants or water for relief.</li>
-        </ul>
-
-        <h3>When to Seek Medical Help:</h3>
-        <ul>
-            <li>Severe symptoms like difficulty breathing or seizures</li>
-            <li>If the person becomes unconscious</li>
-            <li>If help is not readily available in remote areas</li>
-        </ul>
-        
-        <a href="{% url 'venom_quiz' %}" class="btn btn-primary">Take the Quiz</a>
-        <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-bug" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h3 fw-bold mb-0">Venomous Bites First Aid</h1>
     </div>
+
+    <div class="card mb-4 border-start shadow-sm">
+        <div class="card-body pt-4">
+            <div class="d-flex align-items-start gap-3">
+            <i class="fa fa-exclamation-triangle text-warning mt-1 flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+                <h5 class="fw-semibold mb-2">Why This Matters</h5>
+                <p class="text-secondary">
+                    Venomous bites or stings can be caused by animals like snakes, spiders, insects, marine life, and scorpions. These encounters can range from mildly painful to life-threatening, depending on the species and the person's reaction. Immediate and appropriate action is vital to prevent severe reactions or death. Knowing how to respond can make a critical difference in the outcome.
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                1
+            </div>
+            Signs and Symptoms of Venomous Bites
+            </h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4" style="font-size: 0.875rem;">
+                Recognizing a venomous bite or sting is crucial for proper treatment. Look for these common signs:
+            </p>
+          <div class="row g-4 mb-4">
+            <!-- Fracture Card -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-danger bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-triangle-exclamation text-danger" style="font-size: 1.25rem;"></i>
+                  <h6 class="fw-semibold mb-0">Local Reactions</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Pain, swelling, and redness at the site</li>
+                  <li>• Puncture marks or visible sting</li>
+                  <li>• Bruising or discoloration</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Sprain Card -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-danger bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fa-solid fa-triangle-exclamation text-danger" style="font-size: 1.25rem;"></i>
+                  <h6 class="fw-semibold mb-0">Systemic Reactions</h6>
+                </div>
+                <ul class="list-unstyled ps-3" style="font-size: 0.875rem;">
+                  <li>• Difficulty breathing or dizziness</li>
+                  <li>• Rapid heart rate or weakness</li>
+                  <li>• Nausea, vomiting, or paralysis</li>
+                  <li>• Severe itching, rash, or blurred vision</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Alert Box -->
+          <div class="p-3 bg-warning bg-opacity-10 border border-warning-subtle rounded">
+            <h6 class="fw-medium d-flex align-items-center mb-2">
+              <i class="fa-solid fa-triangle-exclamation text-warning me-2"></i>
+              Important Note
+            </h6>
+            <p class="text-muted mb-0" style="font-size: 0.875rem;">
+                Symptoms can vary widely depending on the type of venom and individual sensitivity. Some reactions may be immediate, while others develop over hours. Always take venomous bites seriously, even if initial symptoms seem mild.
+            </p>
+          </div>
+    
+        </div>
+      </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                2
+            </div>
+            First Aid for Different Types of Bites
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            The appropriate first aid depends on the type of venomous creature:
+          </p>
+      
+          <!-- Ingestion Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">1. Snake Bites</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Stay calm, keep the limb still, and call emergency services</li>
+              <li>Do not try to suck out venom or apply ice</li>
+              <li>Remove tight clothing near the bite area</li>
+              <li>Keep the bitten area below heart level if possible</li>
+              <li>If possible, note the snake's appearance for identification (but don't pursue or try to capture it)</li>
+            </ul>
+            <div class="bg-danger bg-opacity-10 border border-danger-subtle rounded p-2 small text-danger d-inline-flex align-items-start">
+              <i class="fas fa-triangle-exclamation me-2 mt-1"></i>
+              Do NOT apply a tourniquet, cut the wound, or try to suck out the venom. These outdated methods can cause more harm.
+            </div>
+          </div>
+      
+          <!-- Inhalation Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">2. Spider Bites</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Clean the bite with soap and water</li>
+              <li>Apply a cool compress to reduce pain and swelling</li>
+              <li>Elevate the affected area if possible</li>
+              <li>Take over-the-counter pain relievers if needed</li>
+              <li>Seek medical help if symptoms worsen or if you suspect a dangerous spider (like a black widow or brown recluse)</li>
+            </ul>
+            <div class="bg-purple-subtle bg-opacity-10 rounded p-2 small text-purple d-inline-flex align-items-start">
+              <i class="fas fa-triangle-exclamation me-2 mt-1"></i>
+              Common inhalation poisons include carbon monoxide, chlorine gas, and chemical fumes. Always ensure your own safety first.
+            </div>
+          </div>
+      
+          <!-- Contact Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">3. Insect Stings</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-0">
+              <li>Remove the stinger if visible (scrape it off with a credit card or flat object)</li>
+              <li>Clean the site and apply a cool compress</li>
+              <li>Take antihistamines or apply antihistamine cream to reduce itching and swelling</li>
+              <li>Seek help for allergic reactions (difficulty breathing, severe swelling)</li>
+            </ul>
+          </div>
+      
+          <!-- Injection Poisoning -->
+          <div class="mb-4">
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">4. Scorpion Stings</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Clean the sting area with soap and water</li>
+              <li>Apply a cool compress to reduce pain and swelling</li>
+              <li>Take over-the-counter pain relievers if needed</li>
+              <li>Seek immediate medical help for severe reactions, especially in children</li>
+            </ul>
+          </div>
+
+          <div>
+            <h6 class="fw-semibold d-flex align-items-center mb-2">
+              <span class="me-2">5. Marine Stings</span>
+            </h6>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Rinse the sting with vinegar or seawater (not fresh water, which can activate remaining stinging cells)</li>
+              <li>Remove tentacles carefully with tweezers or a stick (not bare hands)</li>
+              <li>Immerse the affected area in hot water (not scalding) for 30-90 minutes to help neutralize venom</li>
+              <li>Seek medical help for severe reactions</li>
+            </ul>
+            <div class="bg-primary bg-opacity-10 rounded p-2 small text-primary d-inline-flex align-items-start">
+                <i class="fas fa-triangle-exclamation me-2 mt-1"></i>
+                For box jellyfish stings, vinegar is essential. For stingray injuries, hot water immersion is the priority.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                3
+            </div>
+            What to Do in a Remote Area
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-4">
+            If you're in a remote location with limited access to medical care, follow these steps:
+          </p>
+      
+          <div class="row g-4 mb-4">
+            <!-- Stay Calm -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-heart text-success"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Stay Calm</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  Avoid panic to reduce the spread of venom. Keep your heart rate low and breathe steadily.
+                </p>
+              </div>
+            </div>
+      
+            <!-- Move to Safety -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-campground text-primary"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Move to Safety</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  Get away from the animal and move to a safer area to prevent additional bites or stings.
+                </p>
+              </div>
+            </div>
+      
+            <!-- Apply First Aid -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-purple bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-exclamation-triangle text-purple"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Apply First Aid</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  Immobilize the limb, clean wounds with available resources, and apply cool compresses.
+                </p>
+              </div>
+            </div>
+      
+            <!-- Signal for Help -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <div class="rounded-circle bg-warning bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                    <i class="fas fa-map-marker-alt text-warning"></i>
+                  </div>
+                  <h6 class="fw-semibold mb-0">Signal for Help</h6>
+                </div>
+                <p class="text-muted small mb-0">
+                  Use bright clothing, mirrors, or fire to signal for help. If you have a phone, try to call emergency services.
+                </p>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Natural Remedies -->
+          <div class="bg-success bg-opacity-10 border border-success-subtle p-4 rounded">
+            <h6 class="fw-medium d-flex align-items-center mb-2">
+              <i class="fas fa-campground text-success me-2"></i> Natural Remedies
+            </h6>
+            <p class="small text-muted mb-2">
+              In survival situations, some natural remedies might help provide temporary relief:
+            </p>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Plantain leaves can be crushed and applied to insect stings</li>
+              <li>Aloe vera gel can soothe pain and inflammation</li>
+              <li>Clean, cool water can help flush toxins from wounds</li>
+              <li>Activated charcoal (if in your first aid kit) can help absorb some toxins</li>
+            </ul>
+            <p class="small text-danger mb-0">
+              Note: Natural remedies are not substitutes for proper medical care. Seek professional help as soon as possible.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-danger bg-opacity-10 text-danger fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                4
+            </div>
+            When to Seek Medical Help
+            </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-4">Always seek medical help in the following situations:</p>
+      
+          <div class="row g-4 mb-4">
+            <!-- Emergency Situations -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-danger bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fas fa-triangle-exclamation text-danger"></i>
+                  <h6 class="fw-semibold mb-0">Emergency Situations</h6>
+                </div>
+                <ul class="small text-muted ps-4 mb-0">
+                  <li>Severe symptoms like difficulty breathing or seizures</li>
+                  <li>If the person becomes unconscious</li>
+                  <li>Bites from known venomous species (e.g., rattlesnakes, black widows)</li>
+                  <li>Rapid progression of symptoms</li>
+                  <li>Multiple bites or stings</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- Non-Emergency Situations -->
+            <div class="col-md-6">
+              <div class="border rounded p-4 bg-warning bg-opacity-10 h-100" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="fas fa-triangle-exclamation text-warning"></i>
+                  <h6 class="fw-semibold mb-0">Non-Emergency Situations</h6>
+                </div>
+                <ul class="small text-muted ps-4 mb-0">
+                  <li>Persistent pain, swelling, or redness that doesn't improve</li>
+                  <li>Signs of infection (increasing pain, warmth, pus)</li>
+                  <li>Bites or stings in sensitive areas (face, eyes, mouth)</li>
+                  <li>Bites or stings in children or elderly individuals</li>
+                  <li>If you're unsure about the species that bit or stung you</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Remote Areas -->
+          <div class="bg-purple-subtle bg-opacity-10 border border-purple rounded p-4">
+            <h6 class="fw-medium d-flex align-items-center mb-2">
+              <i class="fas fa-heart text-purple me-2"></i> Remote Areas
+            </h6>
+            <p class="small text-muted mb-2">If help is not readily available in remote areas:</p>
+            <ul class="small text-muted ps-4 mb-2">
+              <li>Try to contact emergency services via satellite phone, radio, or other means</li>
+              <li>If possible, have someone go for help while another person stays with the victim</li>
+              <li>If evacuation is necessary, immobilize the affected limb and move carefully</li>
+              <li>Document the time of the bite and any symptoms for medical personnel</li>
+            </ul>
+          </div>
+        </div>
+      </div>      
+
+    <a href="{% url 'venom_quiz' %}" class="btn btn-danger">Take Quiz</a>
 </div>
 {% endblock %}
