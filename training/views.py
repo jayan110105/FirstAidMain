@@ -15,27 +15,6 @@ def leaderboard(request):
 def profile(request):
     return render(request, 'profile.html')
 
-def poison_venom_allergy(request):
-    return render(request, "poison_venom_allergy.html")
-
-def burns_and_wounds(request):
-    return render(request, 'burns_and_wounds.html')
-
-def fractures_and_sprains(request):
-    return render(request, 'fractures_and_sprains.html')
-
-def cardiac_emergencies(request):
-    return render(request, 'cardiac_emergencies.html')
-
-def choking(request):
-    return render(request, 'choking.html')
-
-def exposure(request):
-    return render(request, 'exposure.html')
-
-def poison_venom_allergy(request):
-    return render(request, 'poison_venom_allergy.html')
-
 def burns_learning(request):
     return render(request, 'burns_learning.html')
 
