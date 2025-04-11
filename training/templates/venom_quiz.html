@@ -3,36 +3,252 @@
 {% block title %}Venomous Bites Quiz{% endblock %}
 
 {% block content %}
-<h2 class='text-center'>🐍 Venomous Bites Quiz</h2>
-<form id="venomousBitesQuiz">
-    <p><strong>1. What should you do first if bitten by a snake?</strong></p>
-    <input type="radio" name="q1" value="a"> Stay calm and call emergency services<br>
-    <input type="radio" name="q1" value="b"> Apply ice to the bite area<br>
-    <input type="radio" name="q1" value="c"> Try to suck out the venom<br>
+<div class="toast-container" id="toastContainer"></div>
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="{% url 'venom_learning' %}" class="d-inline-flex align-items-center text-secondary text-decoration-none">
+            <i class="fa fa-arrow-left me-2"></i>
+            Back to venomous bites Module
+        </a> 
+        <div>
+            <span class="badge bg-warning-subtle text-dark me-2" id="scoreDisplay">0 Points</span>
+            <span class="sbadge bg-danger text-white d-none" id="streakDisplay">Streak!</span>
+        </div>
+    </div>
 
-    <p><strong>2. How should you treat a spider bite?</strong></p>
-    <input type="radio" name="q2" value="a"> Clean the bite, apply a cool compress, and seek help if symptoms worsen<br>
-    <input type="radio" name="q2" value="b"> Apply ice directly to the wound and avoid moving the affected area<br>
-    <input type="radio" name="q2" value="c"> Apply pressure to stop bleeding and apply heat<br>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-spider" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h2 fw-bold mb-0">Venomous Bites Quiz</h1>
+    </div>
 
-    <p><strong>3. What is the first step if stung by an insect?</strong></p>
-    <input type="radio" name="q3" value="a"> Clean the sting site and apply a cool compress<br>
-    <input type="radio" name="q3" value="b"> Apply a tourniquet above the sting site<br>
-    <input type="radio" name="q3" value="c"> Remove the stinger (if visible), clean the site<br>
+    <div class="card" id="quizCard">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-title h4 fw-bold">
+                <span id="questionNumber">Question 1 of 5</span>
+            </div>
+            <span id="timer" class="text-danger fw-bold">20s</span>
+        </div>
 
-    <p><strong>4. How should you treat a scorpion sting?</strong></p>
-    <input type="radio" name="q4" value="b"> Apply pressure to stop venom spread<br>
-    <input type="radio" name="q4" value="a"> Clean the sting, apply ice, and seek medical help for severe reactions<br>
-    <input type="radio" name="q4" value="c"> Wash the area with hot water<br>
+        <div class="progress" style="height: 4px;">
+            <div class="progress-bar bg-danger" id="timerBar" style="width: 60%"></div>
+        </div>
 
-    <p><strong>5. What should you do in a remote area if you get bitten or stung?</strong></p>
-    <input type="radio" name="q5" value="a"> Immobilize the limb, clean wounds, and signal for help<br>
-    <input type="radio" name="q5" value="b"> Walk to the nearest hospital without waiting<br>
-    <input type="radio" name="q5" value="c"> Apply a tourniquet and wait for the venom to subside<br>
+        <div class="card-body">
+            <h5 class="card-title mt-2" id="questionText">Question text here</h5>
+            <div class="d-flex flex-column mt-3">
+                <div>
+                  <div id="optionsList" class="list-group"></div>
+                </div>
+                <div>
+                  <div id="explanation" class="d-inline-flex alert alert-primary d-none small"><strong>Explanation: </strong> <span id="explanationText"></span></div>
+                </div>
+            </div>
+            <div class="text-end">
+                <button id="nextBtn" class="btn btn-danger d-none">Next Question &rarr;</button>
+              </div>
+        </div>
+    </div>
 
-    <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('venomousBitesQuiz', ['a', 'a', 'c', 'a', 'a'])">Check Answers</button>
-    <p id="venomousBitesQuizFeedback" class="mt-2"></p>
-</form>
-<a href="{% url 'venom_learning' %}" class="btn btn-primary">Back to Learning</a>
-<a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <div id="resultCard" class="d-none card mt-5">
+        <div class="result-card">
+          <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Quiz Results</h4>
+          <div class="my-4">
+            <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
+            <p id="scoreMessage" class="text-muted">You're on your way to learning venomous bites first aid. Keep studying!</p>
+            <div class="badge rounded-pill bg-primary-subtle text-dark p-2 px-3 mt-2" id="badgeLabel">Starter Badge Earned!</div>
+          </div>
+          <div class="d-flex justify-content-center gap-3">
+            <button class="btn btn-light" id="retryBtn">Try Again</button>
+            <a href="{% url 'venom_learning' %}" class="btn btn-light">Return to venomous bites Module</a>
+          </div>
+        </div>
+    </div>
+</div>
+  <script>
+     const questions = [
+  {
+    "question": "What should you do first if bitten by a snake?",
+    "options": [
+      { "text": "Stay calm and call emergency services", "isCorrect": true, "icon": "📞" },
+      { "text": "Apply ice to the bite area", "isCorrect": false, "icon": "🧊" },
+      { "text": "Try to suck out the venom", "isCorrect": false, "icon": "🚫" }
+    ],
+    "explanation": "Stay calm to slow venom spread and seek emergency help immediately."
+  },
+  {
+    "question": "How should you treat a spider bite?",
+    "options": [
+      { "text": "Clean the bite, apply a cool compress, and seek help if symptoms worsen", "isCorrect": true, "icon": "🕷️" },
+      { "text": "Apply ice directly to the wound and avoid moving the affected area", "isCorrect": false, "icon": "❄️" },
+      { "text": "Apply pressure to stop bleeding and apply heat", "isCorrect": false, "icon": "🔥" }
+    ],
+    "explanation": "Cleaning and cooling the bite helps reduce swelling. Medical help may be needed."
+  },
+  {
+    "question": "What is the first step if stung by an insect?",
+    "options": [
+      { "text": "Clean the sting site and apply a cool compress", "isCorrect": false, "icon": "🧊" },
+      { "text": "Apply a tourniquet above the sting site", "isCorrect": false, "icon": "🩸" },
+      { "text": "Remove the stinger (if visible), clean the site", "isCorrect": true, "icon": "🪛" }
+    ],
+    "explanation": "Removing the stinger prevents more venom release. Then clean the site."
+  },
+  {
+    "question": "How should you treat a scorpion sting?",
+    "options": [
+      { "text": "Apply pressure to stop venom spread", "isCorrect": false, "icon": "🧯" },
+      { "text": "Clean the sting, apply ice, and seek medical help for severe reactions", "isCorrect": true, "icon": "🦂" },
+      { "text": "Wash the area with hot water", "isCorrect": false, "icon": "🚿" }
+    ],
+    "explanation": "Cool the sting and monitor for allergic reactions. Some stings need urgent care."
+  },
+  {
+    "question": "What should you do in a remote area if you get bitten or stung?",
+    "options": [
+      { "text": "Immobilize the limb, clean wounds, and signal for help", "isCorrect": true, "icon": "🆘" },
+      { "text": "Walk to the nearest hospital without waiting", "isCorrect": false, "icon": "🚶" },
+      { "text": "Apply a tourniquet and wait for the venom to subside", "isCorrect": false, "icon": "⛔" }
+    ],
+    "explanation": "Minimize movement to slow venom spread. Signal or wait for help."
+  }
+]
+
+    let currentQuestion = 0;
+    let timeLeft = 20;
+    let score = 0;
+    let timerInterval = null;
+
+    function updateScoreDisplay() {
+      $('#scoreDisplay').text(`${score} Points`);
+    }
+
+    function showToast(title, message, isSuccess = true) {
+      const toastId = 'toast' + Date.now();
+      const toast = $(
+        `<div id="${toastId}" class="toast align-items-center text-bg-${isSuccess ? 'success' : 'danger'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <strong>${title}</strong><br>${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>`
+      );
+      $('#toastContainer').append(toast);
+      const bsToast = new bootstrap.Toast(document.getElementById(toastId));
+      bsToast.show();
+    }
+
+    function loadQuestion(index) {
+      const q = questions[index];
+      $('#questionNumber').text(`Question ${index + 1} of ${questions.length}`);
+      $('#questionText').text(q.question);
+      $('#questionImage').attr('src', q.image);
+      $('#explanation').addClass('d-none');
+      $('#explanationText').text('');
+      $('#nextBtn').addClass('d-none');
+
+      $('#optionsList').empty();
+      q.options.forEach((opt, i) => {
+        $('#optionsList').append(`
+          <div class="list-group-item option border d-flex align-items-center mb-3" data-index="${i}">
+            <span class="option-icon">${opt.icon}</span>
+            <span>${opt.text}</span>
+          </div>
+        `);
+      });
+
+      startTimer();
+    }
+
+    function startTimer() {
+      timeLeft = 20;
+      $('#timer').text(`${timeLeft}s`);
+      $('#timerBar').css('width', '100%');
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        $('#timer').text(`${timeLeft}s`);
+        $('#timerBar').css('width', `${(timeLeft / 20) * 100}%`);
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          showExplanation(-1);
+        }
+      }, 1000);
+    }
+
+    function showExplanation(selectedIndex) {
+      clearInterval(timerInterval);
+      const q = questions[currentQuestion];
+
+      $('.option').each(function(i) {
+        if (q.options[i].isCorrect) {
+          $(this).addClass('correct');
+        } else if (i === selectedIndex) {
+          $(this).addClass('incorrect');
+        }
+      });
+
+      if (selectedIndex !== -1) {
+        const isCorrect = q.options[selectedIndex].isCorrect;
+        if (isCorrect) score += 10;
+        updateScoreDisplay();
+        showToast(isCorrect ? "Correct!" : "Incorrect!", isCorrect ? "Well done!" : "Let's learn from this.", isCorrect);
+      } else {
+        showToast("Time's up!", "You didn’t answer in time.", false);
+      }
+
+      $('#explanationText').text(q.explanation);
+      $('#explanation').removeClass('d-none');
+      $('#nextBtn').removeClass('d-none');
+    }
+
+    $(document).on('click', '.option', function() {
+      if ($('#explanation').hasClass('d-none')) {
+        const selected = $(this).data('index');
+        showExplanation(selected);
+      }
+    });
+
+    $('#nextBtn').on('click', function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion(currentQuestion);
+      } else {
+        $('#quizCard').hide();
+        $('#finalScore').text(`You scored: ${score} points!`);
+        let message = "You're on your way to learning venomous bites first aid. Keep studying!";
+        let badge = "Starter Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
+        if (score == 40) {
+          message = "Great job! You know your venomous bites treatment well!";
+          badge = "Silver Badge Earned!";
+          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
+        } else if (score == 50) {
+          message = "Outstanding! You're a venomous bites first aid expert!";
+          badge = "Gold Badge Earned!";
+          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
+        }
+        $('#scoreMessage').text(message);
+        $('#badgeLabel').text(badge);
+        $('#resultCard').removeClass('d-none');
+      }
+    });
+
+    $('#retryBtn').on('click', function() {
+      score = 0;
+      currentQuestion = 0;
+      $('#resultCard').addClass('d-none');
+      $('#quizCard').show();
+      loadQuestion(currentQuestion);
+    });
+
+    $(document).ready(function() {
+      loadQuestion(currentQuestion);
+    });
+  </script>
+
 {% endblock %}
