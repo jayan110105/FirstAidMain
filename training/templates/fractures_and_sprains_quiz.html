@@ -1,41 +1,255 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Burns and Wounds{% endblock %}
+{% block title %}Fractures & Sprains Quiz{% endblock %}
 
 {% block content %}
+<div class="toast-container" id="toastContainer"></div>
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="{% url 'fractures_learning' %}" class="d-inline-flex align-items-center text-secondary text-decoration-none">
+            <i class="fa fa-arrow-left me-2"></i>
+            Back to Fracture & Sprains Module
+        </a> 
+        <div>
+            <span class="badge bg-warning-subtle text-dark me-2" id="scoreDisplay">0 Points</span>
+            <span class="sbadge bg-danger text-white d-none" id="streakDisplay">Streak!</span>
+        </div>
+    </div>
 
-<div class="container mt-4">
-    <h2 class="text-center">🦴 Fractures & Sprains Quiz</h2>
-    <form id="fracturesQuiz">
-        <p><strong>1. What is a key sign of a fracture?</strong></p>
-        <input type="radio" name="q1" value="a"> Mild bruising<br>
-        <input type="radio" name="q1" value="b"> Deformity or inability to move limb<br>
-        <input type="radio" name="q1" value="c"> Itching<br>
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger" style="width: 48px; height: 48px;">
+            <i class="fa-solid fa-bone" style="font-size: 24px;"></i>
+        </div>
+        <h1 class="h2 fw-bold mb-0"> Fractures & Sprains Quiz</h1>
+    </div>
 
-        <p><strong>2. What should you do if someone has a suspected sprain?</strong></p>
-        <input type="radio" name="q2" value="a"> Apply ice and rest the injured area<br>
-        <input type="radio" name="q2" value="b"> Keep walking on it to reduce stiffness<br>
-        <input type="radio" name="q2" value="c"> Soak the injured joint in hot water<br>
+    <div class="card" id="quizCard">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-title h4 fw-bold">
+                <span id="questionNumber">Question 1 of 5</span>
+            </div>
+            <span id="timer" class="text-danger fw-bold">20s</span>
+        </div>
 
-        <p><strong>3. What is the first step of splinting a fracture</strong></p>
-        <input type="radio" name="q3" value="a"> Attempt to re align the bonea<br>
-        <input type="radio" name="q3" value="b"> Find padding and wrap it around the limb to keep the patient comfortable<br>
-        <input type="radio" name="q3" value="c"> Keep the injured area still and find a firm object to use as a split<br>
+        <div class="progress" style="height: 4px;">
+            <div class="progress-bar bg-danger" id="timerBar" style="width: 60%"></div>
+        </div>
 
-        <p><strong>4.In which direction to we wrap a sprained limb?</strong></p>
-        <input type="radio" name="q4" value="a">Distal End to Proximal End<br>
-        <input type="radio" name="q4" value="b"> Proximal End to Distal End<br>
-        <input type="radio" name="q4" value="c"> Either, it does not make a difference<br>
+        <div class="card-body">
+            <h5 class="card-title mt-2" id="questionText">Question text here</h5>
+            <div class="d-flex flex-column mt-3">
+                <div>
+                  <div id="optionsList" class="list-group"></div>
+                </div>
+                <div>
+                  <div id="explanation" class="d-inline-flex alert alert-primary d-none small"><strong>Explanation: </strong> <span id="explanationText"></span></div>
+                </div>
+            </div>
+            <div class="text-end">
+                <button id="nextBtn" class="btn btn-danger d-none">Next Question &rarr;</button>
+              </div>
+        </div>
+    </div>
 
-        <p><strong>5. How long do you apply ice on a sprain?</strong></p>
-        <input type="radio" name="q5" value="a"> Until the injured person feels numb<br>
-        <input type="radio" name="q5" value="b"> 45 minutes every 4 hours<br>
-        <input type="radio" name="q5" value="c"> 15-20 minutes every 2 to 3 hours<br>
-
-        <button type="button" class="btn btn-primary mt-2" onclick="checkQuiz('fracturesQuiz', ['b', 'a','c','a','c'])">Check Answers</button>
-        <p id="fracturesQuizFeedback" class="mt-2"></p>
-    </form>
-    <a href="{% url 'fractures_learning' %}" class="btn btn-primary">Learning</a>
-    <a href="{% url 'modules' %}" class="btn btn-secondary">Back to Modules</a>
+    <div id="resultCard" class="d-none card mt-5">
+        <div class="result-card">
+          <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Quiz Results</h4>
+          <div class="my-4">
+            <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
+            <p id="scoreMessage" class="text-muted">You're on your way to learning fracture and sprain first aid. Keep studying!</p>
+            <div class="badge rounded-pill bg-primary-subtle text-dark p-2 px-3 mt-2" id="badgeLabel">Starter Badge Earned!</div>
+          </div>
+          <div class="d-flex justify-content-center gap-3">
+            <button class="btn btn-light" id="retryBtn">Try Again</button>
+            <a href="{% url 'fractures_learning' %}" class="btn btn-light">Return to Fracture & Sprains Module</a>
+          </div>
+        </div>
+    </div>
 </div>
+  <script>
+     const questions = [
+  {
+    "question": "What is a key sign of a fracture?",
+    "options": [
+      { "text": "Mild bruising", "isCorrect": false, "icon": "🟤" },
+      { "text": "Deformity or inability to move limb", "isCorrect": true, "icon": "🦴" },
+      { "text": "Itching", "isCorrect": false, "icon": "🤔" }
+    ],
+    "explanation": "A clear sign of a fracture is visible deformity or inability to move the affected limb."
+  },
+  {
+    "question": "What should you do if someone has a suspected sprain?",
+    "options": [
+      { "text": "Apply ice and rest the injured area", "isCorrect": true, "icon": "🧊" },
+      { "text": "Keep walking on it to reduce stiffness", "isCorrect": false, "icon": "🚶" },
+      { "text": "Soak the injured joint in hot water", "isCorrect": false, "icon": "♨️" }
+    ],
+    "explanation": "Rest, ice, compression, and elevation (RICE) is the recommended first aid for sprains."
+  },
+  {
+    "question": "What is the first step of splinting a fracture?",
+    "options": [
+      { "text": "Attempt to re align the bone", "isCorrect": false, "icon": "⚠️" },
+      { "text": "Find padding and wrap it around the limb to keep the patient comfortable", "isCorrect": false, "icon": "🩹" },
+      { "text": "Keep the injured area still and find a firm object to use as a splint", "isCorrect": true, "icon": "📏" }
+    ],
+    "explanation": "You should immobilize the area and avoid moving it. Then use a splint."
+  },
+  {
+    "question": "In which direction do we wrap a sprained limb?",
+    "options": [
+      { "text": "Distal End to Proximal End", "isCorrect": true, "icon": "🔁" },
+      { "text": "Proximal End to Distal End", "isCorrect": false, "icon": "⬇️" },
+      { "text": "Either, it does not make a difference", "isCorrect": false, "icon": "❓" }
+    ],
+    "explanation": "Wrapping from distal to proximal helps reduce swelling and promotes venous return."
+  },
+  {
+    "question": "How long do you apply ice on a sprain?",
+    "options": [
+      { "text": "Until the injured person feels numb", "isCorrect": false, "icon": "🧊" },
+      { "text": "45 minutes every 4 hours", "isCorrect": false, "icon": "⏱️" },
+      { "text": "15-20 minutes every 2 to 3 hours", "isCorrect": true, "icon": "🕒" }
+    ],
+    "explanation": "The recommended duration is 15–20 minutes every 2–3 hours to avoid tissue damage."
+  }
+]
+
+
+    let currentQuestion = 0;
+    let timeLeft = 20;
+    let score = 0;
+    let timerInterval = null;
+
+    function updateScoreDisplay() {
+      $('#scoreDisplay').text(`${score} Points`);
+    }
+
+    function showToast(title, message, isSuccess = true) {
+      const toastId = 'toast' + Date.now();
+      const toast = $(
+        `<div id="${toastId}" class="toast align-items-center text-bg-${isSuccess ? 'success' : 'danger'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <strong>${title}</strong><br>${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>`
+      );
+      $('#toastContainer').append(toast);
+      const bsToast = new bootstrap.Toast(document.getElementById(toastId));
+      bsToast.show();
+    }
+
+    function loadQuestion(index) {
+      const q = questions[index];
+      $('#questionNumber').text(`Question ${index + 1} of ${questions.length}`);
+      $('#questionText').text(q.question);
+      $('#questionImage').attr('src', q.image);
+      $('#explanation').addClass('d-none');
+      $('#explanationText').text('');
+      $('#nextBtn').addClass('d-none');
+
+      $('#optionsList').empty();
+      q.options.forEach((opt, i) => {
+        $('#optionsList').append(`
+          <div class="list-group-item option border d-flex align-items-center mb-3" data-index="${i}">
+            <span class="option-icon">${opt.icon}</span>
+            <span>${opt.text}</span>
+          </div>
+        `);
+      });
+
+      startTimer();
+    }
+
+    function startTimer() {
+      timeLeft = 20;
+      $('#timer').text(`${timeLeft}s`);
+      $('#timerBar').css('width', '100%');
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        $('#timer').text(`${timeLeft}s`);
+        $('#timerBar').css('width', `${(timeLeft / 20) * 100}%`);
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          showExplanation(-1);
+        }
+      }, 1000);
+    }
+
+    function showExplanation(selectedIndex) {
+      clearInterval(timerInterval);
+      const q = questions[currentQuestion];
+
+      $('.option').each(function(i) {
+        if (q.options[i].isCorrect) {
+          $(this).addClass('correct');
+        } else if (i === selectedIndex) {
+          $(this).addClass('incorrect');
+        }
+      });
+
+      if (selectedIndex !== -1) {
+        const isCorrect = q.options[selectedIndex].isCorrect;
+        if (isCorrect) score += 10;
+        updateScoreDisplay();
+        showToast(isCorrect ? "Correct!" : "Incorrect!", isCorrect ? "Well done!" : "Let's learn from this.", isCorrect);
+      } else {
+        showToast("Time's up!", "You didn’t answer in time.", false);
+      }
+
+      $('#explanationText').text(q.explanation);
+      $('#explanation').removeClass('d-none');
+      $('#nextBtn').removeClass('d-none');
+    }
+
+    $(document).on('click', '.option', function() {
+      if ($('#explanation').hasClass('d-none')) {
+        const selected = $(this).data('index');
+        showExplanation(selected);
+      }
+    });
+
+    $('#nextBtn').on('click', function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion(currentQuestion);
+      } else {
+        $('#quizCard').hide();
+        $('#finalScore').text(`You scored: ${score} points!`);
+        let message = "You're on your way to learning fracture and sprain first aid. Keep studying!";
+        let badge = "Starter Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
+        if (score == 40) {
+          message = "Great job! You know your fracture and sprain treatment well!";
+          badge = "Silver Badge Earned!";
+          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
+        } else if (score == 50) {
+          message = "Outstanding! You're a fracture and sprain first aid expert!";
+          badge = "Gold Badge Earned!";
+          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
+        }
+        $('#scoreMessage').text(message);
+        $('#badgeLabel').text(badge);
+        $('#resultCard').removeClass('d-none');
+      }
+    });
+
+    $('#retryBtn').on('click', function() {
+      score = 0;
+      currentQuestion = 0;
+      $('#resultCard').addClass('d-none');
+      $('#quizCard').show();
+      loadQuestion(currentQuestion);
+    });
+
+    $(document).ready(function() {
+      loadQuestion(currentQuestion);
+    });
+  </script>
+
 {% endblock %}
