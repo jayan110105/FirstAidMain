@@ -1,6 +1,54 @@
 {% extends "base.html" %}
 {% block title %}Achievements{% endblock %}
 {% block content %}
-    <h2>Your Achievements</h2>
-    <p>View your progress.</p>
+<div class="container-fluid p-4">
+    <h2 class="fw-bold">Achievements</h2>
+
+    <div class="d-flex justify-content-between">
+        <p class="text-muted">Track your progress and earn recognition</p>
+        <p class="text-end fw-bold mb-3">
+            <span id="achievements-count">2</span> Achievements Unlocked
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-4">
+            <div class="card achievement-card unlocked text-center p-3">
+                <h1 style="font-size: 3rem;">🎯</h1>
+                <h5 class="fw-bold">First Steps</h5>
+                <p class="text-muted">Complete your first training module</p>
+                <i class="fa fa-check-circle text-success"></i>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card achievement-card locked text-center p-3">
+                <h1 style="font-size: 3rem;">🩶</h1>
+                <h5 class="fw-bold">Life Saver</h5>
+                <p class="text-muted">Complete all basic life support modules</p>
+                <i class="fa fa-lock text-muted"></i>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card achievement-card unlocked text-center p-3">
+                <h1 style="font-size: 3rem;"> ⚡</h1>
+                <h5 class="fw-bold">Quick Thinker</h5>
+                <p class="text-muted">Complete a scenario in under 2 minutes</p>
+                <i class="fa fa-check-circle text-success"></i>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card achievement-card locked text-center p-3">
+                <h1 style="font-size: 3rem;"> 📄</h1>
+                <h5 class="fw-bold">Expert Medic</h5>
+                <p class="text-muted">Reach 1000 points</p>
+                <i class="fa fa-lock text-muted"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
