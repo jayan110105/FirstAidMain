@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+def home(request):
+    return render(request, 'home.html')
+
 @login_required
 def modules(request):
     return render(request, 'modules.html')
