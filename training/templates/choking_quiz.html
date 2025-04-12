@@ -23,6 +23,21 @@
         <h1 class="h2 fw-bold mb-0">Choking First Aid Quiz</h1>
     </div>
 
+    {% if current_score > 0 %}
+    <div class="alert alert-info mb-4">
+        <div class="d-flex align-items-center">
+            <i class="fa-solid fa-circle-info me-2"></i>
+            <div>
+                <strong>Previous Attempt: </strong> Your highest score is {{ current_score }} points.
+                {% if completed %}
+                <span class="badge bg-success ms-2">Completed</span>
+                {% endif %}
+                <div class="small text-muted">Total attempts: {{ attempts }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="card" id="quizCard">
         <div class="card-header d-flex justify-content-between align-items-center">
             <div class="card-title h4 fw-bold">
@@ -59,13 +74,22 @@
             <p id="scoreMessage" class="text-muted">You're on your way to learning choking first aid. Keep studying!</p>
             <div class="badge rounded-pill bg-primary-subtle text-dark p-2 px-3 mt-2" id="badgeLabel">Starter Badge Earned!</div>
           </div>
-          <div class="d-flex justify-content-center gap-3">
-            <button class="btn btn-light" id="retryBtn">Try Again</button>
-            <a href="{% url 'choking_learning' %}" class="btn btn-light">Return to choking Module</a>
-          </div>
+
+
+          <!-- Form to submit score -->
+          <form method="post" id="scoreForm">
+            {% csrf_token %}
+            {{ form.module_slug }}
+            <input type="hidden" name="score" id="scoreInput" value="0">
+            <div class="d-flex justify-content-center gap-3">
+              <button type="submit" class="btn btn-primary" id="retryBtn">Try Again</button>      
+              <button type="submit" href="{% url 'modules' %}" class="btn btn-light">Back to Choking Module</button>
+            </div>
+          </form>
         </div>
     </div>
 </div>
+
   <script>
      const questions = [
   {
@@ -194,7 +218,7 @@
 
       if (selectedIndex !== -1) {
         const isCorrect = q.options[selectedIndex].isCorrect;
-        if (isCorrect) score += 10;
+        if (isCorrect) score += 20;
         updateScoreDisplay();
         showToast(isCorrect ? "Correct!" : "Incorrect!", isCorrect ? "Well done!" : "Let's learn from this.", isCorrect);
       } else {
@@ -214,41 +238,43 @@
     });
 
     $('#nextBtn').on('click', function() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        loadQuestion(currentQuestion);
-      } else {
-        $('#quizCard').hide();
-        $('#finalScore').text(`You scored: ${score} points!`);
-        let message = "You're on your way to learning choking first aid. Keep studying!";
-        let badge = "Starter Badge Earned!";
-        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
-        if (score == 40) {
-          message = "Great job! You know your choking treatment well!";
-          badge = "Silver Badge Earned!";
-          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
-        } else if (score == 50) {
-          message = "Outstanding! You're a choking first aid expert!";
-          badge = "Gold Badge Earned!";
-          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
-        }
-        $('#scoreMessage').text(message);
-        $('#badgeLabel').text(badge);
-        $('#resultCard').removeClass('d-none');
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      loadQuestion(currentQuestion);
+    } 
+    else 
+    {
+      $('#quizCard').hide();
+      $('#finalScore').text(`You scored: ${score} points!`);
+      let message = "You're on your way to learning choking first aid. Keep studying!";
+      let badge = "Starter Badge Earned!";
+      $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
+      
+      if (score >= 60) {
+        message = "Great job! You know your choking treatment well!";
+        badge = "Silver Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
+      } else if (score >= 80) {
+        message = "Outstanding! You're a choking first aid expert!";
+        badge = "Gold Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
       }
-    });
+      else{
+        message = "You have not passed. Kindly retake the test!";
+      }
+      
+      $('#scoreMessage').text(message);
+      $('#badgeLabel').text(badge);
+      $('#resultCard').removeClass('d-none');
+      
+      // Update the hidden form field with the score
+      $('#scoreInput').val(score);
+    }
+  });
 
-    $('#retryBtn').on('click', function() {
-      score = 0;
-      currentQuestion = 0;
-      $('#resultCard').addClass('d-none');
-      $('#quizCard').show();
-      loadQuestion(currentQuestion);
-    });
-
-    $(document).ready(function() {
-      loadQuestion(currentQuestion);
-    });
-  </script>
-
+  $(document).ready(function() {
+    loadQuestion(currentQuestion);
+  });
+  
+</script>
 {% endblock %}

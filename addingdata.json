@@ -1,0 +1,93 @@
+[
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Allergic Reactions First Aid Quiz",
+        "slug": "allergy_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Burns First Aid Quiz",
+        "slug": "burns_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Cardiac Emergencies First Aid Quiz",
+        "slug": "cardiac_emergencies_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Choking First Aid Quiz",
+        "slug": "choking_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Cold First Aid Quiz",
+        "slug": "cold_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Fractures and Sprains First Aid Quiz",
+        "slug": "fractures_and_sprains_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Heat First Aid Quiz",
+        "slug": "heat_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Poison First Aid Quiz",
+        "slug": "poison_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Venom First Aid Quiz",
+        "slug": "venom_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    },
+    {
+      "model": "training.module",
+      "fields": {
+        "title": "Wounds First Aid Quiz",
+        "slug": "wounds_quiz",
+        "max_score": 100,
+        "passing_score": 60
+      }
+    }
+  ]
+  

@@ -81,8 +81,8 @@
             {{ form.module_slug }}
             <input type="hidden" name="score" id="scoreInput" value="0">
             <div class="d-flex justify-content-center gap-3">
-              <button type="submit" class="btn btn-primary">Save Score & Continue</button>
-              <a href="{% url 'modules' %}" class="btn btn-light">All Modules</a>
+              <button type="submit" class="btn btn-primary" id="retryBtn">Try Again</button>
+              <button type="submit" href="{% url 'modules' %}" class="btn btn-light">Back to Allergic Reaction Module</button>
             </div>
           </form>
         </div>
@@ -248,11 +248,11 @@
       let badge = "Starter Badge Earned!";
       $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
       
-      if (score >= 40) {
+      if (score >= 60) {
         message = "Great job! You know your allergic reaction treatment well!";
         badge = "Silver Badge Earned!";
         $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
-      } else if (score >= 60) {
+      } else if (score >= 80) {
         message = "Outstanding! You're a allergic reaction first aid expert!";
         badge = "Gold Badge Earned!";
         $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
