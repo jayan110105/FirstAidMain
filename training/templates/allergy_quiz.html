@@ -12,7 +12,7 @@
         </a> 
         <div>
             <span class="badge bg-warning-subtle text-dark me-2" id="scoreDisplay">0 Points</span>
-            <span class="sbadge bg-danger text-white d-none" id="streakDisplay">Streak!</span>
+            <span class="badge bg-danger text-white d-none" id="streakDisplay">Streak!</span>
         </div>
     </div>
 
@@ -22,6 +22,21 @@
         </div>
         <h1 class="h2 fw-bold mb-0">Allergic Reactions First Aid Quiz</h1>
     </div>
+
+    {% if current_score > 0 %}
+    <div class="alert alert-info mb-4">
+        <div class="d-flex align-items-center">
+            <i class="fa-solid fa-circle-info me-2"></i>
+            <div>
+                <strong>Previous Attempt: </strong> Your highest score is {{ current_score }} points.
+                {% if completed %}
+                <span class="badge bg-success ms-2">Completed</span>
+                {% endif %}
+                <div class="small text-muted">Total attempts: {{ attempts }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
     <div class="card" id="quizCard">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -52,20 +67,28 @@
     </div>
 
     <div id="resultCard" class="d-none card mt-5">
-        <div class="result-card">
+        <div class="result-card p-4">
           <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Quiz Results</h4>
           <div class="my-4">
             <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
             <p id="scoreMessage" class="text-muted">You're on your way to learning allergic reaction first aid. Keep studying!</p>
             <div class="badge rounded-pill bg-primary-subtle text-dark p-2 px-3 mt-2" id="badgeLabel">Starter Badge Earned!</div>
           </div>
-          <div class="d-flex justify-content-center gap-3">
-            <button class="btn btn-light" id="retryBtn">Try Again</button>
-            <a href="{% url 'allergy_learning' %}" class="btn btn-light">Return to allergic reaction Module</a>
-          </div>
+          
+          <!-- Form to submit score -->
+          <form method="post" id="scoreForm">
+            {% csrf_token %}
+            {{ form.module_slug }}
+            <input type="hidden" name="score" id="scoreInput" value="0">
+            <div class="d-flex justify-content-center gap-3">
+              <button type="submit" class="btn btn-primary">Save Score & Continue</button>
+              <a href="{% url 'modules' %}" class="btn btn-light">All Modules</a>
+            </div>
+          </form>
         </div>
     </div>
 </div>
+
   <script>
      const questions = [
   {
@@ -194,7 +217,7 @@
 
       if (selectedIndex !== -1) {
         const isCorrect = q.options[selectedIndex].isCorrect;
-        if (isCorrect) score += 10;
+        if (isCorrect) score += 20;
         updateScoreDisplay();
         showToast(isCorrect ? "Correct!" : "Incorrect!", isCorrect ? "Well done!" : "Let's learn from this.", isCorrect);
       } else {
@@ -212,43 +235,44 @@
         showExplanation(selected);
       }
     });
-
-    $('#nextBtn').on('click', function() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        loadQuestion(currentQuestion);
-      } else {
-        $('#quizCard').hide();
-        $('#finalScore').text(`You scored: ${score} points!`);
-        let message = "You're on your way to learning allergic reaction first aid. Keep studying!";
-        let badge = "Starter Badge Earned!";
-        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
-        if (score == 40) {
-          message = "Great job! You know your allergic reaction treatment well!";
-          badge = "Silver Badge Earned!";
-          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
-        } else if (score == 50) {
-          message = "Outstanding! You're a allergic reaction first aid expert!";
-          badge = "Gold Badge Earned!";
-          $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
-        }
-        $('#scoreMessage').text(message);
-        $('#badgeLabel').text(badge);
-        $('#resultCard').removeClass('d-none');
+  $('#nextBtn').on('click', function() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      loadQuestion(currentQuestion);
+    } 
+    else 
+    {
+      $('#quizCard').hide();
+      $('#finalScore').text(`You scored: ${score} points!`);
+      let message = "You're on your way to learning allergic reaction first aid. Keep studying!";
+      let badge = "Starter Badge Earned!";
+      $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
+      
+      if (score >= 40) {
+        message = "Great job! You know your allergic reaction treatment well!";
+        badge = "Silver Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
+      } else if (score >= 60) {
+        message = "Outstanding! You're a allergic reaction first aid expert!";
+        badge = "Gold Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
       }
-    });
+      else{
+        message = "You have not passed. Kindly retake the test!";
+      }
+      
+      $('#scoreMessage').text(message);
+      $('#badgeLabel').text(badge);
+      $('#resultCard').removeClass('d-none');
+      
+      // Update the hidden form field with the score
+      $('#scoreInput').val(score);
+    }
+  });
 
-    $('#retryBtn').on('click', function() {
-      score = 0;
-      currentQuestion = 0;
-      $('#resultCard').addClass('d-none');
-      $('#quizCard').show();
-      loadQuestion(currentQuestion);
-    });
-
-    $(document).ready(function() {
-      loadQuestion(currentQuestion);
-    });
-  </script>
-
+  $(document).ready(function() {
+    loadQuestion(currentQuestion);
+  });
+  
+</script>
 {% endblock %}

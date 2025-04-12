@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Module, UserModuleProgress
+from .forms import QuizScoreForm
+from django.db import models
 
 def home(request):
     return render(request, 'home.html')
@@ -23,9 +26,37 @@ def achievements(request):
 def leaderboard(request):
     return render(request, 'leaderboard.html')
 
-@login_required
+@login_required(login_url='login')
 def profile(request):
-    return render(request, 'profile.html')
+    # Get all module progress for current user
+    user_progress = UserModuleProgress.objects.filter(user=request.user)
+    
+    # Calculate total points (sum of all scores)
+    total_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    
+    # Count completed modules
+    completed_modules = user_progress.aggregate(total=models.Sum('completed'))['total'] or 0
+    
+    # Total number of modules
+    total_modules = Module.objects.count()
+    
+    # Determine level based on completed modules
+    level = "Beginner"
+    if completed_modules >= 8:
+        level = "Expert"
+    elif completed_modules >= 5:
+        level = "Advanced"
+    elif completed_modules >= 2:
+        level = "Intermediate"
+    
+    context = {
+        'user_progress': user_progress,
+        'total_points': total_points,
+        'completed_modules': completed_modules,
+        'total_modules': total_modules,
+        'level': level
+    }
+    return render(request, 'profile.html', context)
 
 def burns_learning(request):
     return render(request, 'burns_learning.html')
@@ -84,12 +115,48 @@ def venom_quiz(request):
 def allergy_learning(request):
     return render(request, 'allergy_learning.html')
 
+
 def allergy_quiz(request):
-    return render(request, 'allergy_quiz.html')
+    """View for the allergy quiz"""
+    module = get_object_or_404(Module, slug='allergy_quiz')
+    progress, created = UserModuleProgress.objects.get_or_create(
+        user=request.user, 
+        module=module
+    )
+    
+    if request.method == 'POST':
+        form = QuizScoreForm(request.POST)
+        if form.is_valid():
+            new_score = form.cleaned_data['score']
+            
+            # Update attempts counter
+            progress.attempts += 1
+            
+            # Only update score if new score is higher
+            if new_score > progress.score:
+                progress.score = new_score
+                if progress.score >= module.passing_score:
+                    progress.completed = progress.completed + 1
+                progress.save()
+                messages.success(request, "Your score has been updated!")
+            else:
+                progress.save()  # Save to increment attempts
+                messages.info(request, "Your previous score was higher.")
+                
+            # Redirect back to the same page to show updated score
+            return redirect('allergy_quiz')
+    else:
+        form = QuizScoreForm(module_slug=module.slug)
 
 
-
-
+    context = {
+        'module': module,
+        'current_score': progress.score,
+        'completed': progress.completed,
+        'attempts': progress.attempts,
+        'form': form
+    }
+    return render(request, 'allergy_quiz.html', context)
 
 
 
@@ -135,8 +202,3 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('login')
-
-
-@login_required(login_url='login')
-def profile(request):
-    return render(request, 'profile.html')
