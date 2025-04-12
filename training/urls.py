@@ -27,4 +27,8 @@ urlpatterns = [
     path('venom-quiz/', views.venom_quiz, name='venom_quiz'),
     path('allergy-learning/', views.allergy_learning, name='allergy_learning'),
     path('allergy-quiz/', views.allergy_quiz, name='allergy_quiz'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+   
 ]
