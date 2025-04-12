@@ -2,131 +2,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - First Aid Training</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            color: #f8f9fa;
-            position: relative;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url("{% static 'images/home_bg.png' %}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            filter: blur(2px);
-            z-index: -1;
-        }
-        
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - First Aid Training</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
 
-        .login-container {
-            max-width: 400px;
-            margin: 60px auto;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .login-container h2 {
-            color: #dc3545;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        
-      
-        .form-control {
-            border-radius: 30px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-        }
-
-        .form-control:focus {
-            border-color: #dc3545;
-            box-shadow: 0 0 10px rgba(220, 53, 69, 0.3);
-        }
-
-        .btn-primary {
-            background-color: #dc3545;
-            border: none;
-            border-radius: 30px;
-            padding: 12px;
-            width: 100%;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-primary:hover {
-            background-color: #c82333;
-        }
-
-        .register-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            color: #000; /* Entire text in black */
-            font-weight: 500;
-        }
-
-        .register-link a {
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .register-link a:hover {
-            color: #bd2130; /* Dark red on hover */
-            text-decoration: underline;
-        }
-
-        .icon {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .icon i {
-            font-size: 50px;
-            color: #dc3545;
-        }
-
-      
-    </style>
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("{% static 'images/home_bg.png' %}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      z-index: -1;
+    }
+  </style>
 </head>
-<body>
+<body class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 
-    <div class="login-container">
-        <div class="icon">
-            <i class="fa-solid fa-briefcase-medical"></i>
-        </div>
-        <h2>Login to First Aid Training</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                <input type="text" name="username" placeholder="Username" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <input type="password" name="password" placeholder="Password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+  <div class="bg-white bg-opacity-90 shadow-lg p-5 rounded-4" style="max-width: 500px; width: 100%;">
+    <div class="text-center mb-4">
+      <i class="fa-solid fa-briefcase-medical fa-3x text-danger mb-2"></i>
+      <h2 class="text-danger fw-bold">Login to First Aid Training</h2>
     </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="text" name="username" class="form-control py-3" placeholder="Username" required>
+      </div>
+      <div class="mb-3">
+        <input type="password" name="password" class="form-control py-3" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-danger w-100 py-3 fw-bold">Login</button>
+    </form>
+
+    <p class="text-center mt-4 text-dark fw-medium">
+      Don't have an account? 
+      <a href="{% url 'register' %}" class="fw-bold text-decoration-none text-dark">Register here</a>
+    </p>
+  </div>
 
 </body>
 </html>
