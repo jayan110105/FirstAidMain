@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.modules, name='modules'),
+    path('', views.home, name='home'),
+    path('modules/', views.modules, name='modules'),
     path('scenarios/', views.scenarios, name='scenarios'),
     path('achievements/', views.achievements, name='achievements'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
@@ -27,4 +28,8 @@ urlpatterns = [
     path('venom-quiz/', views.venom_quiz, name='venom_quiz'),
     path('allergy-learning/', views.allergy_learning, name='allergy_learning'),
     path('allergy-quiz/', views.allergy_quiz, name='allergy_quiz'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+   
 ]
