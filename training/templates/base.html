@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,6 +131,15 @@
             text-align: left; /* Align text to the left */
             width: 100%;
             margin-top: auto; /* Pushes the logout button to the bottom */
+        }
+
+        .scenario-bg {
+            background-image: url("{% static 'images/restaurant_1.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 2rem;
+            border-radius: 0.375rem;
         }
     </style>
 </head>

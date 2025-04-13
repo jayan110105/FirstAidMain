@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Scenarios{% endblock %}
 
 {% block content %}
@@ -17,16 +17,16 @@
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="card scenario-card">
-                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Cardiac Arrest Emergency">
+                    <img src="{% static 'images/restaurant_1.png' %}" class="card-img-top" alt="Cardiac Arrest Emergency">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">Cardiac Arrest Emergency </h5>
+                            <h5 class="card-title">Restraunt </h5>
                             <span class="badge badge-intermediate">Intermediate</span>
                         </div>
                         <p class="card-text text-muted">Respond to a sudden cardiac arrest situation in a public place.</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <p class="text-muted"><i class="fa-regular fa-clock"></i> 10 min &nbsp; <i class="fas fa-trophy"></i> 200 points</p>
-                            <a href="#" class="btn btn-danger">Start Scenario</a>
+                            <a href="{% url 'RestrauntScenario' %}" class="btn btn-danger">Start Scenario</a>
                         </div>
                     </div>
                 </div>
