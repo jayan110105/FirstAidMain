@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Hiking Emergency{% endblock %}
+
+{% block content %}'
+<div class="container-fluid p-4">
+
+    <!-- Back Link -->
+    <a href="{% url 'scenarios' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i>
+        Back to Scenarios
+    </a>
+
+    <!-- Title Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 fw-bold mb-0">Hiking Emergency Scenario</h1>
+        <div class="text-muted small d-flex align-items-center">
+            <i class="fa-regular fa-clock me-1"></i> Time: 0:14
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div class="mb-2 d-flex justify-content-between small text-muted fw-semibold">
+        <span>Start</span>
+        <span>Progress</span>
+        <span>Complete</span>
+    </div>
+    <div class="progress" style="height: 8px;">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div class="card mt-4 shadow-sm" style="min-height: 65vh;">  <!-- You can adjust 60vh as needed -->
+        <div class="card-body text-dark scenario-bg d-flex flex-column justify-content-end">
+            <!-- Semi-transparent overlay for better text readability -->
+            <div class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
+
+                <!-- Avatar + Dialogue -->
+                <div class="d-flex align-items-start">
+                    <img src="{% static 'images/avatar_hiking.png' %}" alt="Kaladin avatar"
+                        class="rounded-2 me-3" style="width: 48px; height: 48px;">
+                    <div class="bg-light border rounded p-3 shadow-sm w-100">
+                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> "You and Kaladin decide to go for a hike. The two of you decide to go through the moraine to reach Shittidhar mountain to see the Parkachik glacier"</p>
+                    </div>
+                </div>
+
+                <!-- Route Options -->
+                <div class="mt-4" id="options-container">
+                    <p class="fw-semibold" id="option-heading">Where would you like to go?</p>
+                    <div class="d-inline-flex flex-column">
+                        <button class="btn btn-light text-start mb-2" onclick="selectOption('moraine')">
+                            🪨 Down to the moraine!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Continue Button -->
+    <div class="text-end mt-4">
+        <a href="" class="btn btn-danger">
+            Continue <i class="fa-solid fa-arrow-right-long ms-1"></i>
+        </a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.scenario-bg').css({
+                'background-image': "url('{% static 'Images/hiking_1 - Copy.png' %}')",
+                'background-size': 'cover',
+                'background-repeat': 'no-repeat',
+                'background-position': 'center center'
+            });
+        })
+        
+        // --- Dial code variables ---
+        let dialCode1 = [1, 0, 8];
+        let dialCode2 = [1, 1, 2];
+        let dialIndex1 = 0;
+        let dialIndex2 = 0;
+        let dialTimer;
+        let dialTimeLeft = 10;
+
+        function startDialGame() {
+            // Reset both indices
+            dialIndex1 = 0;
+            dialIndex2 = 0;
+            dialTimeLeft = 5;
+            $('#dial-sequence').text('');
+            updateDialTimer();
+
+            dialTimer = setInterval(() => {
+                dialTimeLeft--;
+                updateDialTimer();
+                if (dialTimeLeft <= 0) {
+                    clearInterval(dialTimer);
+                    ambulanceResult('fail');
+                }
+            }, 1000);
+        }
+
+        function updateDialTimer() {
+            $('#call-timer').text(`Time left: ${dialTimeLeft}s`);
+        }
+
+        function pressDial(num) {
+            $('#dial-sequence').append(num);
+
+            // Check for code 1
+            if (dialIndex1 !== -1 && num === dialCode1[dialIndex1]) {
+                dialIndex1++;
+            } else {
+                dialIndex1 = -1;
+            }
+
+            // Check for code 2
+            if (dialIndex2 !== -1 && num === dialCode2[dialIndex2]) {
+                dialIndex2++;
+            } else {
+                dialIndex2 = -1;
+            }
+
+            // If either code has been fully entered:
+            if (dialIndex1 === dialCode1.length || dialIndex2 === dialCode2.length) {
+                clearInterval(dialTimer);
+                ambulanceResult('success');
+            }
+
+            // If both dial attempts are marked invalid, it's a failure:
+            if (dialIndex1 === -1 && dialIndex2 === -1) {
+                clearInterval(dialTimer);
+                ambulanceResult('fail');
+            }
+        }
+
+        function ambulanceResult(status) {
+            if (status === 'success') {
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully dialed the emergency number. However, there is no signal."');
+                $('#option-heading').text("✅ Dialed successfully, but no signal.");
+                $('#options-container .d-inline-flex').html(`<button class="btn btn-success mt-2" onclick="selectOption('call_option')">Finish</button>`);
+            } else {
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You fumbled and dialed the wrong number. No help is coming yet."');
+                $('#option-heading').text("❌ You failed to call for help.");
+                $('#options-container .d-inline-flex').html(`<button class="btn btn-danger mt-2" onclick="selectOption('call_option')">Finish</button>`);
+            }
+        }
+
+        // --- Ankle Wrap Challenge Variables ---
+        let wrapCount = 0;
+        let wrapTimeout;
+        let wrapTime = 15;
+        let wrapInterval;
+
+        function startWrapChallenge() {
+            wrapCount = 0;
+            wrapTime = 15;
+            $('#wrap-counter').text(`Wraps: ${wrapCount}/5`);
+            $('#wrap-timer').text(`⏳ Time left: ${wrapTime}s`);
+            clearInterval(wrapInterval);
+            wrapInterval = setInterval(function() {
+                wrapTime--;
+                $('#wrap-timer').text(`⏳ Time left: ${wrapTime}s`);
+                if (wrapTime <= 0) {
+                    clearInterval(wrapInterval);
+                }
+            }, 1000);
+            // Timeout after 30 seconds if challenge is not completed
+            wrapTimeout = setTimeout(function() {
+                if (wrapCount < 5) {
+                    selectOption('fail_path');
+                }
+            }, 15000);
+        }
+
+        // --- Attach event for wrap overlay clicks via delegation ---
+        $('#options-container').on('click', '#wrap-overlay', function() {
+            wrapCount++;
+            $('#wrap-counter').text(`Wraps: ${wrapCount}/5`);
+            if (wrapCount >= 5) {
+                clearTimeout(wrapTimeout);
+                selectOption('success_path');
+            }
+        });
+
+        function selectOption(choice) {
+            console.log("Selected option:", choice);
+            if (choice === 'moraine') {
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Kaladin loses his footing and slips, his ankle twisting under him. "');
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_2.png' %}" + "')");
+                updateOptions("What do you do?", [
+                    { text: 'Call for help 📱', id: 'unsafe_1' },
+                    { text: 'Asses the injury 📋', id: 'unsafe_1' },
+                    { text: 'Move to a safer area 🌳', id: 'safe' }
+                ]);
+            } else if(choice == 'unsafe_1'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_2.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You lose your balance on the rocks and hit your shoulder. Luckily it\'s just a bruise"');
+                updateOptions("What do you do next?", [
+                        { text: 'Move to a safer area 🌳', id: 'safe' },
+                        { text: 'Call for help 📱', id: 'worst_case' },
+                        { text: 'Asses the injury 📋', id: 'worst_case' }
+                ]);
+            }  else if(choice == 'worst_case'){
+                //fail
+                $('.scenario-bg').css({
+                    'background-image': "url('{% static 'images/hiking_3 - Copy.png' %}')",
+                    'background-size': 'cover', // or use 'contain' if you want the whole image to be visible without cropping
+                    'background-repeat': 'no-repeat',
+                    'background-position': 'center center'
+                })
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Complete Failure, worst case scenario"');
+                $('#option-heading').text("You did not secure the scene. The moraine area is very unstable and prone to landslides. You get caught in a landslide and both die.");
+                $('#options-container .d-inline-flex').html('');
+
+            } else if(choice == 'safe'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_4.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You manage to get him to a safe place to rest and drink some water. What do you do now?"');
+                updateOptions("You are safe — what do you do next?", [
+                        { text: 'Call for help 📱', id: 'call' },
+                        { text: 'Help him walk and try to retrace your steps 🚶', id: 'walk' },
+                        { text: 'Asses the injury 📋', id: 'assess' }
+                ]);
+            } else if(choice == 'assess'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "His ankle is red and slightly swollen but does not appear to be disfigured"');
+                updateOptions("What do you think is wrong?", [
+                        { text: 'Sprain or fracture 🩹', id: 'sprain' },
+                        { text: 'Contusion (bruise) 🤕', id: 'bruise' },
+                ]);
+            } else if(choice == 'sprain'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Kaladin has sprained his ankle!!"');
+                updateOptions("How do you treat it?", [
+                        { text: 'Stabilize and splint the joint 🩹', id: 'wrap_challenge' },
+                        { text: 'Got to the foot of the glacier for snow and put snow on the ankle ❄️', id: 'fail_path' },
+                        { text: 'Rub the ankle to improve blood flow🩸', id: 'fail_path' },
+                ]);
+            }else if (choice == 'wrap_challenge') {
+                // Display the ankle image with an overlaid "8" for the wrap challenge.
+                $('.scenario-bg').css('background-image', "url('{% static 'images/hiking_5.png' %}')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Stabilize Kaladin\'s ankle by wrapping it. Wrap along the overlaid 8 five times to secure the injury."');
+                $('#option-heading').text("Wrap the ankle 5 times to secure it.");
+                // Replace options with the ankle wrap challenge container.
+                $('#options-container .d-inline-flex').html(`
+                    <div id="ankle-wrap-container" style="position: relative; display: inline-block; margin: 20px auto;">
+                        <img src="{% static 'images/ankle.png' %}" alt="Ankle Image" style="width: 200px; height: auto; display: block;">
+                        <div id="wrap-overlay" style="
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-85%, -50%) rotate(-50deg);
+                            font-size: 220px;
+                            color: black;
+                            opacity: 0.8;
+                            cursor: pointer;
+                            user-select: none;
+                        ">8</div>
+                        <!-- Arrows for wrapping direction -->
+                        <!-- Top arrow (clockwise) -->
+                            <i class="fa-solid fa-arrow-rotate-right" style="
+                                position: absolute;
+                                top: 28%;
+                                left: 8%;
+                                font-size: 40px;
+                                color: dark-grey;
+                                transform: rotate(-40deg);
+                            "></i>
+
+                            <!-- Bottom arrow (counter-clockwise) -->
+                            <i class="fa-solid fa-arrow-rotate-left" style="
+                                position: absolute;
+                                bottom: 20%;
+                                right: 40%;
+                                font-size: 45px;
+                                color: dark-grey;
+                                transform: rotate(30deg);
+                            "></i>
+                        </div>
+                    <p id="wrap-counter" class="text-center fw-bold">Wraps: 0/5</p>
+                        <div class="text-center mt-3">
+                    <div id="wrap-timer" class="mb-2 text-secondary fw-bold">⏳ Time left: 15s</div>
+                    </div>
+                `);
+                startWrapChallenge();
+            }else if(choice == 'success_path'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You have attempted to wrap his ankle"');
+                updateOptions("What now?", [
+                        { text: 'Set up camp and wait for rescue 🏕️', id: 'worst_case' },
+                        { text: 'Go alone to look for help or where your phone will have signal🔍', id: 'success' },
+                ]);
+            }else if(choice == 'fail_path'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You have tried to treat his sprained ankle"');
+                updateOptions("What now?", [
+                        { text: 'Set up camp and wait for rescue 🏕️', id: 'worst_case' },
+                        { text: 'Go alone to look for help or where your phone will have signal🔍', id: 'partial' },
+                ]);
+            }else if(choice == 'call_option'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_7.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You tried calling for help, but have no signal"');
+                updateOptions("What do you do now?", [
+                        { text: 'Set up camp and wait for rescue 🏕️', id: 'worst_case' },
+                        { text: 'Go alone to look for help or where your phone will have signal🔍', id: 'partial' },
+                        { text: 'Assess the injury 🩹', id: 'assess' },
+                ]);
+            }else if(choice == 'bruise'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You think Kaladin is bruised after assesing the injury"');
+                updateOptions("What do you do now?", [
+                        { text: 'Leave it alone', id: 'fail_path' },
+                        { text: 'Spray it with muscle relaxant like Volini', id: 'fail_path' },
+                        { text: 'Splint the injury', id: 'wrap_challenge' },
+                ]);
+            }else if(choice == 'walk'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_8.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You two try walking together back to your camp but the ground is too unstable and you can\' support Kaladin\'s weight. The two of you keep dislodging rocks and slipping. You stop at stable ground."');
+                updateOptions("What can you do now?", [
+                        { text: 'Push on and try to keep going ⬆️', id: 'worst_case' },
+                        { text: 'Set camp there and wait for rescue 🏕️', id: 'worst_case' },
+                        { text: 'Assess the injury 🩹', id: 'assess' },
+                        { text: 'Set of on your own 🔍', id: 'partial' },
+                ]);
+            }else if(choice == 'partial'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_6.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success!"');
+                $('#option-heading').text(" The rescue and recovery team stationed hears your call and comes to help you two. Kaladin luckily has only a minor sprain however improper treatment that it is not stable and will take longer to heal");
+                $('#options-container .d-inline-flex').html('');
+            }else if(choice == 'success'){
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_6.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Total Success!"');
+                $('#option-heading').text(" The rescue and recovery team stationed hears your call and comes to help you two. Kaladin luckily has only a minor sprain and by wrapping it you ensured that he will heal quickly");
+                $('#options-container .d-inline-flex').html('');
+            } else if (choice === 'call') {
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_7.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8."');
+                $('#option-heading').text("Dial Emergency Number");
+
+                $('#options-container .d-inline-flex').html(`
+                    <div id="call-status" class="mb-2 text-muted">Dialing: <span id="dial-sequence"></span></div>
+                    <div id="call-timer" class="fw-semibold mb-3">Time left: 5s</div>
+                    <div class="d-flex flex-wrap gap-2 justify-content-center" style="max-width: 260px;">
+                        ${[1,2,3,4,5,6,7,8,9,0].map(n => `
+                            <button class="btn btn-light" style="width: 60px; height: 60px;" onclick="pressDial(${n})">${n}</button>
+                        `).join('')}
+                    </div>
+                `);
+
+                startDialGame();
+            }
+        }
+
+        function updateOptions(heading, options) {
+            $('#option-heading').text(heading);
+            let buttons = '';
+            options.forEach(opt => {
+                buttons += `<button class="btn btn-light text-start mb-2" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+            });
+            $('#options-container .d-inline-flex').html(buttons);
+        }
+    </script>
+</div>
+{% endblock %}

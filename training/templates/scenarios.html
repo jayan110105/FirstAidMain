@@ -34,16 +34,16 @@
 
             <div class="col-md-6">
                 <div class="card scenario-card">
-                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Severe Bleeding Control">
+                    <img src="{% static 'images/hiking_1.png' %}" class="card-img-top" alt="Hiking emergency" style="height: 385px;">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">Severe Bleeding Control</h5>
+                            <h5 class="card-title">Hiking Emergency</h5>
                             <span class="badge badge-intermediate">Intermediate</span>
                         </div>
-                        <p class="card-text text-muted">Handle a severe bleeding emergency in a workplace setting.</p>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <p class="card-text text-muted">Handle emergency during adventure activities.</p>
+                        <div class="d-flex justify-content-between align-items-center" >
                             <p class="text-muted"><i class="fa-regular fa-clock"></i> 8 min &nbsp; <i class="fas fa-trophy"></i> 150 points</p>
-                            <a href="#" class="btn btn-danger">Start Scenario</a>
+                            <a href="{% url 'HikingScenario' %}" class="btn btn-danger">Start Scenario</a>
                         </div>
                     </div>
                 </div>

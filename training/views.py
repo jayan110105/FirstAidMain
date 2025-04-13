@@ -616,3 +616,6 @@ def logout(request):
 
 def RestrauntScenario(request):
     return render(request, 'restraunt_scenario.html')
+
+def HikingScenario(request):
+    return render(request, 'hiking_scenario.html')

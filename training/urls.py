@@ -32,4 +32,5 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('restraunt-scenario/', views.RestrauntScenario, name='RestrauntScenario'),
+    path('hiking-scenario/', views.HikingScenario, name='HikingScenario'),
 ]
