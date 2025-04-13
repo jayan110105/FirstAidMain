@@ -8,9 +8,9 @@
             <h4>Profile</h4>
             <p>Your training progress and achievements</p>
             <table class="table table-striped">
-                <tr><td>Level</td><td>Beginner</td></tr>
-                <tr><td>Total Points</td><td>0</td></tr>
-                <tr><td>Completed Modules</td><td>0</td></tr>
+                <tr><td>Level</td><td>{{level}}</td></tr>
+                <tr><td>Total Points</td><td>{{total_points}}</td></tr>
+                <tr><td>Completed Modules</td><td>{{completed_modules}}</td></tr>
                 <tr><td>Achievements</td><td>0</td></tr>
             </table>
         </div>
@@ -21,14 +21,14 @@
             <div class="col-md-3">
                 <div class="card text-center p-3">
                     <h6 class="text-danger">Current Level</h6>
-                    <h5 class="fw-bold">Beginner</h5>
+                    <h5 class="fw-bold">{{level}}</h5>
                     <p class="text-muted">Keep training to advance</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card text-center p-3">
                     <h6 class="text-warning">Total Points</h6>
-                    <h5 class="fw-bold">0</h5>
+                    <h5 class="fw-bold">{{total_points}}</h5>
                     <p class="text-muted">Points earned from training</p>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <div class="col-md-3">
                 <div class="card text-center p-3">
                     <h6 class="text-success">Accuracy</h6>
-                    <h5 class="fw-bold">92%</h5>
+                    <h5 class="fw-bold">{{accuracy}}%</h5>
                     <p class="text-muted">Average quiz score</p>
                 </div>
             </div>

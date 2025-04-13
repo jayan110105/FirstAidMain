@@ -1,56 +1,51 @@
 {% extends "base.html" %}
 {% block title %}Leaderboard{% endblock %}
+
 {% block content %}
 <div class="container-fluid p-4">
-    <h2 class="fw-bold" >Leaderboard</h2>
+    <h2 class="fw-bold">Leaderboard</h2>
     <p>See how you rank among other first aid trainees</p>
     <div class="row">
+        <!-- Leaderboard Table -->
         <div class="col-md-8">
             <div class="card p-3 mb-4">
-            <table class="table">
-                <thead class="table-light">
-                <tr>
-                    <th class="px-4 py-3">Rank</th>
-                    <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Level</th>
-                    <th class="px-4 py-3">Points</th>
-                    <th class="px-4 py-3">Achievements</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="px-4 py-3">🥇 #1</td>
-                    <td class="px-4 py-3">Sarah Johnson</td>
-                    <td class="px-4 py-3"><span class="badge badge-advanced ">Advanced</span></td>
-                    <td class="px-4 py-3">2500</td>
-                    <td class="px-4 py-3">12</td>
-                </tr>
-                <tr>
-                    <td class="px-4 py-3">🥈 #2</td>
-                    <td class="px-4 py-3">Michael Chen</td>
-                    <td class="px-4 py-3"><span class="badge badge-advanced ">Advanced</span></td>
-                    <td class="px-4 py-3">2100</td>
-                    <td class="px-4 py-3">10</td>
-                </tr>
-                <tr>
-                    <td class="px-4 py-3">🥉 #3</td>
-                    <td class="px-4 py-3">Emma Davis</td>
-                    <td class="px-4 py-3"><span class="badge badge-intermediate">Intermediate</span></td>
-                    <td class="px-4 py-3">1800</td>
-                    <td class="px-4 py-3">8</td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="px-4 py-3">Rank</th>
+                            <th class="px-4 py-3">Name</th>
+                            <th class="px-4 py-3">Level</th>
+                            <th class="px-4 py-3">Points</th>
+                            <th class="px-4 py-3">Achievements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in leaderboard %}
+                        <tr>
+                            <td class="px-4 py-3">
+                                {% if entry.rank == 1 %}🥇{% elif entry.rank == 2 %}🥈{% elif entry.rank == 3 %}🥉{% endif %}
+                                #{{ entry.rank }}
+                            </td>
+                            <td class="px-4 py-3">{{ entry.user.get_full_name|default:entry.user.username }}</td>
+                            <td class="px-4 py-3">
+                                <span class="badge badge-{{ entry.level|lower }}">{{ entry.level }}</span>
+                            </td>
+                            <td class="px-4 py-3">{{ entry.total_points }}</td>
+                            <td class="px-4 py-3">{{ entry.completed_modules }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+
         <!-- Right Side: Your Stats -->
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold">Your Stats</h5>
-                    <p>Current Rank:<br> <span class="fw-bold fs-3">#4</span></p>
-                   
-                    <p>Points to Next Rank:<br> <span class="fw-bold fs-3">300</span></p>
+                    <p>Current Rank:<br> <span class="fw-bold fs-3">#{{ current_rank }}</span></p>
+                    <p>Points to Next Rank:<br> <span class="fw-bold fs-3">{{ next_rank_points }}</span></p>
                     <p>Weekly Progress:</p>
                     <div class="progress" style="height: 10px;">
                         <div class="progress-bar bg-danger" style="width: 50%"></div>
@@ -59,4 +54,27 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Optional CSS for badge styling -->
+<style>
+.badge {
+    padding: 0.4em 0.6em;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.9em;
+}
+.badge-beginner {
+    background-color: #9e9e9e;
+}
+.badge-intermediate {
+    background-color: #03a9f4;
+}
+.badge-advanced {
+    background-color: #ff9800;
+}
+.badge-expert {
+    background-color: #4caf50;
+}
+</style>
 {% endblock %}
