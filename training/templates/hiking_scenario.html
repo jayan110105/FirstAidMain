@@ -67,7 +67,7 @@
     <script>
         $(document).ready(function(){
             $('.scenario-bg').css({
-                'background-image': "url('{% static 'Images/hiking_1 - Copy.png' %}')",
+                'background-image': "url('{% static 'Images/hiking_1.png' %}')",
                 'background-size': 'cover',
                 'background-repeat': 'no-repeat',
                 'background-position': 'center center'
@@ -194,7 +194,7 @@
                     { text: 'Move to a safer area 🌳', id: 'safe' }
                 ]);
             } else if(choice == 'unsafe_1'){
-                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_2.png' %}" + "')");
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_9.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You lose your balance on the rocks and hit your shoulder. Luckily it\'s just a bruise"');
                 updateOptions("What do you do next?", [
                         { text: 'Move to a safer area 🌳', id: 'safe' },
