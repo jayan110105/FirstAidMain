@@ -39,7 +39,7 @@
                     <img src="{% static 'images/avatar_hiking.png' %}" alt="Kaladin avatar"
                         class="rounded-2 me-3" style="width: 48px; height: 48px;">
                     <div class="bg-light border rounded p-3 shadow-sm w-100">
-                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> "You and Kaladin decide to go for a hike. The two of you decide to go through the moraine to reach Shittidhar mountain to see the Parkachik glacier"</p>
+                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> "You and Kaladin decide to go for a hike. The two of you decide to go through the moraine to see the Parkachik glacier. The guide warns you to be carefuly because the rocks in the moraine are highly unstable and it is a landslide prone area."</p>
                     </div>
                 </div>
 
@@ -239,7 +239,7 @@
             }else if (choice == 'wrap_challenge') {
                 // Display the ankle image with an overlaid "8" for the wrap challenge.
                 $('.scenario-bg').css('background-image', "url('{% static 'images/hiking_5.png' %}')");
-                $('#dialogue-text').html('<strong>Narrator:</strong> "Stabilize Kaladin\'s ankle by wrapping it. Wrap along the overlaid 8 five times to secure the injury."');
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Stabilize Kaladin\'s ankle by wrapping it. To correctly wrap any joint sprain we must wind the crepe bandage around the flexed joint in a figure of eight pattern. Trace the 8 to mimic wrapping the Kaladin\'s ankle"');
                 $('#option-heading').text("Wrap the ankle 5 times to secure it.");
                 // Replace options with the ankle wrap challenge container.
                 $('#options-container .d-inline-flex').html(`
@@ -285,7 +285,7 @@
                 startWrapChallenge();
             }else if(choice == 'success_path'){
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
-                $('#dialogue-text').html('<strong>Narrator:</strong> "You have attempted to wrap his ankle"');
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully to wrapped his ankle"');
                 updateOptions("What now?", [
                         { text: 'Set up camp and wait for rescue 🏕️', id: 'worst_case' },
                         { text: 'Go alone to look for help or where your phone will have signal🔍', id: 'success' },
