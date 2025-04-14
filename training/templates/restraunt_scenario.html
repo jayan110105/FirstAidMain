@@ -26,7 +26,7 @@
         <span>Complete</span>
     </div>
     <div class="progress" style="height: 8px;">
-        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" id="progress-bar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <div class="card mt-4 shadow-sm" style="min-height: 65vh;">  <!-- You can adjust 60vh as needed -->
@@ -49,9 +49,6 @@
                     <div class="d-inline-flex flex-column">
                         <button class="btn btn-light text-start mb-2" onclick="selectOption('steak')">
                             🥩 Steak with rosemary
-                        </button>
-                        <button class="btn btn-light text-start mb-2" onclick="selectOption('prawn')">
-                            🍤 Prawn Lemons
                         </button>
                     </div>
                 </div>
@@ -83,6 +80,10 @@
 
         let scenarioStartTime;
         let scenarioInterval;
+
+        function setProgress(percent) {
+            $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
+        }
 
         function startScenarioTimer() {
             scenarioStartTime = Date.now();
@@ -136,12 +137,14 @@
 
         function ambulanceResult(status) {
             if (status === 'success') {
+                setProgress(80);
                 interventionResult = 'success';
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully dialed 108. Help is on the way!"');
                 $('#option-heading').text("✅ Ambulance dispatched immediately");
                 $('#options-container .d-inline-flex').html( `<button class="btn btn-success mt-2" onclick="selectOption('partial')">Finish</button>
                 `);
             } else {
+                setProgress(80);
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You fumbled and dialed the wrong number. No help is coming yet."</strong>');
                 $('#option-heading').text("❌ You failed to call for help.");
                 $('#options-container .d-inline-flex').html(`
@@ -184,6 +187,7 @@
 
         function finishCPR(result) {
             if (result === 'success') {
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_1.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success"');
                 $('#option-heading').text("Airway is cleared, but Shallan needs medical help. You did well, but you should call an ambulance.");
@@ -242,6 +246,7 @@
             clearInterval(heimlichTimer);
 
             if (status === 'success' && heimlichAttempt < 2) {
+                setProgress(50);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_2.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Still Blocked"');
                 updateOptions("It helped a bit, but she’s still choking. What now?", [
@@ -250,6 +255,7 @@
                         { text: 'Perform CPR 🫀', id: 'cpr' }
                 ]);
             } else if (status === 'partial' && heimlichAttempt < 2) {
+                setProgress(50);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_2.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You try your best. Something dislodges, but she’s still gasping."');
                 updateOptions("Choose your next action wisely", [
@@ -257,24 +263,28 @@
                         { text: 'Start CPR 🫀', id: 'cpr' },
                 ]);
             } else if (status === 'fail' && heimlichAttempt < 2){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You fumble. She goes limp... This is serious."');
                 updateOptions("What’s your emergency response?", [
                         { text: 'Start CPR 🫀', id: 'cpr' },
                 ]);
             } else if (status === 'success' && heimlichAttempt >= 2) {
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_1.png' %}" + "')");
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_1.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success"');
                 $('#option-heading').text("Airway is cleared, but Shallan needs medical help. You did well, but you should call an ambulance.");
                 $('#options-container .d-inline-flex').html('');
             } else if (status === 'partial' && heimlichAttempt >= 2) {
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_2.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "She’s breathing — just barely. You’ve helped, but she needs urgent care."');
                 updateOptions("Choose the most critical step", [
                         { text: 'Call an Ambulance 🚑', id: 'ambulance' },
                 ]);
             } else {
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "No change. She’s completely unresponsive now. You must take life-saving action immediately"');
                 updateOptions("What do you do?", [
@@ -286,6 +296,7 @@
         function selectOption(choice) {
             console.log("Selected option:", choice);
             if (choice === 'steak') {
+                setProgress(15);
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Shallan’s eyes widen. She grips her throat. She’s clearly in distress."');
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_2.png' %}" + "')");
                 updateOptions("Match symptoms with possible causes.", [
@@ -293,15 +304,8 @@
                     { text: 'Cardiac Arrest ❤️‍🩹', id: 'collapse' },
                     { text: 'Allergic Reaction 🤧', id: 'collapse' }
                 ]);
-            } else if (choice === 'prawn') {
-                $('#dialogue-text').html('<strong>Shallan:</strong> “My mouth’s tingling.” Slight rash. Scratchy voice.');
-                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_3.png' %}" + "')");
-                updateOptions("What’s Going On?",[
-                    { text: 'Allergic Reaction 🤧', id: 'steak-allergy' },
-                    { text: 'Hangover 🤕', id: 'hangover' },
-                    { text: 'Spicy Food 🌶️', id: 'spicy' }
-                ]);
             } else if(choice == 'choking'){
+                setProgress(20);
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Shallan is choking. Make a Move!"');
                 updateOptions("What do you do?", [
                         { text: 'Heimlich Manoeuvre 🫳', id: 'heimlich' },
@@ -309,6 +313,7 @@
                         { text: 'Give Water 💧', id: 'collapse' }
                 ]);
             } else if (choice === 'heimlich') {
+                setProgress(35);
                 heimlichAttempt++; 
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_4.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Perform the Heimlich! Tap LEFT and RIGHT alternately 5 times to simulate abdominal thrusts!"');
@@ -323,6 +328,7 @@
                 `);
                 startThrustGame();
             } else if(choice == 'collapse'){
+                setProgress(50);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Shallan loses consciousness and slumps in her seat. She’s no longer responding, and her breathing is either very shallow or has stopped."');
                 updateOptions("She’s unresponsive — what do you do next?", [
@@ -331,6 +337,7 @@
                         { text: 'Try the Heimlich Manoeuvre 🫳', id: 'fail' }
                 ]);
             } else if(choice == 'back-blow'){
+                setProgress(35);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_4.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Back Blows Fails"');
                 updateOptions("Back blows didn’t help. Shallan worsens.", [
@@ -338,12 +345,14 @@
                         { text: 'Hit her under diaphragm 🫁', id: 'fail' },
                 ]);
             } else if(choice == 'wasted-effort'){
+                setProgress(50);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "CPR Confusion"');
                 updateOptions("She’s still breathing — CPR was inappropriate. You wasted precious time.", [
                         { text: 'Next', id: 'fail' },
                 ]);
             } else if(choice == 'cpr'){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_6.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Time is critical. Let’s perform CPR. First, select the correct hand position."');
                 $('#option-heading').text("Step 1: Hand Position");
@@ -355,11 +364,13 @@
                     </div>
                 `);
             } else if(choice == 'sucess'){
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_1.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Total Success!"');
                 $('#option-heading').text(" Shallan is stable. She praises your response");
                 $('#options-container .d-inline-flex').html('');
             } else if (choice === 'ambulance') {
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_7.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8."');
                 $('#option-heading').text("Dial Emergency Number");
@@ -377,6 +388,7 @@
                 startDialGame();
             } else if(choice == 'partial'){
                 //fail
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_1.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success"');
                 $('#option-heading').text("You did well, but Shallan needs medical help.");
@@ -384,6 +396,7 @@
 
             } else if(choice == 'fail'){
                 //fail
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You Failed"');
                 $('#option-heading').text("You hesitated, took wrong steps, or didn’t act fast enough. Shallan is unconscious when help arrives — it’s too late.");
