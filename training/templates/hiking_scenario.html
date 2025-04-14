@@ -76,6 +76,11 @@
 
         function setProgress(percent) {
             $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
+            
+            if (percent >= 100 && scenarioInterval) {
+                clearInterval(scenarioInterval);
+                scenarioInterval = null;
+            }
         }
 
         let scenarioTimeLeft = 120;  // set the countdown duration in seconds
