@@ -97,6 +97,14 @@ def leaderboard(request):
         .order_by('-total_points')
     )
 
+    total_items = 13  # Module.objects.count() + Scenario.objects.count()
+    user_progress = UserModuleProgress.objects.filter(user=request.user)
+    completed_modules_count = user_progress.filter(completed=True).count()
+    completed_scenarios_count = UserScenarioProgress.objects.filter(user=user, completed=True).count()
+    
+    progress_percent = ((completed_modules_count + completed_scenarios_count) / total_items) * 100
+
+
     # Generate leaderboard entries with rank and level
     leaderboard = []
     for idx, user in enumerate(users_with_scores, start=1):
@@ -116,6 +124,8 @@ def leaderboard(request):
             'total_points': user.total_points or 0,
             'completed_modules': completed,
             'level': level,
+            'completed_scenarios': completed_scenarios_count,
+            'progress_percent': int(progress_percent)
         })
 
     # Get current user's rank and points

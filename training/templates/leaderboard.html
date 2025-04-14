@@ -46,9 +46,10 @@
                     <h5 class="card-title fw-semibold">Your Stats</h5>
                     <p>Current Rank:<br> <span class="fw-bold fs-3">#{{ current_rank }}</span></p>
                     <p>Points to Next Rank:<br> <span class="fw-bold fs-3">{{ next_rank_points }}</span></p>
-                    <p>Weekly Progress:</p>
+                    <p>Progress: {{ progress_percent }}%</p>
                     <div class="progress" style="height: 10px;">
-                        <div class="progress-bar bg-danger" style="width: 50%"></div>
+                        <div class="progress-bar bg-danger" style="width: {{ progress_percent }}%;"></div>
+
                     </div>
                 </div>
             </div>
