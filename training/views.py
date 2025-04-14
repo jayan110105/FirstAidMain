@@ -3,14 +3,71 @@ from django.contrib.auth import login as auth_login, authenticate, logout as aut
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Module, UserModuleProgress
+from .models import Module, UserModuleProgress,Achievement,UserAchievement
 from .forms import QuizScoreForm
 from django.db import models
 from django.db.models import Sum, Count
+import logging
 
+logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request, 'home.html')
+
+@login_required
+def achievements(request):
+    # Load all achievements and user's current achievements
+    print(">> Achievements view loaded")
+    user_progress = UserModuleProgress.objects.filter(user=request.user)
+    total_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    completed_modules_count = user_progress.filter(completed=True).count()
+
+    all_achievements = Achievement.objects.all()
+    user_achievements = UserAchievement.objects.filter(user=request.user)
+    earned_ids = {ua.achievement.id for ua in user_achievements}
+
+    # Prepare achievement lookup
+    achievements_by_title = {a.title: a for a in all_achievements}
+
+    def unlock(title, condition):
+        print(f"Checking unlock: {title}, Condition: {condition}")
+        if title in achievements_by_title:
+            achievement = achievements_by_title[title]
+            print(f"Achievement found: {achievement}")
+            if condition and achievement.id not in earned_ids:
+                print("Unlocking achievement...")
+                UserAchievement.objects.create(user=request.user, achievement=achievement)
+                messages.success(request, f"Achievement Unlocked: {title}!")
+                earned_ids.add(achievement.id)
+            else:
+                print("Already earned or condition false.")
+        else:
+            print(f"Title '{title}' not found in achievements_by_title")
+
+
+    # Achievement logic
+    unlock('First Steps', completed_modules_count >= 1)
+    unlock('Life Saver', completed_modules_count == 8)
+    unlock('Quick Thinker', user_progress.filter(completed=True, time_spent__lt=120).exists())
+    unlock('Expert Medic', total_points == 1000)
+
+    # Prepare context for template
+    achievements_data = [
+        {
+            'achievement': ach,
+            'achieved': ach.id in earned_ids
+        }
+        for ach in all_achievements
+    ]
+
+    context = {
+        'achievements': achievements_data,
+        'unlocked_count': len(earned_ids),
+        'earned_ids': earned_ids,
+    }
+    print("Context being sent to template:", context)
+
+    return render(request, 'achievements.html', context)
 
 @login_required
 def modules(request):
@@ -19,12 +76,6 @@ def modules(request):
 @login_required
 def scenarios(request):
     return render(request, 'scenarios.html')
-
-@login_required
-def achievements(request):
-    return render(request, 'achievements.html')
-
-@login_required(login_url='login')
 
 @login_required(login_url='login')
 def leaderboard(request):
