@@ -49,7 +49,7 @@
 
     <div class="card mt-4 shadow-sm" style="min-height: 65vh;">
         <div class="card-body text-dark scenario-bg d-flex flex-column justify-content-end" id="scenario-body">
-            <div class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
+            <div id="dialogbox" class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
                 <div class="d-flex align-items-start" id="narrator-container">
                     <img src="{% static 'images/avatar_burns.png' %}" alt="Vin avatar" class="rounded-2 me-3" style="width: 48px; height: 48px;">
                     <div class="bg-light border rounded p-3 shadow-sm w-100">
@@ -69,29 +69,32 @@
                 </div>
 
                 <!-- Final Score Form: Hidden fields for score and time_spent -->
-                <form method="post" id="scoreForm">
-                    {% csrf_token %}
-                    {{ form.scenario_slug }}
-                    <input type="hidden" name="score" id="scoreInput" value="0">
-                    <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
-                    <div class="d-flex justify-content-center gap-3">
-                        <!-- On last page, no option buttons, only "Show Score" button -->
-                        <button type="submit" name="action" value="retry" class="btn btn-danger d-none" id="retryBtn">View Score</button>
-                    </div>
-                </form>
+                
             </div>
             <div id="resultCard" class="d-none card mt-5">
                 <div class="result-card p-4">
                     <div class="bg-white bg-opacity-50 p-4 rounded shadow-sm">
-                        <div class="bg-white bg-opacity-55 p-4 rounded shadow-sm"></div>
-                    <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Scenario Results</h1>
-                    <div class="my-4">
-                        <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
-                        <p id="scoreMessage" class="text-dark">
-                            You're on your way to mastering being a first aider. Keep practicing!
-                        </p>
-                        <p id="timeMessage" class="small text-muted"></p>
-                        <p id="attemptsMessage" class="small text-muted"></p>
+                        <div class="bg-white bg-opacity-55 p-4 rounded shadow-sm">
+                            <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Scenario Results</h1>
+                            <div class="my-4">
+                                <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
+                                <p id="scoreMessage" class="text-dark">
+                                    You're on your way to mastering being a first aider. Keep practicing!
+                                </p>
+                                <p id="timeMessage" class="small text-muted"></p>
+                                <p id="attemptsMessage" class="small text-muted"></p>
+                            </div>
+                            <form method="post" id="scoreForm">
+                                {% csrf_token %}
+                                {{ form.scenario_slug }}
+                                <input type="hidden" name="score" id="scoreInput" value="0">
+                                <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
+                                <div class="d-flex justify-content-center gap-3">
+                                    <!-- On last page, no option buttons, only "Show Score" button -->
+                                    <button type="submit" name="action" value="retry" class="btn btn-danger" id="retryBtn">Try Again</button>
+                                    <button type="submit" name="action" value="back" class="btn btn-danger" id="retryBtn">Back to Scenario</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     </div>
@@ -190,11 +193,12 @@
             //$('#options-container').hide();
             //$('#narrator-container').hide;
             $('#resultCard').removeClass('d-none');
+            $('#dialogbox').addClass('d-none');
             $('#resultCard').css({
                 'background-color': 'transparent',
                 'box-shadow': 'none'
             });
-            $('#scoreForm').submit();
+            // $('#scoreForm').submit();
         }
 
 

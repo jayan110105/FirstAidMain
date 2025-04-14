@@ -56,7 +56,7 @@
     <div class="card mt-4 shadow-sm" style="min-height: 65vh;">  <!-- You can adjust 60vh as needed -->
         <div class="card-body text-dark scenario-bg d-flex flex-column justify-content-end">
             <!-- Semi-transparent overlay for better text readability -->
-            <div class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
+            <div id="dialogbox" class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
 
                 <!-- Avatar + Dialogue -->
                 <div class="d-flex align-items-start">
@@ -76,31 +76,33 @@
                         </button>
                     </div>
                 </div>
-                <form method="post" id="scoreForm">
-                    {% csrf_token %}
-                    {{ form.scenario_slug }}
-                    <input type="hidden" name="score" id="scoreInput" value="0">
-                    <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
-                    <div class="d-flex justify-content-center gap-3">
-                        <!-- On last page, no option buttons, only "Show Score" button -->
-                        <button type="submit" name="action" value="retry" class="btn btn-danger d-none" id="retryBtn">View Score</button>
-                    </div>
-                </form>
+                
             </div>
             <div id="resultCard" class="d-none card mt-5">
                 <div class="result-card p-4">
                     <div class="bg-white bg-opacity-50 p-4 rounded shadow-sm">
-                    <div class="bg-white bg-opacity-55 p-3 rounded shadow-sm">
-                    <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Scenario Results</h1>
-                    <div class="my-4">
-                        <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
-                        <p id="scoreMessage" class="text-dark">
-                            You're on your way to mastering being a first aider. Keep practicing!
-                        </p>
-                        <p id="timeMessage" class="small text-muted"></p>
-                        <p id="attemptsMessage" class="small text-muted"></p>
+                        <div class="bg-white bg-opacity-55 p-3 rounded shadow-sm">
+                            <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Scenario Results</h1>
+                            <div class="my-4">
+                                <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
+                                <p id="scoreMessage" class="text-dark">
+                                    You're on your way to mastering being a first aider. Keep practicing!
+                                </p>
+                                <p id="timeMessage" class="small text-muted"></p>
+                                <p id="attemptsMessage" class="small text-muted"></p>
+                            </div>
+                            <form method="post" id="scoreForm">
+                                {% csrf_token %}
+                                {{ form.scenario_slug }}
+                                <input type="hidden" name="score" id="scoreInput" value="0">
+                                <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
+                                <div class="d-flex justify-content-center gap-3">
+                                    <!-- On last page, no option buttons, only "Show Score" button -->
+                                    <button type="submit" name="action" value="retry" class="btn btn-danger" id="retryBtn">Try Again</button>
+                                    <button type="submit" name="action" value="back" class="btn btn-danger">Back to Scenario</button>
+                                </div>
+                            </form>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -378,43 +380,41 @@
         }
 
         function submitScore() {
-    console.log("submitScore triggered");
-    // Calculate elapsed time in seconds since scenarioStartTime was set
-    const elapsedSeconds = Math.floor((Date.now() - scenarioStartTime) / 1000);
-    console.log("Elapsed seconds:", elapsedSeconds);
-    
-    // Set the hidden field with the computed value
-    $('#timeSpentInput').val(elapsedSeconds);
-    
-    // Read final score from hidden input
-    const finalScore = parseInt($('#scoreInput').val(), 10);
-    console.log("Final score:", finalScore);
-    
-    // Create a message based on score thresholds
-    let message = "";
-    if(finalScore >= 85) {
-        message = "Outstanding! You handled the situation like a pro!";
-    } else if(finalScore >= 60) {
-        message = "Great job! There's some room for improvement.";
-    } else {
-        message = "You need more practice. Review your techniques!";
-    }
-    
-    // Update the result card with score, message, and time taken
-    $('#finalScore').text("You scored: " + finalScore + " points!");
-    $('#scoreMessage').text(message);
-    $('#timeMessage').text("Time taken: " + elapsedSeconds + " seconds.");
-    
-    // Optionally display the result card
-    $('#resultCard').removeClass('d-none');
-    $('#resultCard').css({
-        'background-color': 'transparent',
-        'box-shadow': 'none'
-    });
-    
-    // Submit the form so the POST request is made
-    $('#scoreForm').submit();
-}
+            // Compute time taken as (60 - scenarioTimeLeft)
+            const timeTaken = 120 - scenarioTimeLeft;
+            $('#timeSpentInput').val(timeTaken);
+            
+            // Read final score from hidden input
+            const finalScore = parseInt($('#scoreInput').val(), 10);
+
+            // Create a message based on score (adjust thresholds as desired)
+            let message = "";
+            if(finalScore >= 85) {
+                message = "Outstanding! You handled the situation like a pro!";
+            } else if(finalScore >= 60) {
+                message = "Great job! There's some room for improvement.";
+            } else {
+                message = "You need more practice. Review your techniques!";
+            }
+            
+            // Update the result card with score, message, time taken, and attempt count.
+            $('#finalScore').text("You scored: " + finalScore + " points!");
+            $('#scoreMessage').text(message);
+            $('#timeMessage').text("Time taken: " + timeTaken + " seconds.");
+            // If your template context provided attempts (e.g., via a JavaScript variable or data-attribute), update it accordingly.
+            // For example, assume you set a global variable 'attemptsCount' from the context:
+            
+            // Hide scenario interactive parts and show the result card
+            //$('#options-container').hide();
+            //$('#narrator-container').hide;
+            $('#resultCard').removeClass('d-none');
+            $('#dialogbox').addClass('d-none');
+            $('#resultCard').css({
+                'background-color': 'transparent',
+                'box-shadow': 'none'
+            });
+            // $('#scoreForm').submit();
+        }
 
         function selectOption(choice) {
             console.log("Selected option:", choice);
