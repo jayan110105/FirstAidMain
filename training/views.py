@@ -54,9 +54,9 @@ def achievements(request):
     unlock('Quick Thinker', user_progress.filter(completed=True, time_spent__lt=30).exists())
     unlock('Expert Medic', total_points == 1000)
     unlock('All Star', completed_modules_count == 10 and completed_scenarios_count == 3)
-    unlock('Academic Ace', completed_modules_count == 5)
-    unlock('Simulation Pro',completed_scenarios_count == 3)
-    unlock('Trailblazer',completed_scenarios_count == 1)
+    unlock('Academic Ace', completed_modules_count >= 5)
+    unlock('Simulation Pro',completed_scenarios_count >= 3)
+    unlock('Trailblazer',completed_scenarios_count >= 1)
     for progress in completed_modules:
         unlock('Perfect Score',progress.score == 100)
 
