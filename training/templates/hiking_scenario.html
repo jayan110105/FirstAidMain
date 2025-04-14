@@ -26,7 +26,7 @@
         <span>Complete</span>
     </div>
     <div class="progress" style="height: 8px;">
-        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" id="progress-bar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <div class="card mt-4 shadow-sm" style="min-height: 65vh;">  <!-- You can adjust 60vh as needed -->
@@ -73,6 +73,10 @@
                 'background-position': 'center center'
             });
         })
+
+        function setProgress(percent) {
+            $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
+        }
 
         let scenarioStartTime;
         let scenarioInterval;
@@ -203,6 +207,7 @@
         function selectOption(choice) {
             console.log("Selected option:", choice);
             if (choice === 'moraine') {
+                setProgress(15);
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Kaladin loses his footing and slips, his ankle twisting under him. "');
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_2.png' %}" + "')");
                 updateOptions("What do you do?", [
@@ -211,6 +216,7 @@
                     { text: 'Move to a safer area 🌳', id: 'safe' }
                 ]);
             } else if(choice == 'unsafe_1'){
+                setProgress(20);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_9.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You lose your balance on the rocks and hit your shoulder. Luckily it\'s just a bruise"');
                 updateOptions("What do you do next?", [
@@ -220,6 +226,7 @@
                 ]);
             }  else if(choice == 'worst_case'){
                 //fail
+                setProgress(100);
                 $('.scenario-bg').css({
                     'background-image': "url('{% static 'images/hiking_3 - Copy.png' %}')",
                     'background-size': 'cover', // or use 'contain' if you want the whole image to be visible without cropping
@@ -231,6 +238,7 @@
                 $('#options-container .d-inline-flex').html('');
 
             } else if(choice == 'safe'){
+                setProgress(40);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_4.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You manage to get him to a safe place to rest and drink some water. What do you do now?"');
                 updateOptions("You are safe — what do you do next?", [
@@ -239,6 +247,7 @@
                         { text: 'Asses the injury 📋', id: 'assess' }
                 ]);
             } else if(choice == 'assess'){
+                setProgress(60);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "His ankle is red and slightly swollen but does not appear to be disfigured"');
                 updateOptions("What do you think is wrong?", [
@@ -246,6 +255,7 @@
                         { text: 'Contusion (bruise) 🤕', id: 'bruise' },
                 ]);
             } else if(choice == 'sprain'){
+                setProgress(70);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Kaladin has sprained his ankle!!"');
                 updateOptions("How do you treat it?", [
@@ -255,6 +265,7 @@
                 ]);
             }else if (choice == 'wrap_challenge') {
                 // Display the ankle image with an overlaid "8" for the wrap challenge.
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('{% static 'images/hiking_5.png' %}')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Stabilize Kaladin\'s ankle by wrapping it. To correctly wrap any joint sprain we must wind the crepe bandage around the flexed joint in a figure of eight pattern. Trace the 8 to mimic wrapping the Kaladin\'s ankle"');
                 $('#option-heading').text("Wrap the ankle 5 times to secure it.");
@@ -301,6 +312,7 @@
                 `);
                 startWrapChallenge();
             }else if(choice == 'success_path'){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully to wrapped his ankle"');
                 updateOptions("What now?", [
@@ -308,6 +320,7 @@
                         { text: 'Go alone to look for help or where your phone will have signal🔍', id: 'success' },
                 ]);
             }else if(choice == 'fail_path'){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You have tried to treat his sprained ankle"');
                 updateOptions("What now?", [
@@ -315,6 +328,7 @@
                         { text: 'Go alone to look for help or where your phone will have signal🔍', id: 'partial' },
                 ]);
             }else if(choice == 'call_option'){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_7.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You tried calling for help, but have no signal"');
                 updateOptions("What do you do now?", [
@@ -323,6 +337,7 @@
                         { text: 'Assess the injury 🩹', id: 'assess' },
                 ]);
             }else if(choice == 'bruise'){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_5.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You think Kaladin is bruised after assesing the injury"');
                 updateOptions("What do you do now?", [
@@ -331,6 +346,7 @@
                         { text: 'Splint the injury', id: 'wrap_challenge' },
                 ]);
             }else if(choice == 'walk'){
+                setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_8.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You two try walking together back to your camp but the ground is too unstable and you can\' support Kaladin\'s weight. The two of you keep dislodging rocks and slipping. You stop at stable ground."');
                 updateOptions("What can you do now?", [
@@ -340,16 +356,19 @@
                         { text: 'Set of on your own 🔍', id: 'partial' },
                 ]);
             }else if(choice == 'partial'){
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_6.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success!"');
                 $('#option-heading').text(" The rescue and recovery team stationed hears your call and comes to help you two. Kaladin luckily has only a minor sprain however improper treatment that it is not stable and will take longer to heal");
                 $('#options-container .d-inline-flex').html('');
             }else if(choice == 'success'){
+                setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_6.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Total Success!"');
                 $('#option-heading').text(" The rescue and recovery team stationed hears your call and comes to help you two. Kaladin luckily has only a minor sprain and by wrapping it you ensured that he will heal quickly");
                 $('#options-container .d-inline-flex').html('');
             } else if (choice === 'call') {
+                setProgress(60);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_7.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8."');
                 $('#option-heading').text("Dial Emergency Number");
