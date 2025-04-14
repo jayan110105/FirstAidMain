@@ -11,8 +11,8 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4 fw-bold mb-0">Burns Emergency Scenario</h1>
         <div class="text-muted small d-flex align-items-center">
-            <i class="fa-regular fa-clock me-1"></i> Time: 0:10
-        </div>
+            <i class="fa-regular fa-clock me-1"></i> <span id="scenario-timer">Time: 0:00</span>
+        </div>        
     </div>
 
     <div class="mb-2 d-flex justify-content-between small text-muted fw-semibold">
@@ -56,6 +56,23 @@
                 'background-image': "url('{% static 'Images/burns_1.png' %}')"
             });
         })
+
+        let scenarioStartTime;
+        let scenarioInterval;
+
+        function startScenarioTimer() {
+            scenarioStartTime = Date.now();
+            scenarioInterval = setInterval(() => {
+                const elapsedSeconds = Math.floor((Date.now() - scenarioStartTime) / 1000);
+                const minutes = Math.floor(elapsedSeconds / 60);
+                const seconds = elapsedSeconds % 60;
+                $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+            }, 1000);
+        }
+
+        $(document).ready(function() {
+            startScenarioTimer();
+        });
 
         function selectOption(choice) {
             switch (choice) {
