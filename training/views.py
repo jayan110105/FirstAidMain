@@ -206,7 +206,10 @@ def burns_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('burns_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('burns_learning')
+            else:
+                return redirect('burns_quiz')
     else:
         form = QuizScoreForm(module_slug=module.slug)
 
@@ -250,7 +253,11 @@ def wounds_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('wounds_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('wounds_learning')
+            else:
+                return redirect('wounds_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
 
@@ -294,7 +301,11 @@ def fractures_and_sprains_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('fractures_and_sprains_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('fractures_and_sprains_learning')
+            else:
+                return redirect('fractures_and_sprains_quiz')
+        
     else:
         form = QuizScoreForm(module_slug=module.slug)
 
@@ -338,7 +349,11 @@ def cardiac_emergencies_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('cardiac_emergencies_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('cardiac_emergencies_learning')
+            else:
+                return redirect('cardiac_emergencies_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
     
@@ -382,7 +397,11 @@ def choking_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('choking_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('choking_learning')
+            else:
+                return redirect('choking_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
     
@@ -426,7 +445,11 @@ def heat_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('heat_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('heat_learning')
+            else:
+                return redirect('heat_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
     
@@ -470,7 +493,11 @@ def cold_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('cold_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('cold_learning')
+            else:
+                return redirect('cold_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
 
@@ -515,7 +542,11 @@ def poison_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('poison_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('poison_learning')
+            else:
+                return redirect('poison_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
 
@@ -559,7 +590,11 @@ def venom_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('venom_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('venom_learning')
+            else:
+                return redirect('venom_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
 
@@ -606,7 +641,11 @@ def allergy_quiz(request):
                 messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
-            return redirect('allergy_quiz')
+            if request.POST.get("action") == "back":
+                return redirect('allergy_learning')
+            else:
+                return redirect('allergy_quiz')
+
     else:
         form = QuizScoreForm(module_slug=module.slug)
 

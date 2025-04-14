@@ -82,8 +82,8 @@
             <input type="hidden" name="score" id="scoreInput" value="0">
             <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
             <div class="d-flex justify-content-center gap-3">
-              <button type="submit" class="btn btn-primary" id="retryBtn">Try Again</button>
-              <button type="submit" href="{% url 'modules' %}" class="btn btn-light">Back to Allergic Reaction Module</button>
+              <button type="submit" name="action" value="retry" class="btn btn-danger" id="retryBtn">Try Again</button>
+              <button type="submit" name="action" value="back" class="btn btn-light">Back to Allergic Reaction Module</button>
             </div>
           </form>
         </div>
