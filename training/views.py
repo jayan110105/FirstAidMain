@@ -231,10 +231,10 @@ def burns_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -278,10 +278,10 @@ def wounds_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -326,10 +326,10 @@ def fractures_and_sprains_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -374,10 +374,10 @@ def cardiac_emergencies_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -422,10 +422,10 @@ def choking_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -470,10 +470,10 @@ def heat_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -518,10 +518,10 @@ def cold_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -567,10 +567,10 @@ def poison_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -615,10 +615,10 @@ def venom_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                #  messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -666,10 +666,10 @@ def allergy_quiz(request):
                 progress.score = new_score
                 progress.completed =  progress.score >= module.passing_score
                 progress.save()
-                messages.success(request, "Your score has been updated!")
+                # messages.success(request, "Your score has been updated!")
             else:
                 progress.save()  # Save to increment attempts
-                messages.info(request, "Your previous score was higher.")
+                # messages.info(request, "Your previous score was higher.")
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
@@ -763,7 +763,7 @@ def RestrauntScenario(request):
                                              ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
             else:
                 progress.save()  # Only update attempts
-                messages.info(request, "Your score has been updated")
+                # messages.info(request, "Your score has been updated")
                 
             if request.POST.get("action") == "back":
                 return redirect('scenarios')
@@ -809,7 +809,7 @@ def HikingScenario(request):
                                              ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
             else:
                 progress.save()  # Only update attempts
-                messages.info(request, "Your score has been updated")
+                # messages.info(request, "Your score has been updated")
                 
             if request.POST.get("action") == "back":
                 return redirect('scenarios')
@@ -856,10 +856,10 @@ def BurnsScenario(request):
                                              ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
             else:
                 progress.save()  # Only update attempts
-                if progress.attempts>1:
-                    messages.info(request, "Your previous score was higher.")
-                else:
-                    messages.info(request, "Your score has been updated")
+                # if progress.attempts>1:
+                #     messages.info(request, "Your previous score was higher.")
+                # else:
+                #     messages.info(request, "Your score has been updated")
             if request.POST.get("action") == "back":
                 return redirect('scenarios')
             else:
