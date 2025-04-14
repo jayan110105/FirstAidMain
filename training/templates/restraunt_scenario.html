@@ -80,21 +80,34 @@
         let dialTimer;
         let dialTimeLeft = 10;
 
-        let scenarioStartTime;
+        let scenarioTimeLeft = 120;  // set the countdown duration in seconds
         let scenarioInterval;
 
         function setProgress(percent) {
             $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
+            
+            if (percent >= 100 && scenarioInterval) {
+                clearInterval(scenarioInterval);
+                scenarioInterval = null;
+            }
         }
 
         function startScenarioTimer() {
-            scenarioStartTime = Date.now();
+            updateScenarioTimerDisplay();
             scenarioInterval = setInterval(() => {
-                const elapsedSeconds = Math.floor((Date.now() - scenarioStartTime) / 1000);
-                const minutes = Math.floor(elapsedSeconds / 60);
-                const seconds = elapsedSeconds % 60;
-                $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+                scenarioTimeLeft--;
+                updateScenarioTimerDisplay();
+                if (scenarioTimeLeft <= 0) {
+                    clearInterval(scenarioInterval);
+                    selectOption("timeout");
+                }
             }, 1000);
+        }
+
+        function updateScenarioTimerDisplay() {
+            const minutes = Math.floor(scenarioTimeLeft / 60);
+            const seconds = scenarioTimeLeft % 60;
+            $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
         }
 
         $(document).ready(function() {
@@ -412,6 +425,12 @@
                 $('#option-heading').text("You did well, but Shallan needs medical help.");
                 $('#options-container .d-inline-flex').html('');
 
+            } else if(choice == 'timeout'){
+                setProgress(100);
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_3 - Copy.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "⏱️ Time’s up! You took too long to act. Help arrived too late."</strong>');
+                $('#option-heading').text("⚠️ You failed to act in time.");
+                $('#options-container .d-inline-flex').html('');
             } else if(choice == 'fail'){
                 //fail
                 setProgress(100);

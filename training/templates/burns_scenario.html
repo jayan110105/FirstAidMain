@@ -60,6 +60,11 @@
 
         function setProgress(percent) {
             $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
+            
+            if (percent >= 100 && scenarioInterval) {
+                clearInterval(scenarioInterval);
+                scenarioInterval = null;
+            }
         }
 
         let scenarioTimeLeft = 60;  // set the countdown duration in seconds
@@ -87,6 +92,81 @@
             startScenarioTimer();
         });
 
+        let dialCode1 = [1, 0, 8];
+        let dialCode2 = [1, 1, 2];
+        let dialIndex1 = 0;
+        let dialIndex2 = 0;
+        let dialTimer;
+        let dialTimeLeft = 10;
+
+        function startDialGame(res) {
+            // Reset both indices
+            dialIndex1 = 0;
+            dialIndex2 = 0;
+            dialTimeLeft = 5;
+            $('#dial-sequence').text('');
+            updateDialTimer();
+
+            dialTimer = setInterval(() => {
+                dialTimeLeft--;
+                updateDialTimer();
+                if (dialTimeLeft <= 0) {
+                    clearInterval(dialTimer);
+                    ambulanceResult('fail', res);
+                }
+            }, 1000);
+        }
+
+        function updateDialTimer() {
+            $('#call-timer').text(`Time left: ${dialTimeLeft}s`);
+        }
+
+        function pressDial(num, res) {
+            $('#dial-sequence').append(num);
+
+            // Check for code 1
+            if (dialIndex1 !== -1 && num === dialCode1[dialIndex1]) {
+                dialIndex1++;
+            } else {
+                dialIndex1 = -1;
+            }
+
+            // Check for code 2
+            if (dialIndex2 !== -1 && num === dialCode2[dialIndex2]) {
+                dialIndex2++;
+            } else {
+                dialIndex2 = -1;
+            }
+
+            // If either code has been fully entered:
+            if (dialIndex1 === dialCode1.length || dialIndex2 === dialCode2.length) {
+                clearInterval(dialTimer);
+                ambulanceResult('success', res);
+            }
+
+            // If both dial attempts are marked invalid, it's a failure:
+            if (dialIndex1 === -1 && dialIndex2 === -1) {
+                clearInterval(dialTimer);
+                ambulanceResult('fail', res);
+            }
+        }
+
+        function ambulanceResult(status, res) {
+            if (status === 'success') {
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully dialed the emergency number. Help is on the way!"');
+                $('#option-heading').text("✅ Ambulance dispatched immediately");
+                if (res == 'call-help_t') {
+                    $('#options-container .d-inline-flex').html(`<button class="btn btn-success mt-2" onclick="selectOption('call-help_t')">Finish</button>`);
+                } else {
+                    $('#options-container .d-inline-flex').html(`<button class="btn btn-success mt-2" onclick="selectOption('call-help')">Finish</button>`);
+                }
+            } else {
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You fumbled and dialed the wrong number. No help is coming yet."');
+                $('#option-heading').text("❌ You failed to call for help.");
+                $('#options-container .d-inline-flex').html(`<button class="btn btn-danger mt-2" onclick="selectOption('td_fail')">Finish</button>`);
+            }
+        }
+
         function selectOption(choice) {
             switch (choice) {
                 case 'towel':
@@ -96,7 +176,7 @@
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> The fire grows worse! The towel catches fire.');
                     updateOptions('Now what?', [
-                        { text: '📞 Call for help and evacuate', id: 'call-help' },
+                        { text: '📞 Call for help and evacuate', id: 'call-ambulance' },
                         { text: '💧 Pour water', id: 'third_degree' },
                         { text: '🥣 Use flour', id: 'flour' },
                     ]);
@@ -108,7 +188,7 @@
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> Pouring water makes the flames explode even more violently!');
                     updateOptions('Now what?', [
-                        { text: '📞 Call for help and evacuate', id: 'call-help' },
+                        { text: '📞 Call for help and evacuate', id: 'call-ambulance' },
                         { text: '🥣 Use flour', id: 'flour' },
                         { text: '🏳️ Try to smother with towel again', id: 'third_degree' }
                     ]);
@@ -120,7 +200,7 @@
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> You did not make the ricght choices. Vin manages to put out the flames, but her skin becomes black and she does not feel pain');
                     updateOptions('She has a third degree burn', [
-                        { text: '📞 Call for help and evacuate', id: 'call-help_t' },
+                        { text: '📞 Call for help and evacuate', id: 'call-ambulance_t' },
                         { text: '👚 Remove clothing stuck to the burn', id: 'td_fail' },
                         { text: '💧Try to her some water to drink', id: 'td_fail' }
                     ]);
@@ -151,6 +231,42 @@
                         { text: '🚑 Call ambulance', id: 'call-safe' },
                         { text: '🚿 Cool and apply antiseptic', id: 'treat-minor' },
                     ]);
+                    break;
+                case 'call-ambulance':
+                    setProgress(80);
+                    $('.scenario-bg').css('background-image', "url('" + "{% static 'images/burns_6.png' %}" + "')");
+                    $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8 or 1-1-2."');
+                    $('#option-heading').text("Dial Emergency Number");
+
+                    $('#options-container .d-inline-flex').html(`
+                        <div id="call-status" class="mb-2 text-muted">Dialing: <span id="dial-sequence"></span></div>
+                        <div id="call-timer" class="fw-semibold mb-3">Time left: 5s</div>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center" style="max-width: 260px;">
+                            ${[1,2,3,4,5,6,7,8,9,0].map(n => `
+                                <button class="btn btn-light" style="width: 60px; height: 60px;" onclick="pressDial(${n}, 'call-help')">${n}</button>
+                            `).join('')}
+                        </div>
+                    `);
+
+                    startDialGame('call-help');
+                    break;
+                case 'call-ambulance_t':
+                    setProgress(80);
+                    $('.scenario-bg').css('background-image', "url('" + "{% static 'images/burns_6.png' %}" + "')");
+                    $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8 or 1-1-2."');
+                    $('#option-heading').text("Dial Emergency Number");
+
+                    $('#options-container .d-inline-flex').html(`
+                        <div id="call-status" class="mb-2 text-muted">Dialing: <span id="dial-sequence"></span></div>
+                        <div id="call-timer" class="fw-semibold mb-3">Time left: 5s</div>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center" style="max-width: 260px;">
+                            ${[1,2,3,4,5,6,7,8,9,0].map(n => `
+                                <button class="btn btn-light" style="width: 60px; height: 60px;" onclick="pressDial(${n}, 'call-help_t')">${n}</button>
+                            `).join('')}
+                        </div>
+                    `);
+
+                    startDialGame('call-help_t');
                     break;
                 case 'call-help':
                     setProgress(100);
