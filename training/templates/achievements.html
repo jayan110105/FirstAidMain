@@ -26,8 +26,8 @@
     <div class="row g-4">
         {% for entry in achievements %}
             {% with achievement=entry.achievement achieved=entry.achieved %}
-            <div class="col-4">
-                <div class="card achievement-card {% if achieved %}unlocked{% else %}locked{% endif %} text-center p-3 shadow-sm rounded-4">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card achievement-card {% if achieved %}unlocked{% else %}locked{% endif %} text-center p-3 shadow-sm rounded-4 h-100 d-flex flex-column">
                     <h1 style="font-size: 3rem;">
                         {% if achievement.icon|length < 4 %}
                             {{ achievement.icon }}  {# emoji or short icon string #}
@@ -35,14 +35,14 @@
                             <i class="{{ achievement.icon }}"></i>  {# font awesome or class-based icon #}
                         {% endif %}
                     </h1>
-                    
+
                     <h5 class="fw-bold">{{ achievement.title }}</h5>
-                    <p class="text-muted">{{ achievement.description }}</p>
+                    <p class="text-muted flex-grow-1">{{ achievement.description }}</p>
 
                     {% if achieved %}
-                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-check-circle text-success mt-auto"></i>
                     {% else %}
-                        <i class="fa fa-lock text-muted"></i>
+                        <i class="fa fa-lock text-muted mt-auto"></i>
                     {% endif %}
                 </div>
             </div>
