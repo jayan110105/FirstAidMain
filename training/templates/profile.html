@@ -2,11 +2,13 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
     <div class="container-fluid p-4">
+        <h2 class="fw-bold">Profile</h2>
+        <p class="text-muted">Your training progress and achievements</p>
 
         <!--cards in striped layout-->
         <div class="card p-3 mb-4">
-            <h4>Profile</h4>
-            <p>Your training progress and achievements</p>
+            <!-- <h4>Profile</h4>
+            <p>Your training progress and achievements</p> -->
             <table class="table table-striped">
                 <tr><td>Level</td><td>{{level}}</td></tr>
                 <tr><td>Total Points</td><td>{{total_points}}</td></tr>
