@@ -365,7 +365,7 @@ def fractures_and_sprains_quiz(request):
                 
             # Redirect back to the same page to show updated score
             if request.POST.get("action") == "back":
-                return redirect('fractures_and_sprains_learning')
+                return redirect('fractures_learning')
             else:
                 return redirect('fractures_and_sprains_quiz')
         
