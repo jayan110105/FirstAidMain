@@ -207,6 +207,11 @@
       clearInterval(timerInterval);
       const q = questions[currentQuestion];
 
+      // ⏱️ Track time spent on this question
+      const timeUsed = 20 - timeLeft;
+      totalTimeSpent += timeUsed;
+
+
       $('.option').each(function(i) {
         if (q.options[i].isCorrect) {
           $(this).addClass('correct');
@@ -268,6 +273,7 @@
       
       // Update the hidden form field with the score
       $('#scoreInput').val(score);
+      $('#timeSpentInput').val(totalTimeSpent);  // Add this line
     }
   });
 

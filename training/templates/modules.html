@@ -3,6 +3,8 @@
 {% block title %}Modules{% endblock %}
 {% block content %}
   <div class="container-fluid p-4">
+    <!-- Debug output -->
+
     <h1 class="fw-bold">Training Modules</h1>
     <p class="text-muted">Master life-saving skills through our comprehensive modules</p>
     <div class="row g-4">
@@ -26,7 +28,11 @@
               Learn about different types of burns and how to treat them.
             </p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">150 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% if 'Burns First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'burns_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
@@ -43,7 +49,11 @@
             </div>
             <p class="card-text text-muted">Learn about different types of wounds and how to treat them.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% if 'Wounds First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'wounds_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
@@ -61,8 +71,12 @@
             </div>
             <p class="card-text text-muted">Identify and stabilize fractures and sprains.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'fractures_learning' %}" class="btn btn-danger">Start Module</a>
+              {% if 'Fractures and Sprains First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
+            <a href="{% url 'fractures_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -79,8 +93,12 @@
             </div>
             <p class="card-text text-muted">Handle CPR and heart-related emergencies.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'cardiac_emergencies_learning' %}" class="btn btn-danger">Start Module</a>
+              {% if 'Cardiac Emergencies First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
+            <a href="{% url 'cardiac_emergencies_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -96,9 +114,13 @@
               <span class="badge badge-advanced">beginner</span>
             </div>
             <p class="card-text text-muted">Learn how to assist someone who is choking.</p>
-            <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
-              <a href="{% url 'choking_learning' %}" class="btn btn-danger">Start Module</a>
+            <div class="mt-auto d-flex justify-content-between align-items-center mt-3">              
+              {% if 'Choking First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
+            <a href="{% url 'choking_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
         </div>
@@ -115,7 +137,11 @@
             </div>
             <p class="card-text text-muted">Identify and treat patients suffering from prolonged exposure to high temperatures</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">150 points &nbsp;</p>
+              {% if 'Heat First Aid Quiz' in completed_modules %}
+              <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {%else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'heat_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
@@ -132,7 +158,11 @@
             </div>
             <p class="card-text text-muted">Identify and treat patients suffering from prolonged exposure to low temperatures</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">150 points &nbsp;</p>
+              {% if 'Cold First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'cold_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
@@ -150,7 +180,11 @@
             </div>
             <p class="card-text text-muted">Learn how to diagnose and treat poisoned patients.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">200 points &nbsp;</p>
+              {% if 'Poison First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'poison_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
@@ -167,7 +201,11 @@
             </div>
             <p class="card-text text-muted">Learn about venomous bites and its first aid.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">200 points &nbsp;</p>
+              {% if 'Venom First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'venom_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>
@@ -184,7 +222,11 @@
             </div>
             <p class="card-text text-muted">Learn about allergic reactions and its first aid.</p>
             <div class="mt-auto d-flex justify-content-between align-items-center mt-3">
-              <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% if 'Allergic Reactions First Aid Quiz' in completed_modules %}
+                <p class="text-muted mb-0">100 points &nbsp;<i class="fa-regular fa-circle-check text-success"></i></p>
+              {% else %}
+                <p class="text-muted mb-0">100 points &nbsp;</p>
+              {% endif %}
               <a href="{% url 'allergy_learning' %}" class="btn btn-danger">Start Module</a>
             </div>
           </div>

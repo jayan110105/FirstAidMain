@@ -20,7 +20,7 @@ class UserModuleProgress(models.Model):
     attempts = models.PositiveIntegerField(default=0)
     last_attempt = models.DateTimeField(auto_now=True)
     #time_spent = models.DurationField(default=timedelta()) 
-    time_spent = models.IntegerField(default=0)  # Needed for "Quick Thinker" achievement
+    time_spent = models.IntegerField(default=100)  # Needed for "Quick Thinker" achievement
 
     class Meta:
         unique_together = ('user', 'module')

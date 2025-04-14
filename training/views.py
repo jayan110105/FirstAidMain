@@ -47,8 +47,8 @@ def achievements(request):
 
     # Achievement logic
     unlock('First Steps', completed_modules_count >= 1)
-    unlock('Life Saver', completed_modules_count == 8)
-    unlock('Quick Thinker', user_progress.filter(completed=True, time_spent__lt=120).exists())
+    unlock('Life Saver', completed_modules_count == 10)
+    unlock('Quick Thinker', user_progress.filter(completed=True, time_spent__lt=30).exists())
     unlock('Expert Medic', total_points == 1000)
 
     # Prepare context for template
@@ -71,7 +71,15 @@ def achievements(request):
 
 @login_required
 def modules(request):
-    return render(request, 'modules.html')
+    user = request.user
+    completed_progress = UserModuleProgress.objects.filter(user=user, completed=True)
+    completed_modules = set(progress.module.title for progress in completed_progress)
+
+    context = {
+        'completed_modules': completed_modules,
+    }
+
+    return render(request, 'modules.html', context)
 
 @login_required
 def scenarios(request):
@@ -129,15 +137,14 @@ def leaderboard(request):
 def profile(request):
     # Get all module progress for current user
     user_progress = UserModuleProgress.objects.filter(user=request.user)
-    
     # Calculate total points (sum of all scores)
     total_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
-    
     # Count completed modules
     completed_modules = user_progress.filter(completed=True)
-    
     completed_modules_count = user_progress.filter(completed=True).count()
+    achievement_count = UserAchievement.objects.filter(user=request.user).count()
 
+    
     # Calculate the accuracy for each completed module
     module_accuracies = []
     for progress in completed_modules:
@@ -172,7 +179,8 @@ def profile(request):
         'completed_modules': completed_modules_count,
         'total_modules': total_modules,
         'level': level,
-        'accuracy':avg_accuracy
+        'accuracy':avg_accuracy,
+        'achievement_count': achievement_count,
     }
     return render(request, 'profile.html', context)
 
