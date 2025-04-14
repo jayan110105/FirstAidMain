@@ -21,7 +21,9 @@ def achievements(request):
     print(">> Achievements view loaded")
     user_progress = UserModuleProgress.objects.filter(user=request.user)
     total_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    completed_modules = user_progress.filter(completed=True)
     completed_modules_count = user_progress.filter(completed=True).count()
+    completed_scenarios_count = UserScenarioProgress.objects.filter(user=request.user, completed=True).count()
 
     all_achievements = Achievement.objects.all()
     user_achievements = UserAchievement.objects.filter(user=request.user)
@@ -51,6 +53,14 @@ def achievements(request):
     unlock('Life Saver', completed_modules_count == 10)
     unlock('Quick Thinker', user_progress.filter(completed=True, time_spent__lt=30).exists())
     unlock('Expert Medic', total_points == 1000)
+    unlock('All Star', completed_modules_count == 10 and completed_scenarios_count == 3)
+    unlock('Academic Ace', completed_modules_count == 5)
+    unlock('Simulation Pro',completed_scenarios_count == 3)
+    unlock('Trailblazer',completed_scenarios_count == 1)
+    for progress in completed_modules:
+        unlock('Perfect Score',progress.score == 100)
+
+    
 
     # Prepare context for template
     achievements_data = [
@@ -100,7 +110,7 @@ def leaderboard(request):
     total_items = 13  # Module.objects.count() + Scenario.objects.count()
     user_progress = UserModuleProgress.objects.filter(user=request.user)
     completed_modules_count = user_progress.filter(completed=True).count()
-    completed_scenarios_count = UserScenarioProgress.objects.filter(user=user, completed=True).count()
+    completed_scenarios_count = UserScenarioProgress.objects.filter(user=request.user, completed=True).count()
     
     progress_percent = ((completed_modules_count + completed_scenarios_count) / total_items) * 100
 
@@ -123,9 +133,7 @@ def leaderboard(request):
             'user': user,
             'total_points': user.total_points or 0,
             'completed_modules': completed,
-            'level': level,
-            'completed_scenarios': completed_scenarios_count,
-            'progress_percent': int(progress_percent)
+            'level': level
         })
 
     # Get current user's rank and points
@@ -141,6 +149,8 @@ def leaderboard(request):
         'leaderboard': leaderboard,
         'current_rank': current_rank,
         'next_rank_points': next_rank_points,
+        'completed_scenarios': completed_scenarios_count,
+        'progress_percent': int(progress_percent)
     }
     return render(request, 'leaderboard.html', context)
 
@@ -153,6 +163,7 @@ def profile(request):
     # Count completed modules
     completed_modules = user_progress.filter(completed=True)
     completed_modules_count = user_progress.filter(completed=True).count()
+    completed_scenarios_count = UserScenarioProgress.objects.filter(user=request.user, completed=True).count()
     achievement_count = UserAchievement.objects.filter(user=request.user).count()
 
     
@@ -192,6 +203,7 @@ def profile(request):
         'level': level,
         'accuracy':avg_accuracy,
         'achievement_count': achievement_count,
+        'completed_scenarios_count':completed_scenarios_count
     }
     return render(request, 'profile.html', context)
 

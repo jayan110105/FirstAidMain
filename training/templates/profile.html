@@ -11,46 +11,47 @@
                 <tr><td>Level</td><td>{{level}}</td></tr>
                 <tr><td>Total Points</td><td>{{total_points}}</td></tr>
                 <tr><td>Completed Modules</td><td>{{completed_modules}}</td></tr>
-                <tr><td>Achievements</td><td>{{achievement_count}}</td></tr>
+                <tr><td>Completed Scenarios</td><td>{{completed_scenarios_count}}</td></tr>
             </table>
         </div>
 
         <!--cards in grid layout, col-md-3 shows 3/12 so that 4 cards can fit in a row-->
 
         <div class="row">
-            <div class="col-md-3">
-                <div class="card text-center p-3">
+            <div class="col-md-3 mb-3">
+                <div class="card text-center p-3 h-100 d-flex flex-column">
                     <h6 class="text-danger">Current Level</h6>
                     <h5 class="fw-bold">{{level}}</h5>
-                    <p class="text-muted">Keep training to advance</p>
+                    <p class="text-muted mt-auto">Keep training to advance</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card text-center p-3">
+            <div class="col-md-3 mb-3">
+                <div class="card text-center p-3 h-100 d-flex flex-column">
                     <h6 class="text-warning">Total Points</h6>
                     <h5 class="fw-bold">{{total_points}}</h5>
-                    <p class="text-muted">Points earned from training</p>
+                    <p class="text-muted mt-auto">Points earned from training</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card text-center p-3">
-                    <h6 class="text-primary">Time Spent</h6>
-                    <h5 class="fw-bold">2.5 hrs</h5>
-                    <p class="text-muted">Total training time</p>
+            <div class="col-md-3 mb-3">
+                <div class="card text-center p-3 h-100 d-flex flex-column">
+                    <h6 class="text-primary">Achievements</h6>
+                    <h5 class="fw-bold">{{achievement_count}}</h5>
+                    <p class="text-muted mt-auto">Total training achievements</p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card text-center p-3">
+            <div class="col-md-3 mb-3">
+                <div class="card text-center p-3 h-100 d-flex flex-column">
                     <h6 class="text-success">Accuracy</h6>
                     <h5 class="fw-bold">{{accuracy}}%</h5>
-                    <p class="text-muted">Average quiz score</p>
+                    <p class="text-muted mt-auto">Average quiz score</p>
                 </div>
             </div>
         </div>
+        
     </div>
 
     <!--Bootstrap's list groups inside a card-->
-
+<!-- 
     <div class="container-fluid p-4">
         <h4>Recent Activity</h4>
         <div class="card p-3">
@@ -94,14 +95,14 @@
             </ul>
         </div>
     </div>
+-->
 
 
     <!--cards in grid layout, row-cols-2 so that 2 cards can fit in a row side by side-->
 
-    <div class="container-fluid p-4">
+    <!--<div class="container-fluid p-4">
         <h4>Certificates</h4>
-        <div class="row row-cols-1 row-cols-md-2 g-3">
-            <!-- Certificate 1 -->
+        <div class="row row-cols-1 row-cols-md-2 g-3"> 
             <div class="col">
                 <div class="card text-black bg-certs p-3">
                     <h5 class="fw-bold">Basic Life Support</h5>
@@ -115,7 +116,6 @@
                 </div>
             </div>
 
-            <!-- Certificate 2 -->
             <div class="col">
                 <div class="card text-black bg-certs p-3">
                     <h5 class="fw-bold">CPR Fundamentals</h5>
@@ -130,7 +130,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
-{% endblock %}
+{% endblock %}-->
