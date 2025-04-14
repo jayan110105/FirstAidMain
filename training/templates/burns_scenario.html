@@ -44,11 +44,12 @@
         </div>
     </div>
         <!-- Continue Button -->
-        <div class="text-end mt-4">
-            <a href="" class="btn btn-danger">
-                Continue <i class="fa-solid fa-arrow-right-long ms-1"></i>
-            </a>
-        </div>
+    <div class="text-end mt-4">
+        <a href="" class="btn btn-danger">
+            Restart <i class="fa-solid fa-rotate-right ms-1"></i>
+        </a>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
          $(document).ready(function(){
@@ -61,17 +62,25 @@
             $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
         }
 
-        let scenarioStartTime;
+        let scenarioTimeLeft = 60;  // set the countdown duration in seconds
         let scenarioInterval;
 
         function startScenarioTimer() {
-            scenarioStartTime = Date.now();
+            updateScenarioTimerDisplay();
             scenarioInterval = setInterval(() => {
-                const elapsedSeconds = Math.floor((Date.now() - scenarioStartTime) / 1000);
-                const minutes = Math.floor(elapsedSeconds / 60);
-                const seconds = elapsedSeconds % 60;
-                $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+                scenarioTimeLeft--;
+                updateScenarioTimerDisplay();
+                if (scenarioTimeLeft <= 0) {
+                    clearInterval(scenarioInterval);
+                    selectOption("timeout");
+                }
             }, 1000);
+        }
+
+        function updateScenarioTimerDisplay() {
+            const minutes = Math.floor(scenarioTimeLeft / 60);
+            const seconds = scenarioTimeLeft % 60;
+            $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
         }
 
         $(document).ready(function() {
@@ -174,6 +183,12 @@
                     });
                     $('#dialogue-text').html('<strong>Vin:</strong> "Phew! That feels better. Next time, we cook less dramatically."');
                     updateOptions('Crisis averted.', []);
+                    break;
+                case 'timeout':
+                    setProgress(100);
+                    $('.scenario-bg').css('background-image', "url('" + "{% static 'images/burns_5.png' %}" + "')");
+                    $('#dialogue-text').html('<strong>Narrator:</strong> "⏱️ Time’s up! You took too long to act. Help arrived too late."</strong>');
+                    updateOptions('⚠️ You failed to act in time.', []);
                     break;
                 default:
                     $('.scenario-bg').css({

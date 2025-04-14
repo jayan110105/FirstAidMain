@@ -59,7 +59,7 @@
     <!-- Continue Button -->
     <div class="text-end mt-4">
         <a href="" class="btn btn-danger">
-            Continue <i class="fa-solid fa-arrow-right-long ms-1"></i>
+            Restart <i class="fa-solid fa-rotate-right ms-1"></i>
         </a>
     </div>
 
@@ -78,17 +78,25 @@
             $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
         }
 
-        let scenarioStartTime;
+        let scenarioTimeLeft = 120;  // set the countdown duration in seconds
         let scenarioInterval;
 
         function startScenarioTimer() {
-            scenarioStartTime = Date.now();
+            updateScenarioTimerDisplay();
             scenarioInterval = setInterval(() => {
-                const elapsedSeconds = Math.floor((Date.now() - scenarioStartTime) / 1000);
-                const minutes = Math.floor(elapsedSeconds / 60);
-                const seconds = elapsedSeconds % 60;
-                $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+                scenarioTimeLeft--;
+                updateScenarioTimerDisplay();
+                if (scenarioTimeLeft <= 0) {
+                    clearInterval(scenarioInterval);
+                    selectOption("timeout");
+                }
             }, 1000);
+        }
+
+        function updateScenarioTimerDisplay() {
+            const minutes = Math.floor(scenarioTimeLeft / 60);
+            const seconds = scenarioTimeLeft % 60;
+            $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
         }
 
         $(document).ready(function() {
@@ -367,10 +375,16 @@
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Total Success!"');
                 $('#option-heading').text(" The rescue and recovery team stationed hears your call and comes to help you two. Kaladin luckily has only a minor sprain and by wrapping it you ensured that he will heal quickly");
                 $('#options-container .d-inline-flex').html('');
+            } else if(choice == 'timeout'){
+                setProgress(100);
+                $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_3 - Copy.png' %}" + "')");
+                $('#dialogue-text').html('<strong>Narrator:</strong> "⏱️ Time’s up! You took too long to act. Help arrived too late."</strong>');
+                $('#option-heading').text("⚠️ You failed to act in time.");
+                $('#options-container .d-inline-flex').html('');
             } else if (choice === 'call') {
                 setProgress(60);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/hiking_7.png' %}" + "')");
-                $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8."');
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8 or 1-1-2."');
                 $('#option-heading').text("Dial Emergency Number");
 
                 $('#options-container .d-inline-flex').html(`

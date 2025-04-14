@@ -39,7 +39,7 @@
                     <img src="{% static 'images/avatar_restraunt.png' %}" alt="Shallan avatar"
                         class="rounded-2 me-3" style="width: 48px; height: 48px;">
                     <div class="bg-light border rounded p-3 shadow-sm w-100">
-                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> "You and Shallan are seated at a cozy café. The waiter hands you the specials."</p>
+                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> "You and Shallan are seated at a cozy café. She's craving steak tonight."</p>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                     <p class="fw-semibold" id="option-heading">What would you like to order?</p>
                     <div class="d-inline-flex flex-column">
                         <button class="btn btn-light text-start mb-2" onclick="selectOption('steak')">
-                            🥩 Steak with rosemary
+                            🥩 Order Steak with rosemary
                         </button>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
     <!-- Continue Button -->
     <div class="text-end mt-4">
         <a href="" class="btn btn-danger">
-            Continue <i class="fa-solid fa-arrow-right-long ms-1"></i>
+            Restart <i class="fa-solid fa-rotate-right ms-1"></i>
         </a>
     </div>
 
@@ -73,10 +73,12 @@
         let heimlichTimeLeft;
         let heimlichAttempt = 0;
         
-        let dialCode = [1, 0, 8];
-        let dialIndex = 0;
+        let dialCode1 = [1, 0, 8];
+        let dialCode2 = [1, 1, 2];
+        let dialIndex1 = 0;
+        let dialIndex2 = 0;
         let dialTimer;
-        let dialTimeLeft = 5;
+        let dialTimeLeft = 10;
 
         let scenarioStartTime;
         let scenarioInterval;
@@ -100,7 +102,9 @@
         });
 
         function startDialGame() {
-            dialIndex = 0;
+            // Reset both indices
+            dialIndex1 = 0;
+            dialIndex2 = 0;
             dialTimeLeft = 5;
             $('#dial-sequence').text('');
             updateDialTimer();
@@ -120,18 +124,32 @@
         }
 
         function pressDial(num) {
-            if (num === dialCode[dialIndex]) {
-                dialIndex++;
-                $('#dial-sequence').append(num);
+            $('#dial-sequence').append(num);
 
-                if (dialIndex === dialCode.length) {
-                    clearInterval(dialTimer);
-                    ambulanceResult('success');
-                }
+            // Check for code 1
+            if (dialIndex1 !== -1 && num === dialCode1[dialIndex1]) {
+                dialIndex1++;
             } else {
+                dialIndex1 = -1;
+            }
+
+            // Check for code 2
+            if (dialIndex2 !== -1 && num === dialCode2[dialIndex2]) {
+                dialIndex2++;
+            } else {
+                dialIndex2 = -1;
+            }
+
+            // If either code has been fully entered:
+            if (dialIndex1 === dialCode1.length || dialIndex2 === dialCode2.length) {
+                clearInterval(dialTimer);
+                ambulanceResult('success');
+            }
+
+            // If both dial attempts are marked invalid, it's a failure:
+            if (dialIndex1 === -1 && dialIndex2 === -1) {
                 clearInterval(dialTimer);
                 ambulanceResult('fail');
-                // selectOption('fail');
             }
         }
 
@@ -139,7 +157,7 @@
             if (status === 'success') {
                 setProgress(80);
                 interventionResult = 'success';
-                $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully dialed 108. Help is on the way!"');
+                $('#dialogue-text').html('<strong>Narrator:</strong> "You successfully dialed the emergency number. Help is on the way!"');
                 $('#option-heading').text("✅ Ambulance dispatched immediately");
                 $('#options-container .d-inline-flex').html( `<button class="btn btn-success mt-2" onclick="selectOption('partial')">Finish</button>
                 `);
@@ -372,7 +390,7 @@
             } else if (choice === 'ambulance') {
                 setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_7.png' %}" + "')");
-                $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8."');
+                $('#dialogue-text').html('<strong>Narrator:</strong> "Quick, call emergency services! Dial 1-0-8 or 1-1-2."');
                 $('#option-heading').text("Dial Emergency Number");
 
                 $('#options-container .d-inline-flex').html(`
