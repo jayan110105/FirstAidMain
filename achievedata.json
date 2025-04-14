@@ -1,0 +1,34 @@
+[
+  {
+    "model": "training.achievement",
+    "fields": {
+      "title": "First Steps",
+      "description": "Complete your first training module",
+      "icon": "🎯"
+    }
+  },
+  {
+    "model": "training.achievement",
+    "fields": {
+      "title": "Life Saver",
+      "description": "Complete all basic life support modules",
+      "icon": "❤️"
+    }
+  },
+  {
+    "model": "training.achievement",
+    "fields": {
+      "title": "Quick Thinker",
+      "description": "Complete a scenario in under 2 minutes",
+      "icon": "⚡"
+    }
+  },
+  {
+    "model": "training.achievement",
+    "fields": {
+      "title": "Expert Medic",
+      "description": "Reach 1000 points",
+      "icon": "📄"
+    }
+  }
+]
