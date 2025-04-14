@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Module, UserModuleProgress,Achievement,UserAchievement,Scenario,UserScenarioProgress
 from .forms import QuizScoreForm, ScenarioScoreForm
 from django.db import models
-from django.db.models import Sum, Count
+from django.db.models import F, Sum, Count, Value, ExpressionWrapper
 import logging
 import time
 
@@ -20,7 +20,10 @@ def achievements(request):
     # Load all achievements and user's current achievements
     print(">> Achievements view loaded")
     user_progress = UserModuleProgress.objects.filter(user=request.user)
-    total_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    module_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    scenario_points = UserScenarioProgress.objects.filter(user=request.user).aggregate(total=models.Sum('score'))['total'] or 0
+    total_points = module_points + scenario_points
+
     completed_modules = user_progress.filter(completed=True)
     completed_modules_count = user_progress.filter(completed=True).count()
     completed_scenarios_count = UserScenarioProgress.objects.filter(user=request.user, completed=True).count()
@@ -101,7 +104,12 @@ def leaderboard(request):
     # Get all users and annotate their total score and completed modules
     users_with_scores = (
         User.objects.annotate(
-            total_points=Sum('module_progress__score'),
+            module_points=Sum('module_progress__score', default=0),
+            scenario_points=Sum('scenario_progress__score', default=0),
+            total_points=ExpressionWrapper(
+                F('module_points') + F('scenario_points'),
+                output_field=models.IntegerField()
+            ),
             completed_modules=Count('module_progress', filter=models.Q(module_progress__completed=True))
         )
         .order_by('-total_points')
@@ -159,7 +167,9 @@ def profile(request):
     # Get all module progress for current user
     user_progress = UserModuleProgress.objects.filter(user=request.user)
     # Calculate total points (sum of all scores)
-    total_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    module_points = user_progress.aggregate(total=models.Sum('score'))['total'] or 0
+    scenario_points = UserScenarioProgress.objects.filter(user=request.user).aggregate(total=models.Sum('score'))['total'] or 0
+    total_points = module_points + scenario_points
     # Count completed modules
     completed_modules = user_progress.filter(completed=True)
     completed_modules_count = user_progress.filter(completed=True).count()
