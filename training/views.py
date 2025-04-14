@@ -234,9 +234,16 @@ def burns_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             
             # Only update score if new score is higher
             if new_score > progress.score:
@@ -281,9 +288,16 @@ def wounds_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             
             # Only update score if new score is higher
             if new_score > progress.score:
@@ -329,10 +343,16 @@ def fractures_and_sprains_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
-            
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             # Only update score if new score is higher
             if new_score > progress.score:
                 progress.score = new_score
@@ -377,9 +397,16 @@ def cardiac_emergencies_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             
             # Only update score if new score is higher
             if new_score > progress.score:
@@ -425,10 +452,16 @@ def choking_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
-            
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             # Only update score if new score is higher
             if new_score > progress.score:
                 progress.score = new_score
@@ -473,10 +506,16 @@ def heat_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
-            
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             # Only update score if new score is higher
             if new_score > progress.score:
                 progress.score = new_score
@@ -521,9 +560,16 @@ def cold_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             
             # Only update score if new score is higher
             if new_score > progress.score:
@@ -570,9 +616,16 @@ def poison_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             
             # Only update score if new score is higher
             if new_score > progress.score:
@@ -618,9 +671,16 @@ def venom_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
+       
             
             # Only update score if new score is higher
             if new_score > progress.score:
@@ -669,9 +729,15 @@ def allergy_quiz(request):
         form = QuizScoreForm(request.POST)
         if form.is_valid():
             new_score = form.cleaned_data['score']
+            new_time_spent = form.cleaned_data['time_spent']
             
             # Update attempts counter
             progress.attempts += 1
+
+            if new_time_spent is not None and (progress.time_spent is None or new_time_spent < progress.time_spent):
+                progress.time_spent = new_time_spent
+                progress.save()
+    
             
             # Only update score if new score is higher
             if new_score > progress.score:
