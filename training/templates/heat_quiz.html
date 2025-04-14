@@ -250,16 +250,16 @@
       let badge = "Starter Badge Earned!";
       $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-primary-subtle text-dark p-2 px-3');
       
-      if (score >= 60) {
-        message = "Great job! You know your heat treatment well!";
-        badge = "Silver Badge Earned!";
-        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
-      } else if (score >= 80) {
+      if (score >= 80) {
         message = "Outstanding! You're a heat first aid expert!";
         badge = "Gold Badge Earned!";
         $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-warning-subtle text-dark p-2 px-3');
       }
-      else{
+      else if (score >= 60) {
+        message = "Great job! You know your heat treatment well!";
+        badge = "Silver Badge Earned!";
+        $('#badgeLabel').removeClass().addClass('badge rounded-pill bg-secondary-subtle text-dark p-2 px-3');
+      } else {
         message = "You have not passed. Kindly retake the test!";
       }
       
