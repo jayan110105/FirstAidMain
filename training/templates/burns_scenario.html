@@ -19,7 +19,7 @@
         <span>Start</span><span>Progress</span><span>Complete</span>
     </div>
     <div class="progress" style="height: 8px;">
-        <div class="progress-bar bg-danger" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 10%;" id="progress-bar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <div class="card mt-4 shadow-sm" style="min-height: 65vh;">
@@ -57,6 +57,10 @@
             });
         })
 
+        function setProgress(percent) {
+            $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
+        }
+
         let scenarioStartTime;
         let scenarioInterval;
 
@@ -77,6 +81,7 @@
         function selectOption(choice) {
             switch (choice) {
                 case 'towel':
+                    setProgress(25);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_2.png' %}')"
                     });
@@ -88,6 +93,7 @@
                     ]);
                     break;
                 case 'water':
+                    setProgress(30);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_2.png' %}')"
                     });
@@ -99,6 +105,7 @@
                     ]);
                     break;
                 case 'third_degree':
+                    setProgress(50);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_2.png' %}')"
                     });
@@ -109,7 +116,8 @@
                         { text: '💧Try to her some water to drink', id: 'td_fail' }
                     ]);
                     break;
-                    case 'td_fail':
+                case 'td_fail':
+                    setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_5.png' %}')"
                     });
@@ -117,6 +125,7 @@
                     updateOptions('❌You failed', []);
                     break;
                 case 'flour':
+                    setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_5.png' %}')"
                     });
@@ -124,6 +133,7 @@
                     updateOptions('🔥 Explosion', []);
                     break;
                 case 'cover-lid':
+                    setProgress(50);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_3.png' %}')"
                     });
@@ -134,6 +144,7 @@
                     ]);
                     break;
                 case 'call-help':
+                    setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_4.png' %}')"
                     });
@@ -141,6 +152,7 @@
                     updateOptions('✅ You did your best, but learn how to put out various types of fires.', []);
                     break;
                 case 'call-help_t':
+                    setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_5.png' %}')"
                     });
@@ -148,6 +160,7 @@
                     updateOptions(' You did your okay, but learn how to put out various types of fires.', []);
                     break;
                 case 'call-safe':
+                    setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_3.png' %}')"
                     });
@@ -155,6 +168,7 @@
                     updateOptions('You are glad she\'s okay even though it is better safe than sorry', []);
                     break;
                 case 'treat-minor':
+                    setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_3.png' %}')"
                     });
