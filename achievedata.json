@@ -19,7 +19,7 @@
     "model": "training.achievement",
     "fields": {
       "title": "Quick Thinker",
-      "description": "Complete a scenario in under 2 minutes",
+      "description": "Complete a scenario in under 30 minutes",
       "icon": "⚡"
     }
   },
