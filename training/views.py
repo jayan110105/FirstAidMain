@@ -763,7 +763,7 @@ def RestrauntScenario(request):
                                              ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
             else:
                 progress.save()  # Only update attempts
-                messages.info(request, "Your first score has been updated")
+                messages.info(request, "Your score has been updated")
                 
             if request.POST.get("action") == "back":
                 return redirect('scenarios')
@@ -809,7 +809,7 @@ def HikingScenario(request):
                                              ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
             else:
                 progress.save()  # Only update attempts
-                messages.info(request, "Your first score has been updated")
+                messages.info(request, "Your score has been updated")
                 
             if request.POST.get("action") == "back":
                 return redirect('scenarios')
@@ -859,7 +859,7 @@ def BurnsScenario(request):
                 if progress.attempts>1:
                     messages.info(request, "Your previous score was higher.")
                 else:
-                    messages.info(request, "Your first score has been updated")
+                    messages.info(request, "Your score has been updated")
             if request.POST.get("action") == "back":
                 return redirect('scenarios')
             else:
