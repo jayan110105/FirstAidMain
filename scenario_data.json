@@ -1,0 +1,24 @@
+[
+    {
+      "model": "training.scenario",
+      "fields": {
+        "title": "Hiking Scenario",
+        "slug": "hiking_scenario"
+      }
+    },
+    {
+      "model": "training.scenario",
+      "fields": {
+        "title": "Restaurant Scenario",
+        "slug": "restaurant_scenario"
+      }
+    },
+    {
+      "model": "training.scenario",
+      "fields": {
+        "title": "Cooking in the Kitchen Scenario",
+        "slug": "burns_scenario"
+      }
+    }
+  ]
+  

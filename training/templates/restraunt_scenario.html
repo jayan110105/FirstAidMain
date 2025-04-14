@@ -10,6 +10,30 @@
         <i class="fa fa-arrow-left me-2"></i>
         Back to Scenarios
     </a>
+            <!-- Display Django messages if any -->
+            {% if messages %}
+            <div class="mb-4">
+              {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+      
+          <!-- Display previous attempt details -->
+          {% if current_score > 0 %}
+          <div class="alert alert-info mb-4">
+              <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-circle-info me-2"></i>
+                  <div>
+                      <strong>Previous Attempt: </strong> Your highest score is {{ current_score }} points.
+                      {% if completed %}
+                        <span class="badge bg-success ms-2">Completed</span>
+                      {% endif %}
+                      <div class="small text-muted">Total attempts: {{ attempts }}</div>
+                  </div>
+              </div>
+          </div>
+          {% endif %}
 
     <!-- Title Bar -->
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -50,6 +74,33 @@
                         <button class="btn btn-light text-start mb-2" onclick="selectOption('steak')">
                             🥩 Order Steak with rosemary
                         </button>
+                    </div>
+                </div>
+                <form method="post" id="scoreForm">
+                    {% csrf_token %}
+                    {{ form.scenario_slug }}
+                    <input type="hidden" name="score" id="scoreInput" value="0">
+                    <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
+                    <div class="d-flex justify-content-center gap-3">
+                        <!-- On last page, no option buttons, only "Show Score" button -->
+                        <button type="submit" name="action" value="retry" class="btn btn-danger d-none" id="retryBtn">View Score</button>
+                    </div>
+                </form>
+            </div>
+            <div id="resultCard" class="d-none card mt-5">
+                <div class="result-card p-4">
+                    <div class="bg-white bg-opacity-50 p-4 rounded shadow-sm">
+                    <div class="bg-white bg-opacity-55 p-3 rounded shadow-sm">
+                    <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Scenario Results</h1>
+                    <div class="my-4">
+                        <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
+                        <p id="scoreMessage" class="text-dark">
+                            You're on your way to mastering being a first aider. Keep practicing!
+                        </p>
+                        <p id="timeMessage" class="small text-muted"></p>
+                        <p id="attemptsMessage" class="small text-muted"></p>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -223,6 +274,8 @@
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success"');
                 $('#option-heading').text("Airway is cleared, but Shallan needs medical help. You did well, but you should call an ambulance.");
                 $('#options-container .d-inline-flex').html('');
+                $('#scoreInput').val(40);
+                updateOptions("Final Results", [], true);
             } 
         }
 
@@ -324,6 +377,45 @@
             }
         }
 
+        function submitScore() {
+    console.log("submitScore triggered");
+    // Calculate elapsed time in seconds since scenarioStartTime was set
+    const elapsedSeconds = Math.floor((Date.now() - scenarioStartTime) / 1000);
+    console.log("Elapsed seconds:", elapsedSeconds);
+    
+    // Set the hidden field with the computed value
+    $('#timeSpentInput').val(elapsedSeconds);
+    
+    // Read final score from hidden input
+    const finalScore = parseInt($('#scoreInput').val(), 10);
+    console.log("Final score:", finalScore);
+    
+    // Create a message based on score thresholds
+    let message = "";
+    if(finalScore >= 85) {
+        message = "Outstanding! You handled the situation like a pro!";
+    } else if(finalScore >= 60) {
+        message = "Great job! There's some room for improvement.";
+    } else {
+        message = "You need more practice. Review your techniques!";
+    }
+    
+    // Update the result card with score, message, and time taken
+    $('#finalScore').text("You scored: " + finalScore + " points!");
+    $('#scoreMessage').text(message);
+    $('#timeMessage').text("Time taken: " + elapsedSeconds + " seconds.");
+    
+    // Optionally display the result card
+    $('#resultCard').removeClass('d-none');
+    $('#resultCard').css({
+        'background-color': 'transparent',
+        'box-shadow': 'none'
+    });
+    
+    // Submit the form so the POST request is made
+    $('#scoreForm').submit();
+}
+
         function selectOption(choice) {
             console.log("Selected option:", choice);
             if (choice === 'steak') {
@@ -400,6 +492,8 @@
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Total Success!"');
                 $('#option-heading').text(" Shallan is stable. She praises your response");
                 $('#options-container .d-inline-flex').html('');
+                $('#scoreInput').val(100);
+                updateOptions("Final Results", [], true);
             } else if (choice === 'ambulance') {
                 setProgress(80);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_7.png' %}" + "')");
@@ -419,11 +513,14 @@
                 startDialGame();
             } else if(choice == 'partial'){
                 //fail
+                console.log("Calling Inside Partial...");
                 setProgress(100);
                 $('.scenario-bg').css('background-image', "url('" + "{% static 'images/restaurant_1.png' %}" + "')");
                 $('#dialogue-text').html('<strong>Narrator:</strong> "Partial Success"');
                 $('#option-heading').text("You did well, but Shallan needs medical help.");
                 $('#options-container .d-inline-flex').html('');
+                $('#scoreInput').val(40);
+                updateOptions("Final Results", [], true);
 
             } else if(choice == 'timeout'){
                 setProgress(100);
@@ -438,15 +535,27 @@
                 $('#dialogue-text').html('<strong>Narrator:</strong> "You Failed"');
                 $('#option-heading').text("You hesitated, took wrong steps, or didn’t act fast enough. Shallan is unconscious when help arrives — it’s too late.");
                 $('#options-container .d-inline-flex').html('');
+                $('#scoreInput').val(0);
+                updateOptions("Final Results", [], true);
             }
         }
 
-        function updateOptions(heading, options) {
+        function updateOptions(heading, options, showScore = false) {
+            console.log("Calling updateOptions...");
             $('#option-heading').text(heading);
             let buttons = '';
-            options.forEach(opt => {
-                buttons += `<button class="btn btn-light text-start mb-2" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
-            });
+            if(options.length > 0) {
+                options.forEach(opt => {
+                    buttons += `<button class="btn btn-light text-start mb-2" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+                });
+                // If you want the score button in addition to the options, append it.
+                if(showScore) {
+                    buttons += `<button class="btn btn-primary mt-2" onclick="submitScore()">Show Score</button>`;
+                }
+            } else {
+                // If no options are provided, display only the score button.
+                buttons = `<button class="btn btn-primary" onclick="submitScore()">Show Score</button>`;
+            }
             $('#options-container .d-inline-flex').html(buttons);
         }
     </script>

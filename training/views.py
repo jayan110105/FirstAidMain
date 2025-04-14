@@ -3,11 +3,12 @@ from django.contrib.auth import login as auth_login, authenticate, logout as aut
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Module, UserModuleProgress,Achievement,UserAchievement
-from .forms import QuizScoreForm
+from .models import Module, UserModuleProgress,Achievement,UserAchievement,Scenario,UserScenarioProgress
+from .forms import QuizScoreForm, ScenarioScoreForm
 from django.db import models
 from django.db.models import Sum, Count
 import logging
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -713,10 +714,144 @@ def logout(request):
     return redirect('login')
 
 def RestrauntScenario(request):
-    return render(request, 'restraunt_scenario.html')
+    scenario = get_object_or_404(Scenario, slug='restaurant_scenario')
+    progress, created = UserScenarioProgress.objects.get_or_create(
+        user=request.user, 
+        scenario=scenario
+    )
+    
+    if request.method == 'POST':
+        form = ScenarioScoreForm(request.POST)
+        if form.is_valid():
+            new_score = form.cleaned_data['score']
+            # Get time_spent from POST, default to 0 if None or empty
+            new_time_spent = form.cleaned_data.get('time_spent') or 0
+            
+            # Update attempts counter once per submission
+            progress.attempts += 1
+            
+            # Only update score if new score is higher
+            if new_score > progress.score:
+                progress.score = new_score
+                # Example passing score is 33
+                progress.completed = progress.score >= 33
+                progress.time_spent = new_time_spent
+                progress.save()
+                messages.success(request, f"Your score of {new_score} has been updated! " +
+                                             ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
+            else:
+                progress.save()  # Only update attempts
+                messages.info(request, "Your first score has been updated")
+                
+            if request.POST.get("action") == "back":
+                return redirect('scenarios')
+            else:
+                return redirect('RestrauntScenario')
+    else:
+        form = ScenarioScoreForm(scenario_slug=scenario.slug)
+    
+    context = {
+        'scenario': scenario,
+        'current_score': progress.score,
+        'completed': progress.completed,
+        'attempts': progress.attempts,
+        'form': form
+    }
+    return render(request, 'restraunt_scenario.html', context)
 
 def HikingScenario(request):
-    return render(request, 'hiking_scenario.html')
+    scenario = get_object_or_404(Scenario, slug='hiking_scenario')
+    progress, created = UserScenarioProgress.objects.get_or_create(
+        user=request.user, 
+        scenario=scenario
+    )
+    
+    if request.method == 'POST':
+        form = ScenarioScoreForm(request.POST)
+        if form.is_valid():
+            new_score = form.cleaned_data['score']
+            # Get time_spent from POST, default to 0 if None or empty
+            new_time_spent = form.cleaned_data.get('time_spent') or 0
+            
+            # Update attempts counter once per submission
+            progress.attempts += 1
+            
+            # Only update score if new score is higher
+            if new_score > progress.score:
+                progress.score = new_score
+                # Example passing score is 33
+                progress.completed = progress.score >= 33
+                progress.time_spent = new_time_spent
+                progress.save()
+                messages.success(request, f"Your score of {new_score} has been updated! " +
+                                             ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
+            else:
+                progress.save()  # Only update attempts
+                messages.info(request, "Your first score has been updated")
+                
+            if request.POST.get("action") == "back":
+                return redirect('scenarios')
+            else:
+                return redirect('HikingScenario')
+    else:
+        form = ScenarioScoreForm(scenario_slug=scenario.slug)
+    
+    context = {
+        'scenario': scenario,
+        'current_score': progress.score,
+        'completed': progress.completed,
+        'attempts': progress.attempts,
+        'form': form
+    }
+    return render(request, 'hiking_scenario.html', context)
 
+@login_required
 def BurnsScenario(request):
-    return render(request, 'burns_scenario.html')
+    scenario = get_object_or_404(Scenario, slug='burns_scenario')
+    progress, created = UserScenarioProgress.objects.get_or_create(
+        user=request.user, 
+        scenario=scenario
+    )
+    
+    if request.method == 'POST':
+        form = ScenarioScoreForm(request.POST)
+        if form.is_valid():
+            new_score = form.cleaned_data['score']
+            # Get time_spent from POST, default to 0 if None or empty
+            new_time_spent = form.cleaned_data.get('time_spent') or 0
+            
+            # Update attempts counter once per submission
+            progress.attempts += 1
+            
+            # Only update score if new score is higher
+            if new_score > progress.score:
+                progress.score = new_score
+                # Example passing score is 33
+                progress.completed = progress.score >= 33
+                progress.time_spent = new_time_spent
+                progress.save()
+                messages.success(request, f"Your score of {new_score} has been updated! " +
+                                             ("You successfully completed the scenario!" if progress.completed else "Try again to improve your performance."))
+            else:
+                progress.save()  # Only update attempts
+                if progress.attempts>1:
+                    messages.info(request, "Your previous score was higher.")
+                else:
+                    messages.info(request, "Your first score has been updated")
+            if request.POST.get("action") == "back":
+                return redirect('scenarios')
+            else:
+                return redirect('BurnsScenario')
+    else:
+        form = ScenarioScoreForm(scenario_slug=scenario.slug)
+    
+    context = {
+        'scenario': scenario,
+        'current_score': progress.score,
+        'completed': progress.completed,
+        'attempts': progress.attempts,
+        'form': form
+    }
+
+    return render(request, 'burns_scenario.html', context)
+

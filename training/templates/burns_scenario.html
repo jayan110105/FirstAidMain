@@ -8,11 +8,36 @@
         <i class="fa fa-arrow-left me-2"></i> Back to Scenarios
     </a>
 
+    <!-- Display Django messages if any -->
+    {% if messages %}
+      <div class="mb-4">
+        {% for message in messages %}
+          <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Display previous attempt details -->
+    {% if current_score > 0 %}
+    <div class="alert alert-info mb-4">
+        <div class="d-flex align-items-center">
+            <i class="fa-solid fa-circle-info me-2"></i>
+            <div>
+                <strong>Previous Attempt: </strong> Your highest score is {{ current_score }} points.
+                {% if completed %}
+                  <span class="badge bg-success ms-2">Completed</span>
+                {% endif %}
+                <div class="small text-muted">Total attempts: {{ attempts }}</div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4 fw-bold mb-0">Burns Emergency Scenario</h1>
         <div class="text-muted small d-flex align-items-center">
             <i class="fa-regular fa-clock me-1"></i> <span id="scenario-timer">Time: 0:00</span>
-        </div>        
+        </div>
     </div>
 
     <div class="mb-2 d-flex justify-content-between small text-muted fw-semibold">
@@ -25,10 +50,12 @@
     <div class="card mt-4 shadow-sm" style="min-height: 65vh;">
         <div class="card-body text-dark scenario-bg d-flex flex-column justify-content-end" id="scenario-body">
             <div class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
-                <div class="d-flex align-items-start">
+                <div class="d-flex align-items-start" id="narrator-container">
                     <img src="{% static 'images/avatar_burns.png' %}" alt="Vin avatar" class="rounded-2 me-3" style="width: 48px; height: 48px;">
                     <div class="bg-light border rounded p-3 shadow-sm w-100">
-                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> You and Vin are frying chicken when suddenly—flames rise from the pan!</p>
+                        <p class="mb-0" id="dialogue-text">
+                            <strong>Narrator:</strong> You and Vin are frying chicken when suddenly—flames rise from the pan!
+                        </p>
                     </div>
                 </div>
 
@@ -40,10 +67,40 @@
                         <button class="btn btn-light text-start mb-2" onclick="selectOption('cover-lid')">🧯 Turn off heat & cover with lid</button>
                     </div>
                 </div>
+
+                <!-- Final Score Form: Hidden fields for score and time_spent -->
+                <form method="post" id="scoreForm">
+                    {% csrf_token %}
+                    {{ form.scenario_slug }}
+                    <input type="hidden" name="score" id="scoreInput" value="0">
+                    <input type="hidden" name="time_spent" id="timeSpentInput" value="0">
+                    <div class="d-flex justify-content-center gap-3">
+                        <!-- On last page, no option buttons, only "Show Score" button -->
+                        <button type="submit" name="action" value="retry" class="btn btn-danger d-none" id="retryBtn">View Score</button>
+                    </div>
+                </form>
+            </div>
+            <div id="resultCard" class="d-none card mt-5">
+                <div class="result-card p-4">
+                    <div class="bg-white bg-opacity-50 p-4 rounded shadow-sm">
+                        <div class="bg-white bg-opacity-55 p-4 rounded shadow-sm"></div>
+                    <h1 class="mb-3 fw-bold"><span class="me-2">🏆</span>Scenario Results</h1>
+                    <div class="my-4">
+                        <div class="h2 fw-bold" id="finalScore">You scored: 0 points!</div>
+                        <p id="scoreMessage" class="text-dark">
+                            You're on your way to mastering being a first aider. Keep practicing!
+                        </p>
+                        <p id="timeMessage" class="small text-muted"></p>
+                        <p id="attemptsMessage" class="small text-muted"></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-        <!-- Continue Button -->
+
+    <!-- Restart Button -->
     <div class="text-end mt-4">
         <a href="" class="btn btn-danger">
             Restart <i class="fa-solid fa-rotate-right ms-1"></i>
@@ -52,13 +109,15 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+         // Initialize background image and scenario timer
          $(document).ready(function(){
             $('.scenario-bg').css({
                 'background-image': "url('{% static 'Images/burns_1.png' %}')"
             });
-        })
+            startScenarioTimer();
+         });
 
-        function setProgress(percent) {
+         function setProgress(percent) {
             $('#progress-bar').css('width', percent + '%').attr('aria-valuenow', percent);
             
             if (percent >= 100 && scenarioInterval) {
@@ -67,10 +126,10 @@
             }
         }
 
-        let scenarioTimeLeft = 60;  // set the countdown duration in seconds
-        let scenarioInterval;
+         let scenarioTimeLeft = 60;  // 60-second countdown
+         let scenarioInterval;
 
-        function startScenarioTimer() {
+         function startScenarioTimer() {
             updateScenarioTimerDisplay();
             scenarioInterval = setInterval(() => {
                 scenarioTimeLeft--;
@@ -80,17 +139,64 @@
                     selectOption("timeout");
                 }
             }, 1000);
-        }
+         }
 
-        function updateScenarioTimerDisplay() {
+         function updateScenarioTimerDisplay() {
             const minutes = Math.floor(scenarioTimeLeft / 60);
             const seconds = scenarioTimeLeft % 60;
             $('#scenario-timer').text(`Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+         }
+
+         // Modify updateOptions: If options array is empty, show the final "Show Score" button.
+         function updateOptions(heading, options) {
+            $('#option-heading').text(heading);
+            let buttons = '';
+            if(options.length === 0){
+                buttons = `<button class="btn btn-primary" onclick="submitScore()">Show Score</button>`;
+            } else {
+                options.forEach(opt => {
+                    buttons += `<button class="btn btn-light text-start mb-2" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+                });
+            }
+            $('#options-container .d-inline-flex').html(buttons);
+         }
+
+         function submitScore() {
+            // Compute time taken as (60 - scenarioTimeLeft)
+            const timeTaken = 60 - scenarioTimeLeft;
+            $('#timeSpentInput').val(timeTaken);
+            
+            // Read final score from hidden input
+            const finalScore = parseInt($('#scoreInput').val(), 10);
+
+            // Create a message based on score (adjust thresholds as desired)
+            let message = "";
+            if(finalScore >= 85) {
+                message = "Outstanding! You handled the situation like a pro!";
+            } else if(finalScore >= 60) {
+                message = "Great job! There's some room for improvement.";
+            } else {
+                message = "You need more practice. Review your techniques!";
+            }
+            
+            // Update the result card with score, message, time taken, and attempt count.
+            $('#finalScore').text("You scored: " + finalScore + " points!");
+            $('#scoreMessage').text(message);
+            $('#timeMessage').text("Time taken: " + timeTaken + " seconds.");
+            // If your template context provided attempts (e.g., via a JavaScript variable or data-attribute), update it accordingly.
+            // For example, assume you set a global variable 'attemptsCount' from the context:
+            
+            // Hide scenario interactive parts and show the result card
+            //$('#options-container').hide();
+            //$('#narrator-container').hide;
+            $('#resultCard').removeClass('d-none');
+            $('#resultCard').css({
+                'background-color': 'transparent',
+                'box-shadow': 'none'
+            });
+            $('#scoreForm').submit();
         }
 
-        $(document).ready(function() {
-            startScenarioTimer();
-        });
 
         let dialCode1 = [1, 0, 8];
         let dialCode2 = [1, 1, 2];
@@ -178,7 +284,7 @@
                     updateOptions('Now what?', [
                         { text: '📞 Call for help and evacuate', id: 'call-ambulance' },
                         { text: '💧 Pour water', id: 'third_degree' },
-                        { text: '🥣 Use flour', id: 'flour' },
+                        { text: '🥣 Use flour', id: 'flour' }
                     ]);
                     break;
                 case 'water':
@@ -198,11 +304,11 @@
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_2.png' %}')"
                     });
-                    $('#dialogue-text').html('<strong>Narrator:</strong> You did not make the ricght choices. Vin manages to put out the flames, but her skin becomes black and she does not feel pain');
+                    $('#dialogue-text').html('<strong>Narrator:</strong> You did not make the right choices. Vin manages to put out the flames, but her skin becomes black and she does not feel pain.');
                     updateOptions('She has a third degree burn', [
                         { text: '📞 Call for help and evacuate', id: 'call-ambulance_t' },
                         { text: '👚 Remove clothing stuck to the burn', id: 'td_fail' },
-                        { text: '💧Try to her some water to drink', id: 'td_fail' }
+                        { text: '💧Try to give her some water to drink', id: 'td_fail' }
                     ]);
                     break;
                 case 'td_fail':
@@ -210,8 +316,9 @@
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_5.png' %}')"
                     });
-                    $('#dialogue-text').html('<strong>Narrator:</strong> You did not call for help despite your friend having third degree burns, her body can\'t stand the strain');
-                    updateOptions('❌You failed', []);
+                    $('#dialogue-text').html('<strong>Narrator:</strong> You did not call for help despite Vin having third degree burns. Her body can\'t stand the strain.');
+                    updateOptions('❌ You failed', []);
+                    $('#scoreInput').val(10);
                     break;
                 case 'flour':
                     setProgress(100);
@@ -220,6 +327,7 @@
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> The fire explodes in a flash. You\'re engulfed. Game Over.');
                     updateOptions('🔥 Explosion', []);
+                    $('#scoreInput').val(0);
                     break;
                 case 'cover-lid':
                     setProgress(50);
@@ -275,22 +383,25 @@
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> Help arrives. Vin has second-degree burns. She\'ll be okay.');
                     updateOptions('✅ You did your best, but learn how to put out various types of fires.', []);
+                    $('#scoreInput').val(60);
                     break;
                 case 'call-help_t':
                     setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_5.png' %}')"
                     });
-                    $('#dialogue-text').html('<strong>Narrator:</strong> Help arrives. Vin has third-degree burns. And is rushed to the hospital. Her fate is undecided, but it could have been worse.');
-                    updateOptions(' You did your okay, but learn how to put out various types of fires.', []);
+                    $('#dialogue-text').html('<strong>Narrator:</strong> Help arrives. Vin has third-degree burns and is rushed to the hospital. Her fate is uncertain, but it could have been worse.');
+                    updateOptions('You did okay, but learn how to put out various types of fires.', []);
+                    $('#scoreInput').val(40);
                     break;
                 case 'call-safe':
                     setProgress(100);
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_3.png' %}')"
                     });
-                    $('#dialogue-text').html('<strong>EMT:</strong> Just a first-degree burn, there was no need to call an ambulance. No serious damage.');
-                    updateOptions('You are glad she\'s okay even though it is better safe than sorry', []);
+                    $('#dialogue-text').html('<strong>EMT:</strong> Just a first-degree burn, no need for an ambulance. No serious damage.');
+                    updateOptions('You are glad Vin is okay, though it\'s better to be safe.', []);
+                    $('#scoreInput').val(85);
                     break;
                 case 'treat-minor':
                     setProgress(100);
@@ -299,29 +410,22 @@
                     });
                     $('#dialogue-text').html('<strong>Vin:</strong> "Phew! That feels better. Next time, we cook less dramatically."');
                     updateOptions('Crisis averted.', []);
+                    $('#scoreInput').val(100);
                     break;
                 case 'timeout':
                     setProgress(100);
-                    $('.scenario-bg').css('background-image', "url('" + "{% static 'images/burns_5.png' %}" + "')");
-                    $('#dialogue-text').html('<strong>Narrator:</strong> "⏱️ Time’s up! You took too long to act. Help arrived too late."</strong>');
+                    $('.scenario-bg').css('background-image', "url('{% static 'Images/burns_5.png' %}')");
+                    $('#dialogue-text').html('<strong>Narrator:</strong> "⏱️ Time’s up! You took too long to act. Help arrived too late."');
                     updateOptions('⚠️ You failed to act in time.', []);
+                    $('#scoreInput').val(0);
                     break;
                 default:
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_6.png' %}')"
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> The outcome is uncertain.');
-            }
-        }
-
-        function updateOptions(heading, options) {
-            $('#option-heading').text(heading);
-            let buttons = '';
-            options.forEach(opt => {
-                buttons += `<button class="btn btn-light text-start mb-2" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
-            });
-            $('#options-container .d-inline-flex').html(buttons);
-        }
+             }
+         }
     </script>
 </div>
 {% endblock %}

@@ -10,6 +10,14 @@ class Module(models.Model):
     
     def __str__(self):
         return self.title
+    
+class Scenario(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    #Passing score and maximum marks are by default 33 and 100 so aren't stored as a separate field
+    
+    def __str__(self):
+        return self.title
 
 
 class UserModuleProgress(models.Model):
@@ -27,6 +35,22 @@ class UserModuleProgress(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.module.title} ({self.score})"
+    
+class UserScenarioProgress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='scenario_progress')
+    scenario = models.ForeignKey(Scenario, on_delete=models.CASCADE)
+    score = models.PositiveIntegerField(default=0)
+    completed = models.BooleanField(default=False)
+    attempts = models.PositiveIntegerField(default=0)
+    last_attempt = models.DateTimeField(auto_now=True)
+    #time_spent = models.DurationField(default=timedelta()) 
+    time_spent = models.IntegerField(default=0)  # Needed for "Quick Thinker" achievement
+
+    class Meta:
+        unique_together = ('user', 'scenario')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.scenario.title} ({self.score})"
 
 
 class Achievement(models.Model):
