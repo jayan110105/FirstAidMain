@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Burns Emergency{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+    <a href="{% url 'scenarios' %}" class="d-inline-flex align-items-center mb-4 text-secondary text-decoration-none">
+        <i class="fa fa-arrow-left me-2"></i> Back to Scenarios
+    </a>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 fw-bold mb-0">Burns Emergency Scenario</h1>
+        <div class="text-muted small d-flex align-items-center">
+            <i class="fa-regular fa-clock me-1"></i> Time: 0:10
+        </div>
+    </div>
+
+    <div class="mb-2 d-flex justify-content-between small text-muted fw-semibold">
+        <span>Start</span><span>Progress</span><span>Complete</span>
+    </div>
+    <div class="progress" style="height: 8px;">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <div class="card mt-4 shadow-sm" style="min-height: 65vh;">
+        <div class="card-body text-dark scenario-bg d-flex flex-column justify-content-end" id="scenario-body">
+            <div class="bg-white bg-opacity-75 p-4 rounded shadow-sm">
+                <div class="d-flex align-items-start">
+                    <img src="{% static 'images/avatar_burns.png' %}" alt="Vin avatar" class="rounded-2 me-3" style="width: 48px; height: 48px;">
+                    <div class="bg-light border rounded p-3 shadow-sm w-100">
+                        <p class="mb-0" id="dialogue-text"><strong>Narrator:</strong> You and Vin are frying chicken when suddenly—flames rise from the pan!</p>
+                    </div>
+                </div>
+
+                <div class="mt-4" id="options-container">
+                    <p class="fw-semibold" id="option-heading">What do you do?</p>
+                    <div class="d-inline-flex flex-column">
+                        <button class="btn btn-light text-start mb-2" onclick="selectOption('towel')">🏳️ Throw dish towel on fire</button>
+                        <button class="btn btn-light text-start mb-2" onclick="selectOption('water')">💧 Pour water on the flames</button>
+                        <button class="btn btn-light text-start mb-2" onclick="selectOption('cover-lid')">🧯 Turn off heat & cover with lid</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+         $(document).ready(function(){
+            $('.scenario-bg').css({
+                'background-image': "url('{% static 'Images/burns_1.png' %}')"
+            });
+        })
+
+        function selectOption(choice) {
+            switch (choice) {
+                case 'towel':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_2.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> The fire grows worse! The towel catches fire.');
+                    updateOptions('Now what?', [
+                        { text: '📞 Call for help and evacuate', id: 'call-help' },
+                        { text: '💧 Pour water', id: 'water' },
+                        { text: '🥣 Use flour', id: 'flour' },
+                    ]);
+                    break;
+                case 'water':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_2.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> Pouring water makes the flames explode even more violently!');
+                    updateOptions('Now what?', [
+                        { text: '📞 Call for help and evacuate', id: 'call-help' },
+                        { text: '🥣 Use flour', id: 'flour' },
+                        { text: '🏳️ Try to smother with towel again', id: 'towel' }
+                    ]);
+                    break;
+                case 'flour':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_5.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> The fire explodes in a flash. You\'re engulfed. Game Over.');
+                    updateOptions('🔥 Explosion', []);
+                    break;
+                case 'cover-lid':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_3.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> You covered the fire, and it dies down. Vin looks injured.');
+                    updateOptions('What do you do?', [
+                        { text: '🚑 Call ambulance', id: 'call-safe' },
+                        { text: '🚿 Cool and apply antiseptic', id: 'treat-minor' },
+                    ]);
+                    break;
+                case 'call-help':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_4.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> Help arrives. Vin has second-degree burns. She\'ll be okay.');
+                    updateOptions('✅ You did your best.', []);
+                    break;
+                case 'call-safe':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_3.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>EMT:</strong> Just a first-degree burn. No serious damage.');
+                    updateOptions('Relieved?', []);
+                    break;
+                case 'treat-minor':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_3.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Vin:</strong> "Phew! That feels better. Next time, we cook less dramatically."');
+                    updateOptions('Crisis averted.', []);
+                    break;
+                default:
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_6.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> The outcome is uncertain.');
+            }
+        }
+
+        function updateOptions(heading, options) {
+            $('#option-heading').text(heading);
+            let buttons = '';
+            options.forEach(opt => {
+                buttons += `<button class="btn btn-light text-start mb-2" onclick="selectOption('${opt.id}')">${opt.text}</button>`;
+            });
+            $('#options-container .d-inline-flex').html(buttons);
+        }
+    </script>
+</div>
+{% endblock %}

@@ -619,3 +619,6 @@ def RestrauntScenario(request):
 
 def HikingScenario(request):
     return render(request, 'hiking_scenario.html')
+
+def BurnsScenario(request):
+    return render(request, 'burns_scenario.html')
