@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Module, UserModuleProgress,Achievement,UserAchievement,Scenario,UserScenarioProgress
 from .forms import QuizScoreForm, ScenarioScoreForm
 from django.db import models
-from django.db.models import F, Sum, Count, Value, ExpressionWrapper
+from django.db.models import F, Sum, Count, Value, ExpressionWrapper, Q
+from django.db.models.functions import Coalesce
 import logging
 import time
 
@@ -104,13 +105,15 @@ def leaderboard(request):
     # Get all users and annotate their total score and completed modules
     users_with_scores = (
         User.objects.annotate(
-            module_points=Sum('module_progress__score', default=0),
-            scenario_points=Sum('scenario_progress__score', default=0),
+            module_points=Coalesce(Sum('module_progress__score', distinct=True), 0),
+            scenario_points=Coalesce(Sum('scenario_progress__score', distinct=True), 0),
             total_points=ExpressionWrapper(
                 F('module_points') + F('scenario_points'),
                 output_field=models.IntegerField()
             ),
-            completed_modules=Count('module_progress', filter=models.Q(module_progress__completed=True))
+            completed_modules=Coalesce(
+                Count('module_progress', filter=Q(module_progress__completed=True), distinct=True), 0
+            )
         )
         .order_by('-total_points')
     )
@@ -121,7 +124,6 @@ def leaderboard(request):
     completed_scenarios_count = UserScenarioProgress.objects.filter(user=request.user, completed=True).count()
     
     progress_percent = ((completed_modules_count + completed_scenarios_count) / total_items) * 100
-
 
     # Generate leaderboard entries with rank and level
     leaderboard = []
