@@ -43,7 +43,12 @@
             </div>
         </div>
     </div>
-
+        <!-- Continue Button -->
+        <div class="text-end mt-4">
+            <a href="" class="btn btn-danger">
+                Continue <i class="fa-solid fa-arrow-right-long ms-1"></i>
+            </a>
+        </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
          $(document).ready(function(){
@@ -61,7 +66,7 @@
                     $('#dialogue-text').html('<strong>Narrator:</strong> The fire grows worse! The towel catches fire.');
                     updateOptions('Now what?', [
                         { text: '📞 Call for help and evacuate', id: 'call-help' },
-                        { text: '💧 Pour water', id: 'water' },
+                        { text: '💧 Pour water', id: 'third_degree' },
                         { text: '🥣 Use flour', id: 'flour' },
                     ]);
                     break;
@@ -73,8 +78,26 @@
                     updateOptions('Now what?', [
                         { text: '📞 Call for help and evacuate', id: 'call-help' },
                         { text: '🥣 Use flour', id: 'flour' },
-                        { text: '🏳️ Try to smother with towel again', id: 'towel' }
+                        { text: '🏳️ Try to smother with towel again', id: 'third_degree' }
                     ]);
+                    break;
+                case 'third_degree':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_2.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> You did not make the ricght choices. Vin manages to put out the flames, but her skin becomes black and she does not feel pain');
+                    updateOptions('She has a third degree burn', [
+                        { text: '📞 Call for help and evacuate', id: 'call-help_t' },
+                        { text: '👚 Remove clothing stuck to the burn', id: 'td_fail' },
+                        { text: '💧Try to her some water to drink', id: 'td_fail' }
+                    ]);
+                    break;
+                    case 'td_fail':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_5.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> You did not call for help despite your friend having third degree burns, her body can\'t stand the strain');
+                    updateOptions('❌You failed', []);
                     break;
                 case 'flour':
                     $('.scenario-bg').css({
@@ -98,14 +121,21 @@
                         'background-image': "url('{% static 'Images/burns_4.png' %}')"
                     });
                     $('#dialogue-text').html('<strong>Narrator:</strong> Help arrives. Vin has second-degree burns. She\'ll be okay.');
-                    updateOptions('✅ You did your best.', []);
+                    updateOptions('✅ You did your best, but learn how to put out various types of fires.', []);
+                    break;
+                case 'call-help_t':
+                    $('.scenario-bg').css({
+                        'background-image': "url('{% static 'Images/burns_5.png' %}')"
+                    });
+                    $('#dialogue-text').html('<strong>Narrator:</strong> Help arrives. Vin has third-degree burns. And is rushed to the hospital. Her fate is undecided, but it could have been worse.');
+                    updateOptions(' You did your okay, but learn how to put out various types of fires.', []);
                     break;
                 case 'call-safe':
                     $('.scenario-bg').css({
                         'background-image': "url('{% static 'Images/burns_3.png' %}')"
                     });
-                    $('#dialogue-text').html('<strong>EMT:</strong> Just a first-degree burn. No serious damage.');
-                    updateOptions('Relieved?', []);
+                    $('#dialogue-text').html('<strong>EMT:</strong> Just a first-degree burn, there was no need to call an ambulance. No serious damage.');
+                    updateOptions('You are glad she\'s okay even though it is better safe than sorry', []);
                     break;
                 case 'treat-minor':
                     $('.scenario-bg').css({
