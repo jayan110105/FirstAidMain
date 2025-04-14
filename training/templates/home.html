@@ -50,24 +50,24 @@
         </div>
         <h1 class="display-1 text-danger fw-bold mt-5">First Aid Learning</br>Platform</h1>
         <h2 class="mb-5">Learn essentail first aid skill </br> anytime, anywhere.</h2>
-
+      
         {% if user.is_authenticated %}
-            <p class="fs-5 mb-4">Welcome, {{ user.username }}!</p>
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4 py-2 fw-bold">
-                    <i class="fas fa-sign-out-alt me-2"></i> Logout
-                </a>
-            </div>
-        {% else %}
-            <div class="gap-3 flex-wrap mt-4">
-                <a href="{% url 'login' %}" class="btn btn-danger px-4 py-2 fw-bold">
-                    <h1 class="mx-5">Login</h1>
-                </a>
-                <!-- <a href="{% url 'register' %}" class="btn btn-danger px-4 py-2 fw-bold">
-                    <i class="fas fa-user-plus me-2"></i> Register
-                </a> -->
-            </div>
-        {% endif %}
+    <script>
+        // Redirect authenticated users to the modules page
+        window.location.href = "{% url 'modules' %}";
+    </script>
+{% else %}
+    <div class="gap-3 flex-wrap mt-4">
+        <a href="{% url 'login' %}" class="btn btn-danger px-4 py-2 fw-bold">
+            <h1 class="mx-5">Login</h1>
+        </a>
+         <a href="{% url 'register' %}" class="btn btn-danger px-4 py-2 fw-bold">
+            <h1 class="mx-5">Register</h1>
+        </a> 
+    </div>
+{% endif %}
+
+
     </div>
 </body>
 </html>
