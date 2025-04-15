@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Burns and Wounds{% endblock %}
+{% block title %}Fractures and Sprains{% endblock %}
 
 {% block content %}
 
@@ -214,7 +214,7 @@
                   <h6 class="mb-0 fw-semibold">Start Wrapping</h6>
                 </div>
                 <p class="text-muted" style="font-size: 0.875rem;">
-                    Begin below the injured joint and continue upward in a figure-eight pattern, overlapping the bandage by about half its width.
+                    Begin below the injured joint, ensuring the joint is slightly flexed, and continue upward in a figure-eight pattern, overlapping the bandage by about half its width.
                 </p>
               </div>
             </div>
@@ -256,8 +256,63 @@
           <i class="fas fa-question-circle"></i>
           </a>
         </div>
-      </div>    
-      
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title d-flex align-items-center gap-2 mb-0">
+            <div class="rounded-circle bg-secondary bg-opacity-10 text-secondary fw-bold d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                4
+            </div>
+            RICE Protocol for sprains
+            </h5>
+        </div>
+        <div class="card-body pt-4">
+        
+            <!-- Step 1 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-secondary bg-opacity-10 text-secondary" style="width: 24px; height: 24px; font-size: 0.875rem;">1</span>
+                <h6 class="fw-semibold mb-0">R: Rest</h6>
+            </div>
+            <p class="text-muted small mb-2">
+                Avoid using the injured joint in order to prevent further aggravating the sprain.
+            </p>
+        
+            <!-- Step 2 -->
+            <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-secondary bg-opacity-10 text-secondary" style="width: 24px; height: 24px; font-size: 0.875rem;">2</span>
+                <h6 class="fw-semibold mb-0">I: Ice</h6>
+            </div>
+            <p class="text-muted small">
+                Apply Ice for 15-20 minutes every 2-3 hours for 1-2 days
+            </p>
+            </div>
+        
+            <!-- Step 3 -->
+            <div>
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-secondary bg-opacity-10 text-secondary" style="width: 24px; height: 24px; font-size: 0.875rem;">3</span>
+                <h6 class="fw-semibold mb-0">C: Compress</h6>
+            </div>
+            <p class="text-muted small">
+                Wrap the joint in the manner explained in the previous section to stabilise it and prevent further injury. This also limits swelling
+            </p>
+            </div>
+
+            <div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="fw-bold d-flex align-items-center justify-content-center rounded-circle bg-secondary bg-opacity-10 text-secondary" style="width: 24px; height: 24px; font-size: 0.875rem;">4</span>
+                    <h6 class="fw-semibold mb-0">E: Elevate</h6>
+                </div>
+                <p class="text-muted small">
+                    Keep the injured joint above heart level to encourage fluid drainage and reduce swelling in the injured joint.
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
     <a href="{% url 'fractures_and_sprains_quiz' %}" class="btn btn-danger">Take Quiz</a>
 
 </div>
